@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIA Engine - Image Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #888;
+        }
+        
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        .stat-item.approved {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+        }
+        
+        .stat-item.pending {
+            background: rgba(250, 204, 21, 0.2);
+            color: #facc15;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .controls select, .controls button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #1a1a2e;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .controls button {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            border: none;
+        }
+        
+        .controls button:hover {
+            opacity: 0.9;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .filter-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            background: transparent;
+            color: #888;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        
+        .filter-tab:hover {
+            border-color: #ff6b9d;
+            color: #fff;
+        }
+        
+        .filter-tab.active {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            border-color: transparent;
+            color: #fff;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .image-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+        }
+        
+        .image-card.approved {
+            border: 2px solid #4ade80;
+        }
+        
+        .image-card.rejected {
+            border: 2px solid #f87171;
+            opacity: 0.6;
+        }
+        
+        .image-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .image-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-badge.approved {
+            background: rgba(74, 222, 128, 0.9);
+            color: #000;
+        }
+        
+        .status-badge.rejected {
+            background: rgba(248, 113, 113, 0.9);
+            color: #000;
+        }
+        
+        .status-badge.final {
+            background: rgba(147, 51, 234, 0.9);
+            color: #fff;
+        }
+        
+        .image-info {
+            padding: 15px;
+        }
+        
+        .image-info .filename {
+            font-size: 12px;
+            color: #888;
+            word-break: break-all;
+            margin-bottom: 8px;
+        }
+        
+        .image-info .date {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .action-btn.approve {
+            background: #1a3d2e;
+            color: #4ade80;
+        }
+        
+        .action-btn.approve:hover {
+            background: #2a5d3e;
+        }
+        
+        .action-btn.reject {
+            background: #3d1a1a;
+            color: #f87171;
+        }
+        
+        .action-btn.reject:hover {
+            background: #5d2a2a;
+        }
+        
+        .action-btn.analyze {
+            background: #1a2d4a;
+            color: #60a5fa;
+        }
+        
+        .action-btn.analyze:hover {
+            background: #2a3d5a;
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .score-display {
+            margin-top: 10px;
+            padding: 10px;
+            background: #0d1117;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        
+        .score-bar {
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin-top: 2px;
+            overflow: hidden;
+        }
+        
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        
+        .score-bar-fill.good { background: #4ade80; }
+        .score-bar-fill.ok { background: #facc15; }
+        .score-bar-fill.bad { background: #f87171; }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+        
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .modal-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .modal-actions .action-btn {
+            padding: 12px 30px;
+            font-size: 14px;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            padding: 20px 15px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-nav.prev {
+            left: 20px;
+        }
+        
+        .modal-nav.next {
+            right: 20px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #888;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .toast.success {
+            background: #1a3d2e;
+            color: #4ade80;
+            border: 1px solid #4ade80;
+        }
+        
+        .toast.error {
+            background: #3d1a1a;
+            color: #f87171;
+            border: 1px solid #f87171;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AIA Engine Gallery</h1>
+        <p>Generated AI Influencer Content</p>
+        <div class="stats-bar" id="stats-bar"></div>
+    </div>
+    
+    <div class="controls">
+        <select id="influencer-select">
+            <option value="luna_vale">Luna Vale</option>
+            <option value="starbright_monroe">Starbright Monroe</option>
+        </select>
+        <button onclick="loadImages()">Refresh</button>
+    </div>
+    
+    <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">All</button>
+        <button class="filter-tab" data-filter="pending" onclick="setFilter('pending')">Pending Review</button>
+        <button class="filter-tab" data-filter="approved" onclick="setFilter('approved')">Approved</button>
+        <button class="filter-tab" data-filter="final" onclick="setFilter('final')">Final</button>
+    </div>
+    
+    <div class="gallery" id="gallery"></div>
+    
+    <div class="modal" id="modal" onclick="closeModal(event)">
+        <button class="modal-nav prev" onclick="navigateImage(-1, event)">&lt;</button>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img id="modal-image" src="" alt="">
+            <div class="modal-info" id="modal-info"></div>
+            <div class="modal-actions" id="modal-actions"></div>
+        </div>
+        <button class="modal-nav next" onclick="navigateImage(1, event)">&gt;</button>
+    </div>
+    
+    <script>
+        let images = [];
+        let currentIndex = 0;
+        let currentFilter = 'all';
+        let approvalStatus = {};
+        
+        async function loadImages() {
+            const influencer = document.getElementById('influencer-select').value;
+            const gallery = document.getElementById('gallery');
+            
+            try {
+                const response = await fetch(`/gallery/images/${influencer}`);
+                const data = await response.json();
+                images = data.images || [];
+                approvalStatus = data.approval_status || {};
+                
+                updateStats();
+                renderGallery();
+                
+            } catch (error) {
+                console.error('Failed to load images:', error);
+                gallery.innerHTML = `
+                    <div class="empty-state">
+                        <h3>Error loading images</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateStats() {
+            const statsBar = document.getElementById('stats-bar');
+            const approved = Object.values(approvalStatus).filter(s => s === 'approved').length;
+            const finalCount = Object.values(approvalStatus).filter(s => s === 'final').length;
+            const pending = images.length - approved - finalCount;
+            
+            statsBar.innerHTML = `
+                <div class="stat-item">${images.length} Total</div>
+                <div class="stat-item pending">${pending} Pending</div>
+                <div class="stat-item approved">${approved + finalCount} Approved</div>
+            `;
+        }
+        
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.filter === filter);
+            });
+            renderGallery();
+        }
+        
+        function getImageStatus(path) {
+            return approvalStatus[path] || 'pending';
+        }
+        
+        function filterImages() {
+            if (currentFilter === 'all') return images;
+            return images.filter(img => {
+                const status = getImageStatus(img.path);
+                if (currentFilter === 'pending') return status === 'pending';
+                if (currentFilter === 'approved') return status === 'approved';
+                if (currentFilter === 'final') return status === 'final';
+                return true;
+            });
+        }
+        
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            const filtered = filterImages();
+            
+            if (filtered.length === 0) {
+                gallery.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No images</h3>
+                        <p>${currentFilter === 'all' ? 'Generate some content using the API' : 'No images match this filter'}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            gallery.innerHTML = filtered.map((img, index) => {
+                const status = getImageStatus(img.path);
+                const statusClass = status !== 'pending' ? status : '';
+                const statusBadge = status !== 'pending' ? 
+                    `<div class="status-badge ${status}">${status}</div>` : '';
+                
+                return `
+                    <div class="image-card ${statusClass}">
+                        <div class="image-wrapper" onclick="openModal(${images.indexOf(img)})">
+                            <img src="/gallery/image/${img.path}" alt="${img.filename}" loading="lazy">
+                            ${statusBadge}
+                        </div>
+                        <div class="image-info">
+                            <div class="filename">${img.filename}</div>
+                            <div class="date">${img.date}</div>
+                            <div class="action-buttons">
+                                <button class="action-btn approve" onclick="approveImage('${img.path}', event)" ${status !== 'pending' ? 'disabled' : ''}>
+                                    ✓ Approve
+                                </button>
+                                <button class="action-btn reject" onclick="rejectImage('${img.path}', event)" ${status !== 'pending' ? 'disabled' : ''}>
+                                    ✗ Reject
+                                </button>
+                                <button class="action-btn analyze" onclick="analyzeImage('${img.path}', event)">
+                                    ⚡ Analyze
+                                </button>
+                            </div>
+                            <div id="score-${images.indexOf(img)}" class="score-display" style="display:none;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        async function approveImage(path, event) {
+            if (event) event.stopPropagation();
+            
+            const influencer = document.getElementById('influencer-select').value === 'luna_vale' ? 'Luna Vale' : 'Starbright Monroe';
+            
+            try {
+                const response = await fetch(`/workflow/approve?image_path=${encodeURIComponent(path)}&influencer=${encodeURIComponent(influencer)}`);
+                const data = await response.json();
+                
+                if (data.status === 'approved') {
+                    approvalStatus[path] = 'approved';
+                    if (data.final_path) {
+                        approvalStatus[path] = 'final';
+                    }
+                    renderGallery();
+                    updateStats();
+                    showToast('Image approved and moved to final folder', 'success');
+                } else {
+                    showToast('Failed to approve image', 'error');
+                }
+            } catch (error) {
+                console.error('Approval failed:', error);
+                showToast('Failed to approve image', 'error');
+            }
+        }
+        
+        async function rejectImage(path, event) {
+            if (event) event.stopPropagation();
+            
+            const influencer = document.getElementById('influencer-select').value === 'luna_vale' ? 'Luna Vale' : 'Starbright Monroe';
+            
+            try {
+                const response = await fetch(`/workflow/reject?image_path=${encodeURIComponent(path)}&influencer=${encodeURIComponent(influencer)}`);
+                const data = await response.json();
+                
+                if (data.status === 'rejected') {
+                    approvalStatus[path] = 'rejected';
+                    renderGallery();
+                    updateStats();
+                    showToast('Image rejected', 'success');
+                }
+            } catch (error) {
+                console.error('Rejection failed:', error);
+                showToast('Failed to reject image', 'error');
+            }
+        }
+        
+        async function analyzeImage(path, event) {
+            if (event) event.stopPropagation();
+            const btn = event.target;
+            const imgIndex = images.findIndex(img => img.path === path);
+            const scoreDiv = document.getElementById(`score-${imgIndex}`);
+            
+            btn.textContent = '⏳ Analyzing...';
+            btn.disabled = true;
+            
+            try {
+                const influencer = document.getElementById('influencer-select').value === 'luna_vale' ? 'Luna Vale' : 'Starbright Monroe';
+                const response = await fetch(`/analyze_image?image_path=${encodeURIComponent(path)}&influencer=${encodeURIComponent(influencer)}`);
+                const data = await response.json();
+                
+                if (data.analyzed && data.score) {
+                    const s = data.score;
+                    const getClass = (val) => val >= 0.7 ? 'good' : val >= 0.5 ? 'ok' : 'bad';
+                    
+                    scoreDiv.innerHTML = `
+                        <div class="score-row">
+                            <span>Overall</span>
+                            <span>${(s.overall * 100).toFixed(0)}%</span>
+                        </div>
+                        <div class="score-bar"><div class="score-bar-fill ${getClass(s.overall)}" style="width:${s.overall * 100}%"></div></div>
+                        
+                        <div class="score-row" style="margin-top:8px;">
+                            <span>Skin</span>
+                            <span>${(s.skin_realism * 100).toFixed(0)}%</span>
+                        </div>
+                        <div class="score-bar"><div class="score-bar-fill ${getClass(s.skin_realism)}" style="width:${s.skin_realism * 100}%"></div></div>
+                        
+                        <div class="score-row" style="margin-top:8px;">
+                            <span>Face</span>
+                            <span>${(s.face_consistency * 100).toFixed(0)}%</span>
+                        </div>
+                        <div class="score-bar"><div class="score-bar-fill ${getClass(s.face_consistency)}" style="width:${s.face_consistency * 100}%"></div></div>
+                        
+                        <div style="margin-top:10px; color: ${data.approved_recommendation ? '#4ade80' : '#f87171'};">
+                            ${data.approved_recommendation ? '✓ Recommended' : '✗ Needs Work'}
+                        </div>
+                    `;
+                    scoreDiv.style.display = 'block';
+                    btn.innerHTML = '⚡ Re-analyze';
+                } else {
+                    btn.innerHTML = '⚡ Error';
+                }
+            } catch (error) {
+                btn.innerHTML = '⚡ Error';
+                console.error(error);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        function openModal(index) {
+            currentIndex = index;
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalInfo = document.getElementById('modal-info');
+            const modalActions = document.getElementById('modal-actions');
+            const img = images[index];
+            const status = getImageStatus(img.path);
+            
+            modalImage.src = `/gallery/image/${img.path}`;
+            modalInfo.textContent = img.filename;
+            
+            if (status === 'pending') {
+                modalActions.innerHTML = `
+                    <button class="action-btn approve" onclick="approveImage('${img.path}')">✓ Approve</button>
+                    <button class="action-btn reject" onclick="rejectImage('${img.path}')">✗ Reject</button>
+                `;
+            } else {
+                modalActions.innerHTML = `<span style="color: ${status === 'approved' || status === 'final' ? '#4ade80' : '#f87171'}; text-transform: uppercase;">${status}</span>`;
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function navigateImage(direction, event) {
+            event.stopPropagation();
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            openModal(currentIndex);
+        }
+        
+        function showToast(message, type) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('modal').classList.contains('active')) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') navigateImage(-1, e);
+            if (e.key === 'ArrowRight') navigateImage(1, e);
+        });
+        
+        loadImages();
+    </script>
+</body>
+</html>

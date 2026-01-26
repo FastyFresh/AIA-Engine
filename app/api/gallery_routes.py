@@ -1,0 +1,227 @@
+"""Gallery and content serving routes."""
+from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import FileResponse
+from pathlib import Path
+from datetime import datetime
+import os
+import json
+import logging
+import zipfile
+import tempfile
+
+logger = logging.getLogger(__name__)
+
+router = APIRouter(prefix="/gallery", tags=["Gallery"])
+
+APPROVAL_STATUS_FILE = "data/approval_status.json"
+
+
+def load_approval_status() -> dict:
+    try:
+        if os.path.exists(APPROVAL_STATUS_FILE):
+            with open(APPROVAL_STATUS_FILE, "r") as f:
+                return json.load(f)
+    except Exception as e:
+        logger.error(f"Failed to load approval status: {e}")
+    return {}
+
+
+def save_approval_status(status: dict):
+    try:
+        os.makedirs(os.path.dirname(APPROVAL_STATUS_FILE), exist_ok=True)
+        with open(APPROVAL_STATUS_FILE, "w") as f:
+            json.dump(status, f, indent=2)
+    except Exception as e:
+        logger.error(f"Failed to save approval status: {e}")
+
+
+@router.get("")
+async def gallery_redirect():
+    """Legacy gallery route - redirects to unified dashboard"""
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/dashboard", status_code=301)
+
+
+@router.get("/images/{influencer}")
+async def get_gallery_images(influencer: str, source: str = Query(default="all")):
+    """
+    Get gallery images for an influencer.
+    
+    Args:
+        influencer: Influencer ID (luna_vale, starbright_monroe)
+        source: Filter by source - "all", "raw", "generated", "final", "research"
+    """
+    influencer_key = influencer.lower().replace(" ", "_")
+    
+    images = []
+    
+    if source in ["all", "generated"]:
+        generated_folder = Path(f"content/generated/{influencer_key}")
+        if generated_folder.exists():
+            for file in generated_folder.glob("*.png"):
+                stat = file.stat()
+                images.append({
+                    "filename": file.name,
+                    "path": str(file),
+                    "date": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+                    "size_kb": round(stat.st_size / 1024, 1),
+                    "mtime": stat.st_mtime,
+                    "source": "generated"
+                })
+    
+    if source in ["all", "seedream"]:
+        seedream_folder = Path("content/seedream4_output")
+        if seedream_folder.exists():
+            for file in seedream_folder.glob("*.png"):
+                stat = file.stat()
+                images.append({
+                    "filename": file.name,
+                    "path": str(file),
+                    "date": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+                    "size_kb": round(stat.st_size / 1024, 1),
+                    "mtime": stat.st_mtime,
+                    "source": "seedream"
+                })
+    
+    if source in ["all", "raw"]:
+        raw_folder = Path(f"content/raw/{influencer_key}")
+        if raw_folder.exists():
+            for file in raw_folder.glob("*.png"):
+                stat = file.stat()
+                images.append({
+                    "filename": file.name,
+                    "path": str(file),
+                    "date": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+                    "size_kb": round(stat.st_size / 1024, 1),
+                    "mtime": stat.st_mtime,
+                    "source": "raw"
+                })
+    
+    if source in ["all", "final"]:
+        final_folder = Path(f"content/final/{influencer_key}")
+        if final_folder.exists():
+            for file in final_folder.glob("*.png"):
+                stat = file.stat()
+                images.append({
+                    "filename": file.name,
+                    "path": str(file),
+                    "date": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+                    "size_kb": round(stat.st_size / 1024, 1),
+                    "mtime": stat.st_mtime,
+                    "source": "final"
+                })
+    
+    images.sort(key=lambda x: x["mtime"], reverse=True)
+    
+    for img in images:
+        del img["mtime"]
+    
+    approval_status = load_approval_status()
+    
+    for img in images:
+        if img["path"].startswith("content/final/"):
+            approval_status[img["path"]] = "final"
+    
+    return {"images": images[:50], "approval_status": approval_status}
+
+
+def validate_content_path(path: str) -> Path:
+    """Validate that a path is within the content directory, preventing path traversal."""
+    content_root = Path("content").resolve()
+    file_path = Path(path).resolve()
+    
+    if not str(file_path).startswith(str(content_root)):
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    return file_path
+
+
+@router.get("/image/{path:path}")
+async def serve_gallery_image(path: str):
+    file_path = validate_content_path(path)
+    
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Image not found")
+    
+    return FileResponse(
+        file_path,
+        media_type="image/png",
+        headers={"Cache-Control": "public, max-age=3600"}
+    )
+
+
+@router.get("/download/{path:path}")
+async def download_gallery_file(path: str):
+    """Download a single image or video file."""
+    file_path = validate_content_path(path)
+    
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    suffix = file_path.suffix.lower()
+    media_types = {
+        ".png": "image/png",
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".mp4": "video/mp4",
+        ".webm": "video/webm",
+    }
+    media_type = media_types.get(suffix, "application/octet-stream")
+    
+    return FileResponse(
+        file_path,
+        media_type=media_type,
+        filename=file_path.name,
+        headers={"Content-Disposition": f"attachment; filename={file_path.name}"}
+    )
+
+
+@router.get("/download-all/{influencer}")
+async def download_all_gallery_files(influencer: str, source: str = "all"):
+    """Download all images and videos for an influencer as a ZIP file."""
+    influencer_key = influencer.replace("@", "").lower().replace(" ", "_")
+    
+    files_to_zip = []
+    
+    folders = {
+        "research": Path("content/seedream4_output"),
+        "generated": Path(f"content/generated/{influencer_key}"),
+        "raw": Path(f"content/raw/{influencer_key}"),
+        "final": Path(f"content/final/{influencer_key}"),
+        "loops": Path("content/loops"),
+    }
+    
+    valid_extensions = {".png", ".jpg", ".jpeg", ".mp4", ".webm"}
+    
+    if source == "all":
+        for folder_name, folder_path in folders.items():
+            if folder_path.exists():
+                for file in folder_path.iterdir():
+                    if file.suffix.lower() in valid_extensions:
+                        files_to_zip.append((file, folder_name))
+    else:
+        folder_path = folders.get(source)
+        if folder_path and folder_path.exists():
+            for file in folder_path.iterdir():
+                if file.suffix.lower() in valid_extensions:
+                    files_to_zip.append((file, source))
+    
+    if not files_to_zip:
+        raise HTTPException(status_code=404, detail="No files found to download")
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    zip_filename = f"{influencer_key}_content_{timestamp}.zip"
+    
+    temp_zip = tempfile.NamedTemporaryFile(delete=False, suffix=".zip")
+    
+    with zipfile.ZipFile(temp_zip.name, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for file_path, folder_name in files_to_zip:
+            arcname = f"{folder_name}/{file_path.name}"
+            zf.write(file_path, arcname)
+    
+    return FileResponse(
+        temp_zip.name,
+        media_type="application/zip",
+        filename=zip_filename,
+        headers={"Content-Disposition": f"attachment; filename={zip_filename}"}
+    )

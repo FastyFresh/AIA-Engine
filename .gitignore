@@ -1,0 +1,127 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.env
+.venv
+env/
+venv/
+ENV/
+.pythonlibs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python tools
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Node.js
+node_modules/
+dist/
+.npm
+*.tsbuildinfo
+
+# Large binary directories - NEVER COMMIT
+content/
+attached_assets/
+outputs/
+artifacts/
+logs/
+tmp/
+cache/
+
+# Identity files (sensitive)
+config/identities/*.md
+
+# Telegram bot data
+data/*.db
+
+# Large binary files - NEVER COMMIT
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# AI/ML model files - NEVER COMMIT
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.onnx
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Image files - NEVER COMMIT
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.bmp
+*.ico
+*.tiff
+*.svg
+
+# Video files - NEVER COMMIT
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.flv
+*.wmv
+
+# Audio files - NEVER COMMIT
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.aac
+*.m4a
+
+# Document files (large)
+*.pdf
+*.docx
+*.pptx
+*.xlsx
+
+# Replit specific
+.local/
+.cache/
+.upm/
+
+# Miscellaneous large files
+ziliqT7q

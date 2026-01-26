@@ -1,0 +1,1 @@
+export { CTATab } from './CTATab';

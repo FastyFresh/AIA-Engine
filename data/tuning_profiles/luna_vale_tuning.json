@@ -1,0 +1,669 @@
+{
+  "influencer_name": "Luna Vale",
+  "influencer_handle": "@luna_vale",
+  "lora_scale": 0.77,
+  "guidance_scale": 2.5,
+  "num_inference_steps": 30,
+  "lora_scale_min": 0.7,
+  "lora_scale_max": 0.9,
+  "guidance_scale_min": 2.0,
+  "guidance_scale_max": 4.0,
+  "positive_prompt_additions": [],
+  "negative_prompt_additions": [],
+  "total_generations": 58,
+  "approved_count": 20,
+  "rejected_count": 38,
+  "feedback_history": [
+    {
+      "image_path": "content/raw/luna_vale/8235252193_luna_vale_lora_5256e428_20251203_074326.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T07:44:29.393643",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235252148_luna_vale_lora_08c6828a_20251203_074411.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T07:44:29.421174",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235252165_luna_vale_lora_cbb9259b_20251203_074354.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-03T08:01:56.002898",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235251019_luna_vale_lora_ebf61ec8_20251203_080300.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T08:05:11.836422",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235250989_luna_vale_lora_1595c33a_20251203_080330.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T08:05:11.882028",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235250972_luna_vale_lora_2aceca20_20251203_080347.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T08:05:11.921931",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235250938_luna_vale_lora_b2d2d167_20251203_080421.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T08:05:11.957362",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235250913_luna_vale_lora_c3236946_20251203_080446.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T08:05:11.993645",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235250894_luna_vale_lora_0c0bcbf6_20251203_080505.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-03T08:05:12.029594",
+      "notes": "Auto-rejected: score 0.63 below threshold"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235251019_luna_vale_lora_ebf61ec8_20251203_080300.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-03T08:24:51.194058",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235250802_luna_vale_lora_7a3166bc_20251203_080637.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-03T08:26:04.561428",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235250913_luna_vale_lora_c3236946_20251203_080446.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-03T08:47:22.108394",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235252193_luna_vale_lora_5256e428_20251203_074326.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-03T08:48:15.714398",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235195806_luna_vale_swapped_20251203_232313.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-04T00:09:44.313473",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235192999_luna_vale_swapped_20251204_001000.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-04T23:49:35.261200",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/raw/luna_vale/8235195773_luna_vale_swapped_20251203_232346.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-04T23:49:37.728616",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_companion_20251221_090552_2.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-21T09:07:14.205857",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_teaser_20251221_090350_3.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-21T09:07:18.336995",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_welcome_pack_20251221_090204_3.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-21T09:07:21.726347",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_vip_20251221_084312.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-24T19:33:40.784561",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_newref_red_plaid_20251224_204759.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-24T20:50:46.300759",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_075012.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:00:31.593134",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_074925.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:00:34.262033",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_074831.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:00:36.113138",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_074746.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:00:38.247985",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_074652.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:00:39.496728",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_yoga_blue_v2_02_20251224_212544.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:00:41.246796",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_080207.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:03:37.241519",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_080055.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:03:39.714552",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_080336.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:04:32.631201",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_yoga_blue_v2_01_20251224_212542.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:04:41.397791",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_pink_bikini_v2_02_20251224_212539.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:04:47.659999",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_080430.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:05:36.451720",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_pink_bikini_v2_01_20251224_212538.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:08:10.202798",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_pink_bikini_02_20251224_205403.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:08:22.001169",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_yoga_blue_01_20251224_205357.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:08:27.972692",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_yoga_blue_02_20251224_205355.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:08:39.544483",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_pink_bikini_01_20251224_205401.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:08:48.994115",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_newref_turtleneck_20251224_204800.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:08:54.326023",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_neutral_turtleneck_20251224_195105.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:09:03.393706",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_neutral_red_plaid_20251224_195033.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:09:14.736014",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_082656.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:28:17.867328",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_082549.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:28:24.781916",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_082438.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:28:31.739001",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_082324.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:28:39.700233",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_082230.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:28:46.602763",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_080544.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2025-12-28T08:28:53.134766",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_jpg_ref_test_20251224_193943.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:42:25.493825",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/luna_turtleneck_plaid_20251224_193218.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:42:28.403321",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/luna_vale/fal_generated_20251228_084424.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2025-12-28T08:44:56.781200",
+      "notes": "Rejected via gallery workflow"
+    }
+  ],
+  "last_updated": "2025-12-28T08:44:56.783158"
+}
