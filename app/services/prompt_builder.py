@@ -42,7 +42,7 @@ INFLUENCER_IDENTITIES = {
             "extremely thin slender petite body with very narrow tiny waist, "
             "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure"
         ),
-        "face_ref": "content/references/starbright_monroe/starbright_face_reference_v2.png",
+        "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.png",
         "body_ref": "content/references/starbright_monroe/body_reference.png",
         "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.png",
         "output_dir": "content/generated/starbright_monroe",
