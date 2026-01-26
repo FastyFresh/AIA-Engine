@@ -40,7 +40,8 @@ INFLUENCER_IDENTITIES = {
             "straight sleek dark brown hair (not wavy, not curly), "
             "warm olive-brown eyes, natural freckles across nose and cheeks, "
             "extremely thin slender petite body with very narrow tiny waist, "
-            "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure"
+            "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure, "
+            "small natural A-cup breasts, proportionate feminine figure"
         ),
         "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.png",
         "body_ref": "content/references/starbright_monroe/body_reference.png",

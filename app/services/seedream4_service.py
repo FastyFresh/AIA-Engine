@@ -285,7 +285,8 @@ class Seedream4Service:
         aspect_ratio: str = "9:16",
         seed: Optional[int] = None,
         filename_prefix: str = "unified",
-        size: str = "4K"
+        size: str = "4K",
+        negative_prompt: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Generate image with face, body, and optional background references.
@@ -317,13 +318,24 @@ class Seedream4Service:
                 image_refs.append(bg_b64)
                 logger.info(f"Using 3-reference generation with background: {background_ref}")
             
+            # Default anatomical negative prompt for body consistency
+            default_negative = (
+                "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
+                "deformed body, disproportionate body, unnatural anatomy, distorted proportions, "
+                "mutated hands, fused fingers, too many fingers, missing fingers, "
+                "bad anatomy, wrong anatomy, unrealistic body, mannequin, plastic skin"
+            )
+            
+            final_negative = negative_prompt if negative_prompt else default_negative
+            
             input_data = {
                 "prompt": prompt,
                 "image_input": image_refs,
                 "aspect_ratio": aspect_ratio,
                 "size": size,
                 "max_images": 1,
-                "sequential_image_generation": "disabled"
+                "sequential_image_generation": "disabled",
+                "negative_prompt": final_negative
             }
             
             if seed is not None:
