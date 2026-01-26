@@ -55,10 +55,17 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
     
     images = []
     
+    final_folder = Path(f"content/final/{influencer_key}")
+    final_filenames = set()
+    if final_folder.exists():
+        final_filenames = {f.name for f in final_folder.glob("*.png")}
+    
     if source in ["all", "generated"]:
         generated_folder = Path(f"content/generated/{influencer_key}")
         if generated_folder.exists():
             for file in generated_folder.glob("*.png"):
+                if file.name in final_filenames:
+                    continue
                 stat = file.stat()
                 images.append({
                     "filename": file.name,
@@ -73,6 +80,8 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
         seedream_folder = Path("content/seedream4_output")
         if seedream_folder.exists():
             for file in seedream_folder.glob("*.png"):
+                if file.name in final_filenames:
+                    continue
                 stat = file.stat()
                 images.append({
                     "filename": file.name,
@@ -87,6 +96,8 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
         raw_folder = Path(f"content/raw/{influencer_key}")
         if raw_folder.exists():
             for file in raw_folder.glob("*.png"):
+                if file.name in final_filenames:
+                    continue
                 stat = file.stat()
                 images.append({
                     "filename": file.name,
@@ -98,7 +109,6 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
                 })
     
     if source in ["all", "final"]:
-        final_folder = Path(f"content/final/{influencer_key}")
         if final_folder.exists():
             for file in final_folder.glob("*.png"):
                 stat = file.stat()
