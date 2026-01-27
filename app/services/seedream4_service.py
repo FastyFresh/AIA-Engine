@@ -336,7 +336,8 @@ class Seedream4Service:
                 "size": size,
                 "max_images": 1,
                 "sequential_image_generation": "disabled",
-                "negative_prompt": final_negative
+                "negative_prompt": final_negative,
+                "disable_safety_checker": True
             }
             
             if seed is not None:
