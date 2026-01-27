@@ -10,49 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 234,
-  "approved_count": 173,
+  "total_generations": 237,
+  "approved_count": 176,
   "rejected_count": 61,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_plaid_closeup03_20260125_063943.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T08:49:38.311997",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_plaid_closeup01_20260125_063743.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T08:49:39.805708",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_20260125_085056.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T08:51:46.081296",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_20260125_085000.png",
       "prompt": "",
@@ -663,7 +624,46 @@
       "approved": true,
       "timestamp": "2026-01-27T18:07:43.621502",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_standing_pose_20260127_210404.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-01-27T21:19:54.562257",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_sitting_pose_20260127_210306.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-01-27T21:19:55.643167",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_cozy_bedroom_20260127_191410.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-01-27T21:19:57.497624",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-01-27T18:07:43.622491"
+  "last_updated": "2026-01-27T21:19:57.500604"
 }
