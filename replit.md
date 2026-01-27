@@ -1,6 +1,6 @@
 # AIA Engine - Replit Hub Edition
 
-*Last Updated: January 24, 2026*
+*Last Updated: January 27, 2026*
 
 ## Overview
 The Autonomous AI Influencer Agent Engine is a multi-agent system designed to generate hyper-realistic, photorealistic AI influencer content for multiple personas (Starbright Monroe, Luna Vale) under Firepie LLC. It automates content creation, optimization, and multi-platform distribution using a "micro-loop workflow" which combines curated hero images with micro-movement video generation.
@@ -12,23 +12,181 @@ The Autonomous AI Influencer Agent Engine is a multi-agent system designed to ge
 ### Micro-Loop Workflow (Complete)
 Hero image → Kling v2.1 micro-movement video → Grok captions → Grok hashtags (no AI tags) → DFans CTA → Twitter/X posting
 
-### Pose Transfer Workflow (Jan 24, 2026 - PRODUCTION READY)
+---
 
-**Endpoint:** `POST /api/seedream4/generate`
-**Documentation:** `docs/SEEDREAM4_POSE_TRANSFER_WORKFLOW.md`
+## Replicate SEEDream 4.5 Reference Image Workflow
 
-**Proven Prompt Structure:**
+### Core Technology
+The system uses **ByteDance SEEDream 4.5** via Replicate API for hyper-realistic image generation with multi-reference image conditioning. This enables consistent face, body, and background preservation across all generated images.
+
+### API Endpoint
+```
+POST /api/seedream4/generate
+```
+
+### Replicate Model
+```
+bytedance/seedream-4.5
+```
+
+### Reference Image System
+
+SEEDream 4.5 supports up to **10 reference images** for identity consistency. The system uses a multi-reference approach:
+
+| Reference Type | Purpose | Location |
+|----------------|---------|----------|
+| **Face Reference** | Locks facial features, expressions, freckles | `content/references/{influencer}/` |
+| **Body Reference** | Maintains body proportions, skin tone, figure | `content/references/{influencer}/` |
+| **Background Reference** | (Optional) Scene consistency | `content/references/backgrounds/` |
+
+### Current Reference Images
+
+**Starbright Monroe:**
+```
+Face:  content/references/starbright_monroe/starbright_face_reference_v3.png
+Body:  content/references/starbright_monroe/body_reference.png
+Back:  content/references/starbright_monroe/body_reference_back_1.png
+```
+
+**Luna Vale:**
+```
+Face:  content/references/luna_vale/luna_face_canonical.png
+Body:  content/references/luna_vale/luna_body_reference.png
+```
+
+### Key API Parameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| `image_input` | Array of base64 images | Face + body (+ optional background) references |
+| `aspect_ratio` | `3:4` (portrait), `9:16` (full-body) | Image dimensions |
+| `size` | `4K` | Resolution for maximum skin detail |
+| `max_images` | `1` | Images per generation |
+| `guidance_scale` | `2.5` - `6.0` | Prompt adherence (lower = more creative) |
+| `seed` | Integer | Lock for reproducibility across session |
+| `negative_prompt` | String | Anatomical/quality exclusions |
+
+### Default Negative Prompt (Anatomical Safety)
+```
+extra limbs, extra legs, extra arms, extra fingers, missing limbs, 
+deformed body, disproportionate body, unnatural anatomy, distorted proportions, 
+elongated limbs, stretched arms, stretched legs, unrealistic limb length, 
+mutated hands, fused fingers, too many fingers, missing fingers, 
+bad anatomy, wrong anatomy, unrealistic body, mannequin, plastic skin
+```
+
+### Prompt Structure (Proven Format)
 ```
 [POSE + SETTING], [OUTFIT], [IDENTITY DESCRIPTORS], [CAMERA ANGLE], [LIGHTING], [EXPRESSION]
 ```
 
-**Identity Descriptors (ALWAYS INCLUDE):**
+### Identity Descriptors (Critical for Quality)
+
+**Starbright Monroe (HIGH DETAIL - Best Results):**
 ```
-very pale porcelain ivory white skin with natural freckles across nose and cheeks,
-straight sleek dark brown hair, warm olive-brown eyes,
-extremely thin slender petite body with very narrow tiny waist,
-slim narrow hips, long thin slender legs
+very pale porcelain ivory white skin, straight sleek dark brown hair (not wavy, not curly), 
+warm olive-brown eyes, natural freckles across nose and cheeks, 
+extremely thin slender petite body with very narrow tiny waist, 
+slim narrow hips, long thin slender legs, delicate small frame, size 0 figure,
+small natural A-cup breasts, proportionate feminine figure
 ```
+
+**Luna Vale:**
+```
+fair pale skin with subtle freckles across nose and cheeks, 
+long straight cotton candy pink hair parted in middle, 
+striking grey-blue eyes with long dark lashes, thick natural eyebrows, 
+soft rounded face with defined cheekbones, full pouty natural lips, 
+slim petite body with feminine curves, small waist, 
+youthful delicate features, natural beauty with minimal makeup look
+```
+
+### Camera & Quality Settings
+```
+Shot on Canon EOS R5, 85mm f/1.4 lens
+natural skin texture with visible pores
+8K ultra detailed, cinematic lighting
+```
+
+### Hyper-Realism Settings
+```
+natural skin texture with visible pores, fine skin detail, 
+slight natural skin imperfections, photorealistic skin tones, 
+no plastic skin, no airbrushed, no over-smoothed, no beauty filter
+```
+
+### Python Example (Using System Service)
+```python
+from app.services.seedream4_service import Seedream4Service
+
+service = Seedream4Service(influencer_id="starbright_monroe")
+
+result = await service.generate_with_background(
+    prompt="Full body portrait, standing confidently in luxury apartment, wearing white silk dress, soft natural lighting",
+    face_ref=None,  # Uses default from config
+    body_ref=None,  # Uses default from config
+    background_ref="content/references/backgrounds/luxury_apartment.png",  # Optional
+    aspect_ratio="3:4",
+    size="4K",
+    filename_prefix="starbright_apartment"
+)
+```
+
+### Direct Replicate API Example
+```python
+import replicate
+
+output = replicate.run(
+    "bytedance/seedream-4.5",
+    input={
+        "prompt": "Professional headshot, studio lighting, soft expression",
+        "image_input": [
+            face_base64_url,
+            body_base64_url
+        ],
+        "aspect_ratio": "3:4",
+        "size": "4K",
+        "guidance_scale": 2.5,
+        "seed": 12345,
+        "negative_prompt": "extra limbs, deformed body, plastic skin..."
+    }
+)
+```
+
+### Best Practices
+
+1. **Face Consistency:** Use 2-3 clear face references (front + 3/4 angle)
+2. **Lock Seed:** Keep same seed across a session for identity stability
+3. **Guidance Scale:** 2.5-3.0 for natural results, 4.5-6.0 for strict prompt adherence
+4. **Match Camera Angles:** Reference image angle should match desired output angle
+5. **Detailed Identity:** More specific descriptors = better quality (skin tone + hair texture + eye color + body details + distinguishing features)
+
+### Service Hierarchy
+- **PRIMARY:** `app/services/fal_seedream_service.py` (fal.ai) - faster, cheaper
+- **FALLBACK:** `app/services/seedream4_service.py` (Replicate) - multi-reference support
+
+### Prompt Builder Service
+Location: `app/services/prompt_builder.py`
+
+Centralizes:
+- Identity descriptions per influencer
+- Camera settings (Canon EOS R5, 85mm f/1.4)
+- Hyper-realism settings (visible pores, natural texture)
+- Quality settings (8K ultra detailed)
+
+### Content Output Directories
+```
+content/seedream4_output/     # Raw generated images
+content/final/{influencer}/   # Approved/curated images
+content/generated/{influencer}/ # Legacy output directory
+```
+
+---
+
+## Pose Transfer Workflow (Jan 24, 2026 - PRODUCTION READY)
+
+**Endpoint:** `POST /api/seedream4/generate`
+**Documentation:** `docs/SEEDREAM4_POSE_TRANSFER_WORKFLOW.md`
 
 **Settings:**
 - Aspect ratio: `3:4` (portrait)
@@ -38,8 +196,10 @@ slim narrow hips, long thin slender legs
 **Key Insight:** Match camera angle from reference image exactly
 
 **References:**
-- Face reference: `content/references/starbright_monroe/starbright_face_reference_v2.png`
+- Face reference: `content/references/starbright_monroe/starbright_face_reference_v3.png`
 - Alluring pose library: `content/prompt_templates/alluring_pose_library.json`
+
+---
 
 ## User Preferences
 - Prefers proper training convergence over fast incomplete training
@@ -92,20 +252,6 @@ The system features a unified React/TypeScript dashboard providing system monito
 
 ### Critical Discovery: Detailed Identity Prompts (Dec 30, 2024)
 The quality of generated images is directly correlated to the level of detail in the identity prompt. **Starbright's detailed identity produces significantly better results.**
-
-**Starbright (HIGH QUALITY - 5x more detail):**
-```
-"very pale porcelain ivory white skin, straight sleek dark brown hair (not wavy, not curly), 
-warm olive-brown eyes, natural freckles across nose and cheeks, extremely thin slender petite 
-body with very narrow tiny waist, slim narrow hips, long thin slender legs, delicate small frame, 
-size 0 figure"
-```
-
-**Luna (LOWER QUALITY - too vague):**
-```
-"young woman with long straight pink hair, blue-green eyes, slim petite figure, natural beauty, 
-confident expression"
-```
 
 **Key Insight:** The `/api/seedream4/generate-quick` endpoint always uses Starbright's detailed prompt (ignores `influencer` parameter). This is why "Luna" generations look like high-quality Starbright images.
 
@@ -168,3 +314,78 @@ Successfully developed kneeling pose series with male figure. Key learnings:
 - Male figure: "navy pants and white t-shirt"
 - For bare feet: add shoes/stockings/tights to negative prompt
 - Always include detailed identity descriptors for best results
+
+---
+
+## Project File Structure
+
+```
+app/
+├── agents/                    # Multi-agent system
+│   ├── identity_agent.py      # Persona identity management
+│   ├── reference_agent.py     # Image generation with references
+│   ├── quality_agent.py       # Quality assessment and tuning
+│   ├── caption_agent.py       # Caption generation (Grok)
+│   ├── planner_agent.py       # Content scheduling
+│   ├── twitter_poster_agent.py # Twitter/X posting
+│   └── ...
+├── services/
+│   ├── seedream4_service.py   # Replicate SEEDream 4.5 (FALLBACK)
+│   ├── fal_seedream_service.py # Fal.ai SEEDream 4.5 (PRIMARY)
+│   ├── prompt_builder.py      # Centralized prompt construction
+│   ├── prompt_safety_filter.py # Content policy compliance
+│   ├── storage_manager.py     # Disk space management
+│   └── object_storage/        # Replit Object Storage integration
+├── api/                       # FastAPI route modules
+│   ├── seedream_routes.py     # Image generation endpoints
+│   ├── workflow_routes.py     # Approval/rejection workflows
+│   └── ...
+├── tools/
+│   ├── replicate_client.py    # Replicate API wrapper
+│   ├── grok_client.py         # XAI/Grok API wrapper
+│   └── ...
+└── main.py                    # FastAPI app entry point
+
+content/
+├── references/
+│   ├── starbright_monroe/     # Starbright reference images
+│   ├── luna_vale/             # Luna reference images
+│   └── backgrounds/           # Background references
+├── seedream4_output/          # Raw generated images
+├── final/                     # Approved curated images
+├── prompt_templates/          # Pose and prompt libraries
+└── luna_prompt_config.json    # Luna modular prompt config
+
+client/                        # React/TypeScript dashboard
+```
+
+---
+
+## Quick Reference: Image Generation
+
+**To generate a Starbright image:**
+```python
+from app.services.seedream4_service import Seedream4Service
+
+service = Seedream4Service("starbright_monroe")
+result = await service.generate(
+    prompt=service.build_prompt(
+        scene="luxury bedroom with soft morning light",
+        outfit="white silk slip dress",
+        pose="sitting on edge of bed",
+        lighting="soft diffused natural lighting"
+    ),
+    aspect_ratio="3:4",
+    filename_prefix="starbright_bedroom"
+)
+```
+
+**To transform an image into Starbright style:**
+Use the SEEDream 4.5 reference system - provide the source image context in your prompt while using Starbright's face and body references to maintain identity consistency.
+
+---
+
+## Workflow Command
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 5000
+```
