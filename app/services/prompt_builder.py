@@ -117,7 +117,10 @@ class PromptBuilder:
         additional: str = ""
     ) -> str:
         """
-        Build a prompt for fal.ai Seedream 4.5 with Figure 1/Figure 2 reference system.
+        Build a prompt for fal.ai Seedream 4.5 with direct identity description.
+        
+        Uses Replicate-style prompting where reference images are passed separately
+        and the model uses them automatically without Figure 1/2 references.
         
         Args:
             scene: Background/environment description
@@ -130,9 +133,9 @@ class PromptBuilder:
             Formatted prompt string
         """
         prompt = (
-            f"Generate a new image of the woman from Figure 1 and Figure 2. "
-            f"She is {pose}, wearing {outfit}, in {scene}. "
-            f"Maintain her exact facial features, {self.identity}. "
+            "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
+            f"Maintain her EXACT facial features: {self.identity}. "
+            f"She is {pose}, wearing {outfit}, in {scene}, {lighting}. "
             f"{CAMERA_SETTINGS}, {SKIN_TEXTURE}, {QUALITY_SETTINGS}"
         )
         
@@ -145,6 +148,9 @@ class PromptBuilder:
         """
         Build a prompt from a research-derived narrative.
         
+        Uses Figure 1/2 references with explicit facial identity preservation instructions
+        as recommended by SEEDream 4.5 documentation for character consistency.
+        
         Args:
             narrative_prompt: The narrative prompt from research agent
         
@@ -152,8 +158,9 @@ class PromptBuilder:
             Full prompt with identity and camera settings
         """
         identity_prefix = (
-            "Generate a new image of the woman from Figure 1 and Figure 2. "
-            f"Maintain her exact facial features, {self.identity}. "
+            "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
+            f"Maintain her EXACT facial features, bone structure, and identity: {self.identity}. "
+            "Keep the same face shape, eyes, nose, lips, and freckles as the reference. "
         )
         
         camera_suffix = (
@@ -184,10 +191,10 @@ class PromptBuilder:
         scene = CONSISTENCY_BACKGROUNDS.get(background, background)
         
         prompt = (
-            f"Generate a new image of the woman from Figure 1 and Figure 2. "
-            f"She is {pose}, wearing {outfit}. "
+            "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
+            f"Maintain her EXACT facial features: {self.identity}. "
+            f"{pose}, wearing {outfit}. "
             f"Setting: {scene}, {lighting}. "
-            f"Maintain her exact facial features, {self.identity}. "
             f"No earrings, no jewelry, no ear accessories. "
             f"{CAMERA_SETTINGS}, {SKIN_TEXTURE}, {QUALITY_SETTINGS}."
         )
@@ -236,8 +243,8 @@ class PromptBuilder:
         modified_prompt = re.sub(r'\s+', ' ', modified_prompt).strip()
         
         identity_prefix = (
-            "Generate a new image of the woman from Figure 1 and Figure 2. "
-            f"Maintain her exact facial features, {self.identity}. "
+            "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
+            f"Maintain her EXACT facial features: {self.identity}. "
         )
         
         setting_clause = f" Setting: {scene}, {lighting}. No earrings, no jewelry, no ear accessories."
