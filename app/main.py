@@ -26,6 +26,7 @@ from app.api.webchat_routes import router as webchat_router
 from app.api.gallery_routes import router as gallery_router
 from app.api.twitter_routes import router as twitter_router
 from app.api.seedream4_routes import router as seedream4_router
+from app.api.venice_routes import router as venice_router
 from app.api.unified_routes import router as unified_router
 from app.api.workflow_routes import router as workflow_router
 from app.api.object_storage_routes import router as object_storage_router, uploads_router
@@ -63,6 +64,7 @@ app.include_router(webchat_router)
 app.include_router(gallery_router)
 app.include_router(twitter_router)
 app.include_router(seedream4_router)
+app.include_router(venice_router)
 app.include_router(unified_router)
 app.include_router(workflow_router)
 app.include_router(object_storage_router)
