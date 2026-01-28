@@ -468,6 +468,17 @@ class Seedream4Service:
             
             image_refs = [face_b64, body_b64, source_b64]
             
+            identity_descriptors = (
+                "Figure 1 is the face reference. Figure 2 is the body reference showing extremely thin slender petite body "
+                "with very narrow tiny waist, slim narrow hips, long thin slender legs, delicate small frame, size 0 figure, "
+                "small natural A-cup breasts. "
+                "Figure 3 is the pose/scene reference. "
+                "Generate an image with the face from Figure 1, the body proportions from Figure 2, "
+                "and matching the exact pose, camera angle, scene, lighting, and composition from Figure 3. "
+            )
+            
+            full_prompt = identity_descriptors + prompt
+            
             default_negative = (
                 "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
                 "deformed body, disproportionate body, unnatural anatomy, distorted proportions, "
@@ -479,7 +490,7 @@ class Seedream4Service:
             final_negative = negative_prompt if negative_prompt else default_negative
             
             input_data = {
-                "prompt": prompt,
+                "prompt": full_prompt,
                 "image_input": image_refs,
                 "aspect_ratio": aspect_ratio,
                 "size": size,
@@ -492,7 +503,7 @@ class Seedream4Service:
             if seed is not None:
                 input_data["seed"] = seed
             
-            logger.info(f"Seedream 4.5 transform: {size} resolution, source + face + body refs")
+            logger.info(f"Seedream 4.5 transform: {size} resolution, Figure 1=face, Figure 2=body, Figure 3=source")
             
             async with httpx.AsyncClient(timeout=120.0) as client:
                 response = await client.post(

@@ -19,14 +19,8 @@ SOURCE_DIR = "attached_assets/transform_batch/012426transform 4"
 BATCH_SIZE = 2
 
 TRANSFORM_PROMPT_TEMPLATE = """
-Figure 1 is a young woman with very pale porcelain ivory white skin, straight sleek dark brown hair (not wavy, not curly), 
-warm olive-brown eyes, natural freckles across nose and cheeks, 
-extremely thin slender petite body with very narrow tiny waist, 
-slim narrow hips, long thin slender legs, delicate small frame, size 0 figure,
-small natural A-cup breasts, proportionate feminine figure.
-
-Transform Figure 3 (the reference pose image) into Figure 1's appearance while maintaining the exact same pose, 
-camera angle, scene, lighting, and composition from Figure 3.
+Young woman with very pale porcelain ivory white skin, straight sleek dark brown hair (not wavy, not curly), 
+warm olive-brown eyes, natural freckles across nose and cheeks.
 
 natural skin texture with visible pores, fine skin detail, 
 slight natural skin imperfections, photorealistic skin tones, 
