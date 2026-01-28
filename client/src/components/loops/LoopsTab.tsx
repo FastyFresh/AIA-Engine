@@ -63,6 +63,9 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
   const [captionedVideos, setCaptionedVideos] = useState<LoopVideo[]>([]);
   const [isLoadingCaptioned, setIsLoadingCaptioned] = useState(false);
   
+  const [omnihumanVideos, setOmnihumanVideos] = useState<LoopVideo[]>([]);
+  const [isLoadingOmnihuman, setIsLoadingOmnihuman] = useState(false);
+  
   const [captionSuggestions, setCaptionSuggestions] = useState<Array<{id: string; lines: string[]; theme?: string; pattern?: string; emotional_mode?: string; formatted: string; source?: string}>>([]);
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<string>("all");
@@ -183,6 +186,28 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
       setIsLoadingCaptioned(false);
     }
   }, [apiBase, addLog]);
+
+  const loadOmnihumanVideos = useCallback(async () => {
+    setIsLoadingOmnihuman(true);
+    try {
+      const response = await fetch(`${apiBase}/gallery/videos/${selectedInfluencer}?source=omnihuman`);
+      if (!response.ok) throw new Error("Failed to load OmniHuman videos");
+      
+      const data = await response.json();
+      const videos = (data.videos || []).map((v: any) => ({
+        filename: v.filename,
+        path: v.path,
+        size_kb: (v.size_mb || 0) * 1024,
+        created: v.date
+      }));
+      setOmnihumanVideos(videos);
+      addLog("LOOPS", `Loaded ${videos.length} OmniHuman lip-sync videos`, "info");
+    } catch (error: any) {
+      console.error("Failed to load OmniHuman videos:", error);
+    } finally {
+      setIsLoadingOmnihuman(false);
+    }
+  }, [apiBase, selectedInfluencer, addLog]);
 
   const checkTwitterStatus = useCallback(async () => {
     try {
@@ -352,8 +377,9 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
     loadLoops();
     loadMovements();
     loadCaptioned();
+    loadOmnihumanVideos();
     checkTwitterStatus();
-  }, [selectedInfluencer, loadWorkflowType, loadHeroRefs, loadLoops, loadMovements, loadCaptioned, checkTwitterStatus]);
+  }, [selectedInfluencer, loadWorkflowType, loadHeroRefs, loadLoops, loadMovements, loadCaptioned, loadOmnihumanVideos, checkTwitterStatus]);
 
   useEffect(() => {
     if (showCaptionForm && previewVideo && captionSuggestions.length === 0) {
@@ -626,11 +652,11 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
           <Button 
             variant="outline" 
             size="sm" 
-            onClick={() => { loadHeroRefs(); loadLoops(); loadCaptioned(); }}
-            disabled={isLoadingRefs || isLoadingLoops || isLoadingCaptioned}
+            onClick={() => { loadHeroRefs(); loadLoops(); loadCaptioned(); loadOmnihumanVideos(); }}
+            disabled={isLoadingRefs || isLoadingLoops || isLoadingCaptioned || isLoadingOmnihuman}
             className="border-white/10"
           >
-            <RefreshCw className={`w-4 h-4 mr-1 ${(isLoadingRefs || isLoadingLoops || isLoadingCaptioned) ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 mr-1 ${(isLoadingRefs || isLoadingLoops || isLoadingCaptioned || isLoadingOmnihuman) ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
           
@@ -648,6 +674,7 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
           <span className="text-purple-400">{heroRefs.length} hero refs</span>
           <span className="text-cyan-400">{loops.length} loops</span>
           <span className="text-pink-400">{captionedVideos.length} captioned</span>
+          <span className="text-orange-400">{omnihumanVideos.length} lip-sync</span>
         </div>
       </div>
 
@@ -664,6 +691,10 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
           <TabsTrigger value="captioned" className="text-xs font-mono">
             <Type className="w-3 h-3 mr-1" />
             CAPTIONED
+          </TabsTrigger>
+          <TabsTrigger value="omnihuman" className="text-xs font-mono">
+            <Music className="w-3 h-3 mr-1" />
+            LIP_SYNC
           </TabsTrigger>
         </TabsList>
 
@@ -892,6 +923,62 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </ScrollArea>
+        </TabsContent>
+
+        <TabsContent value="omnihuman" className="flex-1 mt-0">
+          <ScrollArea className="h-full">
+            {isLoadingOmnihuman ? (
+              <div className="flex items-center justify-center h-40">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              </div>
+            ) : omnihumanVideos.length === 0 ? (
+              <div className="text-center py-12 text-muted-foreground">
+                <Music className="w-10 h-10 mx-auto mb-3 opacity-30" />
+                <p>No lip-sync videos yet</p>
+                <p className="text-xs mt-2">OmniHuman videos will appear here when generated</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {omnihumanVideos.map((video) => (
+                  <div 
+                    key={video.path}
+                    className="relative group rounded-lg overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all"
+                  >
+                    <div className="w-full aspect-[9/16] bg-black/40 flex items-center justify-center">
+                      <video 
+                        src={`${apiBase}/gallery/video/${video.path}`}
+                        className="w-full h-full object-cover"
+                        muted
+                        loop
+                        playsInline
+                        controls
+                      />
+                    </div>
+                    
+                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-orange-500/90">
+                      LIP-SYNC
+                    </div>
+                    
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+                      <p className="text-[10px] text-white/80 truncate">{video.filename}</p>
+                      <p className="text-[9px] text-white/50 mt-1">{Math.round(video.size_kb)}KB</p>
+                      <div className="flex items-center gap-1 mt-2">
+                        <a 
+                          href={`${apiBase}/gallery/video/${video.path}`}
+                          download={video.filename}
+                          className="flex-1 inline-flex items-center justify-center gap-1 h-7 bg-orange-600 hover:bg-orange-500 rounded text-[10px] font-medium"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Download className="w-3 h-3" />
+                          Download
+                        </a>
                       </div>
                     </div>
                   </div>
