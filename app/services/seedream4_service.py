@@ -420,6 +420,155 @@ class Seedream4Service:
             logger.error(f"Seedream4 3-ref generation error: {e}")
             return {"status": "error", "error": str(e)}
 
+    async def transform_image(
+        self,
+        source_image_path: str,
+        prompt: str,
+        aspect_ratio: str = "3:4",
+        seed: Optional[int] = None,
+        filename_prefix: str = "transform",
+        size: str = "4K",
+        negative_prompt: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Transform a source image into Starbright Monroe style.
+        
+        Uses source image as pose/scene reference, combined with face and body references
+        for identity consistency.
+        
+        Args:
+            source_image_path: Path to the image to transform
+            prompt: Description of the desired output (describe pose, outfit, scene)
+            aspect_ratio: Output aspect ratio
+            seed: Random seed for reproducibility
+            filename_prefix: Prefix for output filename
+            size: Resolution - "2K" or "4K"
+            negative_prompt: Things to avoid in generation
+        """
+        if not self.replicate_api_token:
+            return {"status": "error", "error": "REPLICATE_API_TOKEN not configured"}
+        
+        if not os.path.exists(source_image_path):
+            return {"status": "error", "error": f"Source image not found: {source_image_path}"}
+        
+        face_path = self.face_ref_path
+        body_path = self.body_ref_path
+        
+        if not os.path.exists(face_path):
+            return {"status": "error", "error": f"Face reference not found: {face_path}"}
+        if not os.path.exists(body_path):
+            return {"status": "error", "error": f"Body reference not found: {body_path}"}
+        
+        try:
+            version = await self.get_model_version()
+            
+            face_b64 = self.encode_image(face_path)
+            body_b64 = self.encode_image(body_path)
+            source_b64 = self.encode_image(source_image_path)
+            
+            image_refs = [face_b64, body_b64, source_b64]
+            
+            default_negative = (
+                "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
+                "deformed body, disproportionate body, unnatural anatomy, distorted proportions, "
+                "elongated limbs, stretched arms, stretched legs, unrealistic limb length, "
+                "mutated hands, fused fingers, too many fingers, missing fingers, "
+                "bad anatomy, wrong anatomy, unrealistic body, mannequin, plastic skin"
+            )
+            
+            final_negative = negative_prompt if negative_prompt else default_negative
+            
+            input_data = {
+                "prompt": prompt,
+                "image_input": image_refs,
+                "aspect_ratio": aspect_ratio,
+                "size": size,
+                "max_images": 1,
+                "sequential_image_generation": "disabled",
+                "negative_prompt": final_negative,
+                "disable_safety_checker": True
+            }
+            
+            if seed is not None:
+                input_data["seed"] = seed
+            
+            logger.info(f"Seedream 4.5 transform: {size} resolution, source + face + body refs")
+            
+            async with httpx.AsyncClient(timeout=120.0) as client:
+                response = await client.post(
+                    REPLICATE_API_URL,
+                    headers={
+                        "Authorization": f"Token {self.replicate_api_token}",
+                        "Content-Type": "application/json"
+                    },
+                    json={"version": version, "input": input_data}
+                )
+                
+                if response.status_code not in [200, 201]:
+                    return {"status": "error", "error": f"API error: {response.text}"}
+                
+                prediction = response.json()
+                prediction_id = prediction.get("id")
+                
+                if not prediction_id:
+                    return {"status": "error", "error": "No prediction ID returned"}
+                
+                logger.info(f"Started Seedream 4.5 transform: {prediction_id}")
+                
+                for _ in range(150):
+                    await asyncio.sleep(2)
+                    
+                    check_response = await client.get(
+                        f"{REPLICATE_API_URL}/{prediction_id}",
+                        headers={"Authorization": f"Token {self.replicate_api_token}"}
+                    )
+                    
+                    if check_response.status_code != 200:
+                        continue
+                    
+                    status_data = check_response.json()
+                    status = status_data.get("status")
+                    
+                    if status == "succeeded":
+                        output = status_data.get("output", [])
+                        image_url = output[0] if isinstance(output, list) else output
+                        
+                        if image_url:
+                            img_response = await client.get(image_url, timeout=60.0)
+                            
+                            if not storage_manager.ensure_space_for_write(estimated_size_mb=5.0):
+                                logger.error("Insufficient disk space after cleanup")
+                                return {"status": "error", "error": "Disk quota exceeded"}
+                            
+                            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                            filename = f"{filename_prefix}_{timestamp}.png"
+                            save_path = self.output_dir / filename
+                            
+                            with open(save_path, "wb") as f:
+                                f.write(img_response.content)
+                            
+                            logger.info(f"Saved transformed image: {save_path}")
+                            
+                            return {
+                                "status": "success",
+                                "image_path": str(save_path),
+                                "filename": filename,
+                                "prediction_id": prediction_id,
+                                "prompt": prompt,
+                                "source_image": source_image_path,
+                                "provider": "replicate"
+                            }
+                    
+                    elif status in ["failed", "canceled"]:
+                        error = status_data.get("error", "Generation failed")
+                        return {"status": "error", "error": error}
+                
+                return {"status": "error", "error": "Generation timed out"}
+                
+        except Exception as e:
+            logger.error(f"Seedream4 transform error: {e}")
+            return {"status": "error", "error": str(e)}
+
     async def generate_batch(
         self,
         prompts: List[Dict[str, str]],
