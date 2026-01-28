@@ -202,6 +202,64 @@ async def download_gallery_file(path: str):
     )
 
 
+@router.get("/videos/{influencer}")
+async def get_gallery_videos(influencer: str, source: str = Query(default="all")):
+    """
+    Get gallery videos for an influencer.
+    
+    Args:
+        influencer: Influencer ID (luna_vale, starbright_monroe)
+        source: Filter by source - "all", "omnihuman", "loops"
+    """
+    influencer_key = influencer.lower().replace(" ", "_")
+    
+    videos = []
+    
+    video_folders = {
+        "omnihuman": Path("content/videos/omnihuman"),
+        "loops": Path("content/loops"),
+    }
+    
+    for folder_name, folder_path in video_folders.items():
+        if source not in ["all", folder_name]:
+            continue
+        if not folder_path.exists():
+            continue
+        
+        for file in folder_path.glob("*.mp4"):
+            stat = file.stat()
+            videos.append({
+                "filename": file.name,
+                "path": str(file),
+                "date": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+                "size_mb": round(stat.st_size / (1024 * 1024), 2),
+                "mtime": stat.st_mtime,
+                "source": folder_name
+            })
+    
+    videos.sort(key=lambda x: x["mtime"], reverse=True)
+    
+    for v in videos:
+        del v["mtime"]
+    
+    return {"videos": videos[:20]}
+
+
+@router.get("/video/{path:path}")
+async def serve_gallery_video(path: str):
+    """Serve a video file from the gallery."""
+    file_path = validate_content_path(path)
+    
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Video not found")
+    
+    return FileResponse(
+        file_path,
+        media_type="video/mp4",
+        headers={"Cache-Control": "public, max-age=3600"}
+    )
+
+
 @router.get("/download-all/{influencer}")
 async def download_all_gallery_files(influencer: str, source: str = "all"):
     """Download all images and videos for an influencer as a ZIP file."""
