@@ -10,75 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 250,
+  "total_generations": 255,
   "approved_count": 189,
-  "rejected_count": 61,
+  "rejected_count": 66,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_20260125_102643.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T17:59:43.429907",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_20260125_102757.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T17:59:46.420364",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_20260125_102438.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T17:59:48.522833",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_20260125_102420.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T17:59:50.586501",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_20260125_101947.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-25T17:59:53.848281",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_20260125_102054.png",
       "prompt": "",
@@ -663,7 +598,72 @@
       "approved": true,
       "timestamp": "2026-01-28T07:19:32.874085",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_072841.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-01-28T07:36:55.293937",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_072139.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-01-28T07:36:58.264197",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_072006.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-01-28T07:36:59.806967",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/venice_output/starbright_jersey_v7_20260128_063229.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-01-28T07:37:15.880379",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/venice_output/starbright_jersey_venice_20260128_063155.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-01-28T07:37:19.368138",
+      "notes": "Rejected via gallery workflow"
     }
   ],
-  "last_updated": "2026-01-28T07:19:32.875590"
+  "last_updated": "2026-01-28T07:37:19.369591"
 }
