@@ -464,21 +464,10 @@ class Seedream4Service:
             
             face_b64 = self.encode_image(face_path)
             body_b64 = self.encode_image(body_path)
-            source_b64 = self.encode_image(source_image_path)
             
-            image_refs = [body_b64, face_b64, source_b64]
+            image_refs = [face_b64, body_b64]
             
-            identity_descriptors = (
-                "Figure 1 is the body reference showing extremely thin slender petite body "
-                "with very narrow tiny waist, slim narrow hips, normal proportionate legs, delicate small frame, size 0 figure, "
-                "small natural A-cup breasts. "
-                "Figure 2 is the face reference with pale porcelain skin, dark brown hair, olive-brown eyes, natural freckles. "
-                "Figure 3 is the pose/scene reference. "
-                "Generate an image with the body proportions from Figure 1, the face from Figure 2, "
-                "and matching the pose, camera angle, scene, and lighting from Figure 3. "
-            )
-            
-            full_prompt = identity_descriptors + prompt
+            full_prompt = prompt
             
             default_negative = (
                 "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
