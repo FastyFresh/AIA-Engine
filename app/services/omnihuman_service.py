@@ -9,13 +9,15 @@ Features:
 - Audio-driven animation with lip-sync
 - Up to 60 seconds at 720p
 - Turbo mode for faster iteration
+- Auto-resize images >5MB for API compliance
 """
 
 import os
 import fal_client
 import logging
-import base64
 import httpx
+import subprocess
+import time
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, Any
@@ -23,6 +25,7 @@ from typing import Optional, Dict, Any
 logger = logging.getLogger(__name__)
 
 OMNIHUMAN_ENDPOINT = "fal-ai/bytedance/omnihuman/v1.5"
+MAX_IMAGE_SIZE = 5 * 1024 * 1024
 
 
 class OmniHumanService:
@@ -37,33 +40,32 @@ class OmniHumanService:
         self.fal_key = os.getenv("FAL_KEY", "")
         self.output_dir = Path("content/videos/omnihuman")
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.temp_dir = Path("/tmp/omnihuman_temp")
+        self.temp_dir.mkdir(parents=True, exist_ok=True)
         logger.info("OmniHuman v1.5 Service initialized")
     
-    def _encode_to_data_uri(self, file_path: str) -> str:
-        """Encode local file to data URI"""
-        with open(file_path, "rb") as f:
-            file_data = base64.b64encode(f.read()).decode()
+    def _resize_image_if_needed(self, image_path: str) -> str:
+        """Resize image if it exceeds 5MB limit"""
+        file_size = Path(image_path).stat().st_size
         
-        ext = Path(file_path).suffix.lower()
+        if file_size <= MAX_IMAGE_SIZE:
+            return image_path
         
-        image_mimes = {
-            ".jpg": "image/jpeg",
-            ".jpeg": "image/jpeg",
-            ".png": "image/png",
-            ".webp": "image/webp"
-        }
+        logger.info(f"Image {file_size/1024/1024:.1f}MB exceeds 5MB limit, resizing...")
         
-        audio_mimes = {
-            ".mp3": "audio/mpeg",
-            ".wav": "audio/wav",
-            ".ogg": "audio/ogg",
-            ".m4a": "audio/mp4",
-            ".aac": "audio/aac"
-        }
+        resized_path = self.temp_dir / f"resized_{Path(image_path).stem}.jpg"
         
-        mime = image_mimes.get(ext) or audio_mimes.get(ext, "application/octet-stream")
+        subprocess.run([
+            "magick", image_path,
+            "-resize", "1280x1280>",
+            "-quality", "85",
+            str(resized_path)
+        ], check=True, capture_output=True)
         
-        return f"data:{mime};base64,{file_data}"
+        new_size = resized_path.stat().st_size
+        logger.info(f"Resized to {new_size/1024:.1f}KB")
+        
+        return str(resized_path)
     
     async def generate_talking_video(
         self,
@@ -78,7 +80,7 @@ class OmniHumanService:
         Generate a lip-sync talking video from image + audio.
         
         Args:
-            image_path: Path to the portrait/hero image
+            image_path: Path to the portrait/hero image (auto-resized if >5MB)
             audio_path: Path to the audio file (mp3, wav, ogg, m4a, aac) - max 60s at 720p
             resolution: "720p" (recommended) or "1080p"
             turbo_mode: Enable faster generation for testing
@@ -98,32 +100,44 @@ class OmniHumanService:
         if not Path(audio_path).exists():
             return {"status": "error", "error": f"Audio not found: {audio_path}"}
         
-        image_url = self._encode_to_data_uri(image_path)
-        audio_url = self._encode_to_data_uri(audio_path)
-        
         try:
+            processed_image = self._resize_image_if_needed(image_path)
+            
+            logger.info(f"Uploading files to fal storage...")
+            image_url = fal_client.upload_file(processed_image)
+            audio_url = fal_client.upload_file(audio_path)
+            
             logger.info(f"Submitting to OmniHuman v1.5...")
             logger.info(f"Image: {Path(image_path).name}")
             logger.info(f"Audio: {Path(audio_path).name}")
             logger.info(f"Resolution: {resolution}, Turbo: {turbo_mode}")
             
-            def on_queue_update(update):
-                if isinstance(update, fal_client.InProgress):
-                    logger.info(f"OmniHuman generation in progress...")
-                    for log in update.logs:
-                        logger.info(f"  {log.get('message', '')}")
-            
-            result = fal_client.subscribe(
+            handle = fal_client.submit(
                 OMNIHUMAN_ENDPOINT,
                 arguments={
                     "image_url": image_url,
                     "audio_url": audio_url,
                     "resolution": resolution,
                     "turbo_mode": turbo_mode
-                },
-                with_logs=True,
-                on_queue_update=on_queue_update
+                }
             )
+            
+            request_id = handle.request_id
+            logger.info(f"Request submitted: {request_id}")
+            
+            for i in range(120):
+                status = fal_client.status(OMNIHUMAN_ENDPOINT, request_id, with_logs=True)
+                status_type = type(status).__name__
+                
+                if status_type == "Completed":
+                    result = fal_client.result(OMNIHUMAN_ENDPOINT, request_id)
+                    break
+                elif status_type == "Failed":
+                    return {"status": "error", "error": "Generation failed"}
+                
+                time.sleep(5)
+            else:
+                return {"status": "error", "error": "Generation timed out (10 min)"}
             
             logger.info(f"OmniHuman complete. Result keys: {list(result.keys())}")
             
@@ -141,13 +155,12 @@ class OmniHumanService:
             filename = f"{filename_prefix}_{timestamp}.mp4"
             filepath = save_dir / filename
             
-            async with httpx.AsyncClient(timeout=180.0) as client:
-                video_resp = await client.get(video_url)
-                if video_resp.status_code == 200:
-                    filepath.write_bytes(video_resp.content)
-                    logger.info(f"Video saved: {filepath} ({duration:.1f}s)")
-                else:
-                    return {"status": "error", "error": f"Download failed: {video_resp.status_code}"}
+            video_resp = httpx.get(video_url, timeout=180.0)
+            if video_resp.status_code == 200:
+                filepath.write_bytes(video_resp.content)
+                logger.info(f"Video saved: {filepath} ({duration:.1f}s)")
+            else:
+                return {"status": "error", "error": f"Download failed: {video_resp.status_code}"}
             
             estimated_cost = duration * 0.16
             
