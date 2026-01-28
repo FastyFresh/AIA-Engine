@@ -159,8 +159,9 @@ class PromptBuilder:
         """
         identity_prefix = (
             "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
-            f"Maintain her EXACT facial features, bone structure, and identity: {self.identity}. "
-            "Keep the same face shape, eyes, nose, lips, and freckles as the reference. "
+            f"STRICTLY preserve her EXACT facial features from Figure 1: {self.identity}. "
+            "Keep the same face shape, eyes, nose, lips, natural freckles, and real skin texture with visible pores - not airbrushed or smoothed. "
+            "STRICTLY match Figure 2 body proportions: petite slender frame, slim narrow waist, small natural bust, no exaggerated curves. "
         )
         
         camera_suffix = (
