@@ -92,6 +92,22 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
                     "source": "seedream"
                 })
     
+    if source in ["all", "venice"]:
+        venice_folder = Path("content/venice_output")
+        if venice_folder.exists():
+            for file in venice_folder.glob("*.png"):
+                if file.name in final_filenames:
+                    continue
+                stat = file.stat()
+                images.append({
+                    "filename": file.name,
+                    "path": str(file),
+                    "date": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+                    "size_kb": round(stat.st_size / 1024, 1),
+                    "mtime": stat.st_mtime,
+                    "source": "venice"
+                })
+    
     if source in ["all", "raw"]:
         raw_folder = Path(f"content/raw/{influencer_key}")
         if raw_folder.exists():
@@ -195,6 +211,7 @@ async def download_all_gallery_files(influencer: str, source: str = "all"):
     
     folders = {
         "research": Path("content/seedream4_output"),
+        "venice": Path("content/venice_output"),
         "generated": Path(f"content/generated/{influencer_key}"),
         "raw": Path(f"content/raw/{influencer_key}"),
         "final": Path(f"content/final/{influencer_key}"),
