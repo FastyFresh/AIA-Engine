@@ -151,11 +151,16 @@ class FalSeedreamService:
             "Content-Type": "application/json"
         }
         
+        # Use auto_4K for high resolution like Replicate
+        # The aspect_ratio parameter is only used if not using auto_4K
+        image_size = "auto_4K" if aspect_ratio in ["portrait_4_3", "portrait_16_9", "landscape_4_3", "landscape_16_9", "square"] else aspect_ratio
+        
         payload = {
             "prompt": prompt,
             "image_urls": [face_uri, body_uri],
-            "image_size": aspect_ratio,
+            "image_size": image_size,
             "num_images": 1,
+            "max_images": 1,
             "enable_safety_checker": enable_safety_checker
         }
         
