@@ -93,6 +93,10 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
   const [uploadInfluencer, setUploadInfluencer] = useState<string>("starbright_monroe");
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  
+  const [videoPlayerOpen, setVideoPlayerOpen] = useState(false);
+  const [videoPlayerSrc, setVideoPlayerSrc] = useState<string>("");
+  const [videoPlayerTitle, setVideoPlayerTitle] = useState<string>("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<{
     outfit?: string;
@@ -614,6 +618,12 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
     setUploadDialogOpen(true);
   };
 
+  const openVideoPlayer = (videoPath: string, title: string) => {
+    setVideoPlayerSrc(`${apiBase}/gallery/video/${videoPath}`);
+    setVideoPlayerTitle(title);
+    setVideoPlayerOpen(true);
+  };
+
   if (workflowType === null) {
     return (
       <div className="h-full flex flex-col items-center justify-center text-muted-foreground">
@@ -949,17 +959,24 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
                 {omnihumanVideos.map((video) => (
                   <div 
                     key={video.path}
-                    className="relative group rounded-lg overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all"
+                    className="relative group rounded-lg overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all cursor-pointer"
+                    onClick={() => openVideoPlayer(video.path, video.filename)}
                   >
-                    <div className="w-full aspect-[9/16] bg-black/40 flex items-center justify-center">
+                    <div className="w-full aspect-[9/16] bg-black/40 flex items-center justify-center relative">
                       <video 
                         src={`${apiBase}/gallery/video/${video.path}`}
                         className="w-full h-full object-cover"
                         muted
                         loop
                         playsInline
-                        controls
+                        onMouseEnter={(e) => e.currentTarget.play()}
+                        onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
                       />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all">
+                        <div className="w-12 h-12 rounded-full bg-orange-500/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <Play className="w-6 h-6 text-white fill-white ml-1" />
+                        </div>
+                      </div>
                     </div>
                     
                     <div className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-orange-500/90">
@@ -970,14 +987,22 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
                       <p className="text-[10px] text-white/80 truncate">{video.filename}</p>
                       <p className="text-[9px] text-white/50 mt-1">{Math.round(video.size_kb)}KB</p>
                       <div className="flex items-center gap-1 mt-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="flex-1 h-7 bg-orange-600 hover:bg-orange-500 text-white text-[10px]"
+                          onClick={(e) => { e.stopPropagation(); openVideoPlayer(video.path, video.filename); }}
+                        >
+                          <Play className="w-3 h-3 mr-1" />
+                          Watch
+                        </Button>
                         <a 
                           href={`${apiBase}/gallery/video/${video.path}`}
                           download={video.filename}
-                          className="flex-1 inline-flex items-center justify-center gap-1 h-7 bg-orange-600 hover:bg-orange-500 rounded text-[10px] font-medium"
+                          className="inline-flex items-center justify-center h-7 px-2 bg-white/10 hover:bg-white/20 rounded text-[10px]"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <Download className="w-3 h-3" />
-                          Download
                         </a>
                       </div>
                     </div>
@@ -1688,6 +1713,44 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
                   Upload & Save
                 </>
               )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={videoPlayerOpen} onOpenChange={setVideoPlayerOpen}>
+        <DialogContent className="glass-panel border-white/10 text-foreground sm:max-w-[800px] max-h-[90vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Play className="w-5 h-5 text-orange-400" />
+              {videoPlayerTitle}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex justify-center bg-black rounded-lg overflow-hidden">
+            <video
+              key={videoPlayerSrc}
+              src={videoPlayerSrc}
+              className="max-h-[70vh] w-auto"
+              controls
+              autoPlay
+              playsInline
+            />
+          </div>
+          <DialogFooter className="gap-2">
+            <a 
+              href={videoPlayerSrc}
+              download={videoPlayerTitle}
+              className="inline-flex items-center justify-center gap-2 h-9 px-4 bg-orange-600 hover:bg-orange-500 rounded-md text-sm font-medium"
+            >
+              <Download className="w-4 h-4" />
+              Download
+            </a>
+            <Button
+              variant="outline"
+              onClick={() => setVideoPlayerOpen(false)}
+              className="border-white/20"
+            >
+              Close
             </Button>
           </DialogFooter>
         </DialogContent>
