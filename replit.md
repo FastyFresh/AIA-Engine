@@ -389,3 +389,75 @@ Use the SEEDream 4.5 reference system - provide the source image context in your
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 5000
 ```
+
+---
+
+## OpenClaw VPS Integration (Jan 30, 2026)
+
+**Architecture:** OpenClaw on VPS (browser automation, DM management, social posting) + AIA Engine on Replit (content generation) connected via webhooks.
+
+### VPS Details
+- **Provider:** Vultr
+- **IP Address:** 45.32.219.67
+- **Port:** 18789
+- **OS:** Ubuntu 22.04 x64
+- **Location:** Atlanta
+
+### Credentials
+- **SSH:** root@45.32.219.67
+- **Password:** 5Zn}5(jG_}}]R%4J
+- **Gateway Token:** 5776e7f50be0318cc69693d93e89462d96f2db19dd1b3489773b3b585b07ec5e
+- **Webhook Token:** starbright-aia-webhook-2026
+
+### OpenClaw Config
+Location: `~/.openclaw/openclaw.json`
+```json
+{
+  "hooks": {
+    "enabled": true,
+    "token": "starbright-aia-webhook-2026"
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "token": "5776e7f50be0318cc69693d93e89462d96f2db19dd1b3489773b3b585b07ec5e"
+    }
+  }
+}
+```
+
+### Webhook Endpoints
+- **Wake Hook:** `POST http://45.32.219.67:18789/hooks/wake`
+- **Agent Hook:** `POST http://45.32.219.67:18789/hooks/agent`
+
+### Example Webhook Call
+```bash
+curl -X POST "http://45.32.219.67:18789/hooks/agent" \
+  -H "Authorization: Bearer starbright-aia-webhook-2026" \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Generate a new selfie post for DFans","name":"ContentGen","deliver":true}'
+```
+
+### Systemd Service
+```bash
+# Status
+systemctl status openclaw
+
+# Restart
+systemctl restart openclaw
+
+# Logs
+journalctl -u openclaw -f
+```
+
+### SSH Access
+```bash
+sshpass -p '5Zn}5(jG_}}]R%4J' ssh root@45.32.219.67
+```
+
+### Supported Channels (Future)
+- WhatsApp (Baileys)
+- Telegram (Bot API)
+- Discord (Bot API)
+- Instagram (Browser automation via OpenClaw)
+- TikTok (Browser automation via OpenClaw)
