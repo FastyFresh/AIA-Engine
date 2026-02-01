@@ -1,6 +1,5 @@
-"""Quick regeneration with lived-in background details"""
+"""Generate multiple test images with varied lived-in scenes"""
 import asyncio
-import os
 import sys
 sys.path.insert(0, '.')
 
@@ -9,31 +8,49 @@ from app.services.fal_seedream_service import FalSeedreamService
 async def regenerate():
     service = FalSeedreamService(influencer_id="starbright_monroe")
     
-    # Build prompt with lived-in background details
-    prompt = service.build_prompt(
-        scene="cozy lived-in bedroom, clothes scattered on floor, throw blanket draped on chair, shoes by the door, personal items on nightstand, slightly messy but stylish, real home environment",
-        outfit="red crop top and red shorts matching set",
-        pose="standing naturally with relaxed confident pose, full body visible, feet on ground",
-        lighting="soft natural daylight from window, warm realistic lighting",
-        additional="extremely thin slender petite body, very small A-cup chest, flat chest appearance, slim narrow frame"
-    )
+    scenes = [
+        {
+            "scene": "small cozy apartment living room, clothes tossed on couch, coffee mug on table, magazines scattered, shoes kicked off near door, compact space scaled to petite person",
+            "outfit": "casual oversized sweater and shorts",
+            "pose": "standing casually leaning against wall, full body visible"
+        },
+        {
+            "scene": "intimate bedroom with unmade bed, clothes on floor, phone charger on nightstand, small vanity with makeup, cozy proportioned room matching petite frame",
+            "outfit": "white tank top and grey sweatpants",
+            "pose": "standing relaxed with arms at sides, full body grounded"
+        },
+        {
+            "scene": "bathroom doorway, towels hanging, skincare products on counter, robe on hook, small personal bathroom scale appropriate to slim petite person",
+            "outfit": "light blue athletic set",
+            "pose": "natural standing pose, full body visible, feet on floor"
+        }
+    ]
     
-    print(f"Prompt: {prompt[:300]}...")
+    results = []
+    for i, s in enumerate(scenes):
+        print(f"\n--- Generating scene {i+1}/3 ---")
+        prompt = service.build_prompt(
+            scene=s["scene"],
+            outfit=s["outfit"],
+            pose=s["pose"],
+            lighting="soft natural daylight, realistic shadows",
+            additional="extremely thin slender petite body, very small flat A-cup chest, slim narrow frame"
+        )
+        
+        result = await service.generate_with_references(
+            prompt=prompt,
+            aspect_ratio="portrait_4_3",
+            output_dir="content/generated/starbright_monroe",
+            filename_prefix="starbright_monroe",
+            enable_safety_checker=False
+        )
+        
+        status = result.get("status", "error")
+        print(f"Scene {i+1}: {status}")
+        results.append(result)
     
-    result = await service.generate_with_references(
-        prompt=prompt,
-        aspect_ratio="portrait_4_3",
-        output_dir="content/generated/starbright_monroe",
-        filename_prefix="starbright_monroe",
-        enable_safety_checker=False
-    )
-    
-    if result.get("status") == "success":
-        print(f"\nSuccess! Image saved to: {result.get('saved_path')}")
-    else:
-        print(f"\nError: {result.get('error')}")
-    
-    return result
+    print("\nDone generating 3 test images!")
+    return results
 
 if __name__ == "__main__":
     asyncio.run(regenerate())
