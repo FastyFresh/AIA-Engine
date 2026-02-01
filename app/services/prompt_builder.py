@@ -41,8 +41,9 @@ INFLUENCER_IDENTITIES = {
             "warm olive-brown eyes, natural freckles across nose and cheeks, "
             "extremely thin slender petite body with very narrow tiny waist, "
             "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure, "
-            "small natural A-cup breasts, proportionate feminine figure"
+            "very small flat chest, tiny A-cup breasts almost flat, minimal bust, petite chest matching body reference exactly"
         ),
+        "negative_prompt_additions": "large breasts, big breasts, busty, prominent bust, enhanced chest, voluptuous, curvy chest, cleavage, exaggerated chest, big bust, medium breasts, C-cup, D-cup, augmented",
         "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
         "body_ref": "content/references/starbright_monroe/body_reference.webp",
         "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.webp",

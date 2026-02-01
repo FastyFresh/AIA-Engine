@@ -50,6 +50,7 @@ class FalSeedreamService:
         self.face_ref_path = config["face_ref"]
         self.body_ref_path = config["body_ref"]
         self.body_ref_back_path = config.get("body_ref_back")
+        self.default_negative_prompt = config.get("negative_prompt_additions", "")
         
         self.prompt_builder = PromptBuilder(influencer_id)
         
@@ -164,8 +165,12 @@ class FalSeedreamService:
             "enable_safety_checker": enable_safety_checker
         }
         
+        # Combine default negative prompts with any additional ones provided
+        combined_negative = self.default_negative_prompt
         if negative_prompt:
-            payload["negative_prompt"] = negative_prompt
+            combined_negative = f"{self.default_negative_prompt}, {negative_prompt}" if self.default_negative_prompt else negative_prompt
+        if combined_negative:
+            payload["negative_prompt"] = combined_negative
         
         try:
             async with httpx.AsyncClient(timeout=180.0) as client:
