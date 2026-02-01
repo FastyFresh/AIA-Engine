@@ -8,6 +8,9 @@ import json
 import logging
 import zipfile
 import tempfile
+import mimetypes
+
+from app.utils.image_files import list_images
 
 logger = logging.getLogger(__name__)
 
@@ -58,12 +61,12 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
     final_folder = Path(f"content/final/{influencer_key}")
     final_filenames = set()
     if final_folder.exists():
-        final_filenames = {f.name for f in final_folder.glob("*.png")}
+        final_filenames = {f.name for f in list_images(final_folder)}
     
     if source in ["all", "generated"]:
         generated_folder = Path(f"content/generated/{influencer_key}")
         if generated_folder.exists():
-            for file in generated_folder.glob("*.png"):
+            for file in list_images(generated_folder):
                 if file.name in final_filenames:
                     continue
                 stat = file.stat()
@@ -79,7 +82,7 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
     if source in ["all", "seedream"]:
         seedream_folder = Path("content/seedream4_output")
         if seedream_folder.exists():
-            for file in seedream_folder.glob("*.png"):
+            for file in list_images(seedream_folder):
                 if file.name in final_filenames:
                     continue
                 stat = file.stat()
@@ -95,7 +98,7 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
     if source in ["all", "venice"]:
         venice_folder = Path("content/venice_output")
         if venice_folder.exists():
-            for file in venice_folder.glob("*.png"):
+            for file in list_images(venice_folder):
                 if file.name in final_filenames:
                     continue
                 stat = file.stat()
@@ -111,7 +114,7 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
     if source in ["all", "raw"]:
         raw_folder = Path(f"content/raw/{influencer_key}")
         if raw_folder.exists():
-            for file in raw_folder.glob("*.png"):
+            for file in list_images(raw_folder):
                 if file.name in final_filenames:
                     continue
                 stat = file.stat()
@@ -126,7 +129,7 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
     
     if source in ["all", "final"]:
         if final_folder.exists():
-            for file in final_folder.glob("*.png"):
+            for file in list_images(final_folder):
                 stat = file.stat()
                 images.append({
                     "filename": file.name,
@@ -169,9 +172,13 @@ async def serve_gallery_image(path: str):
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="Image not found")
     
+    media_type, _ = mimetypes.guess_type(str(file_path))
+    if not media_type:
+        media_type = "application/octet-stream"
+
     return FileResponse(
         file_path,
-        media_type="image/png",
+        media_type=media_type,
         headers={"Cache-Control": "public, max-age=3600"}
     )
 
