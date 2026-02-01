@@ -1,4 +1,4 @@
-"""Generate multiple test images with varied lived-in scenes"""
+"""Generate 4 variations in modern luxury bedroom"""
 import asyncio
 import sys
 sys.path.insert(0, '.')
@@ -8,33 +8,22 @@ from app.services.fal_seedream_service import FalSeedreamService
 async def regenerate():
     service = FalSeedreamService(influencer_id="starbright_monroe")
     
-    scenes = [
-        {
-            "scene": "small cozy apartment living room, clothes tossed on couch, coffee mug on table, magazines scattered, shoes kicked off near door, compact space scaled to petite person",
-            "outfit": "casual oversized sweater and shorts",
-            "pose": "standing casually leaning against wall, full body visible"
-        },
-        {
-            "scene": "intimate bedroom with unmade bed, clothes on floor, phone charger on nightstand, small vanity with makeup, cozy proportioned room matching petite frame",
-            "outfit": "white tank top and grey sweatpants",
-            "pose": "standing relaxed with arms at sides, full body grounded"
-        },
-        {
-            "scene": "bathroom doorway, towels hanging, skincare products on counter, robe on hook, small personal bathroom scale appropriate to slim petite person",
-            "outfit": "light blue athletic set",
-            "pose": "natural standing pose, full body visible, feet on floor"
-        }
+    poses = [
+        "standing naturally with relaxed pose, full body visible",
+        "standing casually with hand on hip, full body visible", 
+        "standing confidently with arms relaxed at sides, full body visible",
+        "standing with slight lean, relaxed natural pose, full body visible"
     ]
     
     results = []
-    for i, s in enumerate(scenes):
-        print(f"\n--- Generating scene {i+1}/3 ---")
+    for i, pose in enumerate(poses):
+        print(f"\n--- Generating variation {i+1}/4 ---")
         prompt = service.build_prompt(
-            scene=s["scene"],
-            outfit=s["outfit"],
-            pose=s["pose"],
-            lighting="soft natural daylight, realistic shadows",
-            additional="extremely thin slender petite body, very small flat A-cup chest, slim narrow frame"
+            scene="spacious bright modern luxury bedroom, large windows with natural sunlight flooding in, high ceilings, designer furniture, clothes on floor, personal items on nightstand, lived-in feel, king size bed with rumpled sheets",
+            outfit="casual loungewear",
+            pose=pose,
+            lighting="bright natural daylight flooding through large windows, warm sunlit atmosphere",
+            additional="slim petite body matching body reference exactly, natural healthy proportions, small A-cup chest"
         )
         
         result = await service.generate_with_references(
@@ -46,10 +35,10 @@ async def regenerate():
         )
         
         status = result.get("status", "error")
-        print(f"Scene {i+1}: {status}")
+        print(f"Variation {i+1}: {status}")
         results.append(result)
     
-    print("\nDone generating 3 test images!")
+    print("\nDone generating 4 variations!")
     return results
 
 if __name__ == "__main__":
