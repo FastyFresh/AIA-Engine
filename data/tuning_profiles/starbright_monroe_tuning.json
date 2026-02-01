@@ -10,36 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 314,
+  "total_generations": 316,
   "approved_count": 233,
-  "rejected_count": 81,
+  "rejected_count": 83,
   "feedback_history": [
-    {
-      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_075151.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-28T08:13:19.438718",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_075155.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-28T08:13:25.814338",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_075616.png",
       "prompt": "",
@@ -663,7 +637,33 @@
       "approved": true,
       "timestamp": "2026-02-01T22:43:50.346418",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260201_222031.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-01T22:57:10.110828",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260201_221226.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-01T22:57:18.157055",
+      "notes": "Rejected via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-01T22:43:50.347871"
+  "last_updated": "2026-02-01T22:57:18.159272"
 }
