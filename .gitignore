@@ -125,3 +125,6 @@ data/*.db
 
 # Miscellaneous large files
 ziliqT7q
+
+# Large local assets
+content/
