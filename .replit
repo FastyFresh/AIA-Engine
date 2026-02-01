@@ -10,6 +10,7 @@ packages = ["ffmpeg", "freetype", "lcms2", "libimagequant", "libjpeg", "libtiff"
 [workflows]
 run = "echo AGENT_SAFE_RUN && sleep 1"
 
+runButton = "Project"
 [[workflows.workflow]]
 name = "Project"
 mode = "parallel"
