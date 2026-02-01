@@ -10,36 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 298,
-  "approved_count": 217,
+  "total_generations": 300,
+  "approved_count": 219,
   "rejected_count": 81,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_pink_boyshorts_v2_20260127_235036.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-28T00:21:35.127647",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_071738.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-28T07:19:32.874085",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/generated/starbright_monroe/starbright_monroe_20260128_072841.png",
       "prompt": "",
@@ -663,7 +637,33 @@
       "approved": true,
       "timestamp": "2026-01-31T09:46:55.442639",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_balcony_dusk_20260127_212129.webp",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-01T03:44:28.683619",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_fal_hips_v1_20260127_071952.webp",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-01T03:44:36.788674",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-01-31T09:46:55.444418"
+  "last_updated": "2026-02-01T03:44:36.791234"
 }
