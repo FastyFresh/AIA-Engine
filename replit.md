@@ -62,3 +62,32 @@ The system features a unified React/TypeScript dashboard providing system monito
 
 ### External Integrations
 - **OpenClaw VPS Integration**: Connects AIA Engine (Replit) with an OpenClaw instance on a Vultr VPS (Ubuntu 22.04 x64) for browser automation, DM management, and social posting via webhooks. This integration is crucial for social media interaction beyond content generation.
+
+## Recent Changes
+
+### 2026-02-02: Kreator Flow Transformation Method (BREAKTHROUGH)
+
+**WORKING SOLUTION** for image transformation that preserves:
+- Starbright's face identity from face reference
+- Body proportions from body reference
+- Exact pose, outfit, and camera angle from source image
+
+**Key Method**: `FalSeedreamService.transform_with_pose_source()`
+
+**Reference Order (CRITICAL)**:
+1. Face reference (reference1)
+2. Body reference (reference2)
+3. Pose source image (reference3)
+
+**Prompt Structure**:
+```
+A portrait of Starbright, using the EXACT pose from reference3: [DETAILED POSE].
+Replace the face with features from reference1: [FACE DESCRIPTORS].
+Replace the body with proportions from reference2: [BODY DESCRIPTORS].
+KEEP from reference3: exact body position, hand placement, camera angle, [BACKGROUND], [OUTFIT].
+```
+
+**Files Updated**:
+- `app/services/fal_seedream_service.py` - Added `transform_with_pose_source()` method
+- `app/services/prompt_builder.py` - Added `face_descriptors` and `body_descriptors` to config
+- `docs/starbright_transformation_guide.md` - Full documentation of working approach

@@ -43,6 +43,9 @@ INFLUENCER_IDENTITIES = {
             "natural healthy weight, soft feminine curves, long slender legs, "
             "small natural A-cup chest, petite but healthy looking frame"
         ),
+        # KREATOR FLOW descriptors - used for transform_with_pose_source method
+        "face_descriptors": "hazel-brown eyes, full lips with cupid's bow, natural freckles across nose and cheeks, dark brown straight hair, soft oval jaw, high cheekbones",
+        "body_descriptors": "slim petite healthy build, natural A-cup, feminine proportions, fair skin",
         "negative_prompt_additions": "large breasts, big breasts, busty, prominent bust, enhanced chest, voluptuous, curvy chest, cleavage, exaggerated chest, big bust, medium breasts, C-cup, D-cup, augmented, skeletal, anorexic, emaciated, too thin, bony, underweight, malnourished, gaunt, skin and bones",
         "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
         "body_ref": "content/references/starbright_monroe/body_reference.webp",

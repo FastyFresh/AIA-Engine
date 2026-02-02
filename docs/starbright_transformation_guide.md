@@ -291,13 +291,89 @@ Hair color improved in V8 (darker brown) but still not consistently dark brown a
 
 ---
 
-## Potential Solutions to Explore
+## WORKING SOLUTION: Kreator Flow Method (v9)
 
-1. **Two-Pass Approach**: Generate Starbright in the pose first, then composite/blend
-2. **Face Swap as Separate Step**: Use a dedicated face swap tool after initial generation
-3. **Lower Source Weight**: Find a way to reduce the source image's influence on facial features
-4. **Different Model**: Evaluate if another model handles identity replacement better
-5. **IP-Adapter or ControlNet**: Use pose extraction + identity injection separately
+**Status:** RESOLVED - February 2, 2026
+
+### The Breakthrough
+
+After extensive testing, we discovered the **Kreator Flow prompt structure** that successfully:
+- Preserves Starbright's face identity from face reference
+- Preserves body proportions from body reference  
+- Copies exact pose, outfit, and camera angle from source image
+
+### Reference Image Order
+
+**CRITICAL**: The order of references matters!
+1. **reference1** (Figure 1): Face reference - `starbright_face_reference_v3.webp`
+2. **reference2** (Figure 2): Body reference - `body_reference.webp`
+3. **reference3** (Figure 3): Pose source image (the image to transform)
+
+### Kreator Flow Prompt Template
+
+```
+A portrait of Starbright, using the EXACT pose from reference3: [DETAILED POSE DESCRIPTION].
+
+Replace the face with facial features from reference1: [FACE DESCRIPTORS].
+Replace the body with proportions from reference2: [BODY DESCRIPTORS].
+
+KEEP from reference3: The exact body position, hand placement, camera angle, [BACKGROUND], [OUTFIT] outfit.
+
+Photorealistic, high detail, sharp focus, 8K quality.
+```
+
+### Starbright Identity Descriptors
+
+**Face descriptors:**
+```
+hazel-brown eyes, full lips with cupid's bow, natural freckles across nose and cheeks, dark brown straight hair, soft oval jaw, high cheekbones
+```
+
+**Body descriptors:**
+```
+slim petite healthy build, natural A-cup, feminine proportions, fair skin
+```
+
+### Negative Prompt
+
+```
+Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, [standard body negative prompts]
+```
+
+### Example Working Prompt
+
+For a source image with leaning forward pose, white bra, red shorts:
+
+```
+A portrait of Starbright, using the EXACT pose from reference3: woman leaning forward with torso bent, hands resting on thighs near knees, head tilted slightly looking up at camera.
+
+Replace the face with facial features from reference1: hazel-brown eyes, full lips with cupid's bow, natural freckles across nose and cheeks, dark brown straight hair.
+Replace the body with proportions from reference2: slim petite healthy build, natural A-cup.
+
+KEEP from reference3: The exact body position, hand placement on thighs, camera angle from above, indoor room background, white bralette and red shorts with white stripe outfit.
+
+Photorealistic, high detail, sharp focus, 8K quality.
+```
+
+### Key Insights
+
+1. **Explicit separation**: Tell the model exactly what to KEEP vs REPLACE
+2. **Precise pose description**: Describe the pose in detail (body position, hand placement, camera angle)
+3. **Reference assignment**: Use "from reference1/2/3" language consistently
+4. **Negative prompts**: Explicitly block the original influencer's features
+
+### Service Method
+
+Use `FalSeedreamService.transform_with_pose_source()`:
+
+```python
+result = await fal_service.transform_with_pose_source(
+    pose_source_path="path/to/source/image.jpg",
+    pose_description="leaning forward with hands on thighs, camera from above",
+    outfit_description="white bralette and red shorts",
+    background_description="indoor room with gray walls"
+)
+```
 
 ---
 
@@ -305,4 +381,11 @@ Hair color improved in V8 (darker brown) but still not consistently dark brown a
 - v1: Initial transformation with basic prompts
 - v2: Added face reference conditioning
 - v3: Added Grok background analysis, body reference, hair color enforcement
-- v4: (In progress) Stronger body reference, pure room backgrounds
+- v4: Stronger body reference, pure room backgrounds
+- v5: Fixed multiple-person generation issue
+- v6-v8: Hair color and photorealism improvements
+- **v9: KREATOR FLOW METHOD - WORKING SOLUTION** (Feb 2, 2026)
+  - Explicit KEEP/REPLACE prompt structure
+  - Reference order: face, body, pose source
+  - Detailed pose descriptions
+  - Successfully preserves identity + pose + outfit
