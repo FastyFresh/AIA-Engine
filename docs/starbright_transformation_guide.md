@@ -7,11 +7,11 @@ AI-powered influencer content generation using Fal.ai Seedream 4.5 to transform 
 
 ### Face
 - Delicate symmetrical face
-- Large round hazel-green eyes
+- Large round hazel-brown eyes (NOT blue, NOT green)
 - Natural arched eyebrows
 - Small nose
 - Full natural lips
-- Light freckles across cheeks
+- Light freckles across cheeks and nose
 - High cheekbones
 
 ### Body
@@ -251,8 +251,53 @@ We have dedicated background reference images for consistency:
 6. [x] Update living room description to use black leather furniture
 7. [x] Fix hair color to dark brown
 8. [x] Fix cartoonish face issue with photorealistic emphasis
-9. [ ] Full batch re-run with V7 configuration
+9. [ ] Full batch re-run with final configuration
 10. [ ] Document final working configuration
+
+---
+
+## Known Issues & Limitations
+
+### Issue: Face Blending Instead of Replacement
+**Status:** UNRESOLVED
+
+Seedream 4.5 blends the source model's facial features with Starbright's reference instead of fully replacing them. This results in:
+- Eye color inconsistency (blue, green, hazel variations instead of consistent hazel-brown)
+- Facial structure that's a mix of source + Starbright
+- Different-looking faces across images that should be identical
+
+**Evidence from V8 test:**
+- Image 1: Eyes appear blue
+- Image 2: Eyes appear hazel/brown
+- Image 3: Eyes appear green
+- All should be consistent hazel-brown
+
+### Issue: Pose Not Preserved
+**Status:** UNRESOLVED
+
+The model changes poses rather than preserving them exactly from the source:
+- Red lingerie image: Source was standing at vanity with stool, output shows kneeling on floor
+- White bra image: Source was leaning forward, output shows sitting on bed
+
+### Issue: Body Type Influence
+**Status:** PARTIALLY RESOLVED
+
+Source model's thin body proportions still influence output despite body reference. Body appears healthier in V8 but not fully matching Starbright's reference.
+
+### Issue: Hair Color Consistency
+**Status:** PARTIALLY RESOLVED
+
+Hair color improved in V8 (darker brown) but still not consistently dark brown across all images.
+
+---
+
+## Potential Solutions to Explore
+
+1. **Two-Pass Approach**: Generate Starbright in the pose first, then composite/blend
+2. **Face Swap as Separate Step**: Use a dedicated face swap tool after initial generation
+3. **Lower Source Weight**: Find a way to reduce the source image's influence on facial features
+4. **Different Model**: Evaluate if another model handles identity replacement better
+5. **IP-Adapter or ControlNet**: Use pose extraction + identity injection separately
 
 ---
 
