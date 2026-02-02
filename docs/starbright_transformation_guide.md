@@ -137,12 +137,33 @@ Source models often have black/dark hair which was bleeding through.
 - `transform_with_analysis.py` - Main transformation script
 - `data/tuning_profiles/starbright_monroe_tuning.json` - Character tuning
 
-### Seedream 4.5 Best Practices (from fal.ai docs)
-- **Reference strength**: 0.5-0.7 for editing
-- **Denoise strength**: 0.25-0.40 (lower = less face drift)
-- **CFG scale**: 4.5-6.0
-- **Concrete descriptors**: Repeat identity anchors in every prompt
-- **Multi-reference**: Can specify face, body, background from different images
+### Seedream 4.5 Best Practices (from fal.ai docs + z-image.ai research)
+
+**Critical Parameters:**
+- **Seed**: LOCK IT - reuse exact seed for entire set to prevent identity drift
+- **CFG (guidance)**: 4.5–6.0 for portraits (higher pushes toward generic archetypes)
+- **Denoise strength**: 0.25–0.40 sweet spot (0.5+ changes bone structure!)
+- **Steps**: 28–36 (fewer = more variance, more = subtle drift toward priors)
+
+**Identity Anchors (use concrete descriptors, NOT vague terms):**
+- Write: "soft round jaw, high cheekbones, slightly wide-set hazel-green eyes, defined cupid's bow, light freckles"
+- NOT: "beautiful model, cinematic lighting" (too vague, causes drift)
+
+**Reference Strategy:**
+- Use ONE strong anchor image, not multiple weak ones
+- Generate a "master" shot first, save it
+- Create variations changing ONLY ONE thing at a time (angle OR lighting OR background - not all)
+- If identity drifts, re-inject master shot as secondary reference
+
+**Background Consistency:**
+- Use the SAME background reference image across generations
+- Lock seed + keep lighting phrase constant
+- For background changes: use low denoise 0.25-0.35, keep face area protected
+
+**Editing Rules:**
+- Low-strength, single-purpose passes
+- Small literal edits (avoid hats covering forehead - occlusion triggers drift)
+- If edit goes sideways, roll back to last stable image
 
 ---
 
