@@ -464,10 +464,14 @@ class Seedream4Service:
             
             face_b64 = self.encode_image(face_path)
             body_b64 = self.encode_image(body_path)
+            source_b64 = self.encode_image(source_image_path)
             
-            image_refs = [face_b64, body_b64]
+            # CRITICAL: Source image as Figure 1 for pose/outfit reference
+            # Face and body references as Figure 2 and 3 for identity
+            image_refs = [source_b64, face_b64, body_b64]
             
-            full_prompt = prompt
+            # Prompt should reference Figure 1 as the pose/outfit source
+            full_prompt = f"Transform the woman in Figure 1 to match the identity in Figures 2 and 3. Keep the exact pose, clothing, and scene from Figure 1. Apply the face from Figure 2 and body type from Figure 3. {prompt}"
             
             default_negative = (
                 "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
@@ -493,7 +497,7 @@ class Seedream4Service:
             if seed is not None:
                 input_data["seed"] = seed
             
-            logger.info(f"Seedream 4.5 transform: {size} resolution, Figure 1=face, Figure 2=body, Figure 3=source")
+            logger.info(f"Seedream 4.5 transform: {size} resolution, Figure 1=source, Figure 2=face, Figure 3=body")
             
             async with httpx.AsyncClient(timeout=120.0) as client:
                 response = await client.post(
