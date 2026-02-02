@@ -39,16 +39,10 @@ INFLUENCER_IDENTITIES = {
             "very pale porcelain ivory white skin, "
             "straight sleek dark brown hair (not wavy, not curly), "
             "warm olive-brown eyes, natural freckles across nose and cheeks, "
-            "slim healthy petite body with feminine proportions matching body reference exactly, "
-            "natural healthy weight, soft feminine curves, long slender legs, "
-            "small natural A-cup chest, petite but healthy looking frame"
+            "extremely thin slender petite body with very narrow tiny waist, "
+            "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure, "
+            "small natural A-cup breasts, proportionate feminine figure"
         ),
-        # KREATOR FLOW descriptors - used for transform_with_pose_source method
-        # identity_anchor: Short textual anchor for Seedream 4.5 face consistency (per best practices)
-        "identity_anchor": "soft oval face, hazel-brown almond eyes, full natural lips with defined cupid's bow, light freckles across nose and cheeks, high cheekbones, dark brown straight hair",
-        "face_descriptors": "hazel-brown eyes, full lips with cupid's bow, natural freckles across nose and cheeks, dark brown straight hair, soft oval jaw, high cheekbones",
-        "body_descriptors": "slim petite healthy build, natural A-cup, feminine proportions, fair skin",
-        "negative_prompt_additions": "large breasts, big breasts, busty, prominent bust, enhanced chest, voluptuous, curvy chest, cleavage, exaggerated chest, big bust, medium breasts, C-cup, D-cup, augmented, skeletal, anorexic, emaciated, too thin, bony, underweight, malnourished, gaunt, skin and bones",
         "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
         "body_ref": "content/references/starbright_monroe/body_reference.webp",
         "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.webp",

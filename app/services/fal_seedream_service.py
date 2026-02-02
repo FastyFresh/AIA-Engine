@@ -50,7 +50,6 @@ class FalSeedreamService:
         self.face_ref_path = config["face_ref"]
         self.body_ref_path = config["body_ref"]
         self.body_ref_back_path = config.get("body_ref_back")
-        self.default_negative_prompt = config.get("negative_prompt_additions", "")
         
         self.prompt_builder = PromptBuilder(influencer_id)
         
@@ -165,12 +164,8 @@ class FalSeedreamService:
             "enable_safety_checker": enable_safety_checker
         }
         
-        # Combine default negative prompts with any additional ones provided
-        combined_negative = self.default_negative_prompt
         if negative_prompt:
-            combined_negative = f"{self.default_negative_prompt}, {negative_prompt}" if self.default_negative_prompt else negative_prompt
-        if combined_negative:
-            payload["negative_prompt"] = combined_negative
+            payload["negative_prompt"] = negative_prompt
         
         try:
             async with httpx.AsyncClient(timeout=180.0) as client:
@@ -327,158 +322,6 @@ class FalSeedreamService:
             enable_safety_checker=False,
             negative_prompt=negative_prompt
         )
-
-
-    async def transform_with_pose_source(
-        self,
-        pose_source_path: str,
-        pose_description: str,
-        outfit_description: str,
-        background_description: str = "indoor room",
-        background_ref_path: Optional[str] = None,
-        aspect_ratio: str = "portrait_4_3",
-        output_dir: Optional[str] = None,
-        filename_prefix: str = "transformed"
-    ) -> Dict[str, Any]:
-        """
-        Transform a source image to Starbright using the KREATOR FLOW method.
-        
-        This is the PROVEN WORKING approach for pose/outfit transfer with identity preservation.
-        Uses 3-4 references: face (ref1), body (ref2), pose source (ref3), optional background (ref4).
-        
-        The prompt explicitly states:
-        - What to KEEP from the pose source (pose, outfit, camera angle)
-        - What to REPLACE with Starbright's identity (face features, body proportions)
-        - Optional: What background to use from ref4
-        
-        Args:
-            pose_source_path: Path to the source image to transform
-            pose_description: Detailed description of the pose
-            outfit_description: Description of the outfit to preserve
-            background_description: Description of the background
-            background_ref_path: Optional path to background reference image
-            aspect_ratio: Output aspect ratio
-            output_dir: Optional output directory
-            filename_prefix: Prefix for output filename
-        
-        Returns:
-            Generation result dict with image_path
-        """
-        if not self.fal_key:
-            return {"status": "error", "error": "FAL_KEY not configured"}
-        
-        # Get face and body references
-        face_uri, body_uri = self._get_reference_uris("")
-        if not face_uri or not body_uri:
-            return {"status": "error", "error": "Reference images not found"}
-        
-        # Encode pose source image
-        if not Path(pose_source_path).exists():
-            return {"status": "error", "error": f"Pose source not found: {pose_source_path}"}
-        
-        pose_uri = self._encode_image(pose_source_path)
-        
-        # KREATOR FLOW PROMPT STRUCTURE - PROVEN WORKING
-        # Order: face (ref1), body (ref2), pose (ref3), optional background (ref4)
-        image_urls = [face_uri, body_uri, pose_uri]
-        
-        # Optional background reference as 4th image
-        background_prompt_section = ""
-        if background_ref_path and Path(background_ref_path).exists():
-            bg_uri = self._encode_image(background_ref_path)
-            image_urls.append(bg_uri)
-            background_prompt_section = f"Use the background/environment from reference4. "
-            logger.info(f"Added background reference: {background_ref_path}")
-        
-        # Get Starbright identity descriptors
-        config = INFLUENCER_IDENTITIES.get(self.influencer_id, INFLUENCER_IDENTITIES["starbright_monroe"])
-        face_descriptors = config.get("face_descriptors", "hazel-brown eyes, full lips, natural freckles, dark brown hair")
-        body_descriptors = config.get("body_descriptors", "slim petite healthy build, natural A-cup")
-        
-        # Direct subject reference approach - use face/body from references directly
-        prompt = f"""Same person from reference1, same body from reference2, in the pose from reference3: {pose_description}.
-
-Subject face from reference1: {face_descriptors}.
-Subject body from reference2: {body_descriptors}.
-
-From reference3 ONLY use: pose position, camera angle, {outfit_description} outfit.
-
-{background_prompt_section}{background_description}.
-
-Photorealistic, high detail, sharp focus, 8K quality."""
-
-        negative_prompt = f"Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, large bust, big chest, curvy, busty, {self.default_negative_prompt}"
-        
-        headers = {
-            "Authorization": f"Key {self.fal_key}",
-            "Content-Type": "application/json"
-        }
-        
-        payload = {
-            "prompt": prompt,
-            "image_urls": image_urls,
-            "image_size": "auto_4K",
-            "num_images": 1,
-            "enable_safety_checker": False,
-            "negative_prompt": negative_prompt,
-            "guidance_scale": 5.5,  # 4.5-6.0 for portraits
-            "num_inference_steps": 30,
-            "seed": 42  # Lock seed for identity consistency
-        }
-        
-        try:
-            async with httpx.AsyncClient(timeout=300.0) as client:
-                logger.info(f"Kreator Flow transform: pose='{pose_description[:50]}...'")
-                logger.info(f"Prompt: {prompt[:200]}...")
-                
-                response = await client.post(FAL_EDIT_URL, headers=headers, json=payload)
-                
-                if response.status_code == 200:
-                    result = response.json()
-                    images = result.get("images", [])
-                    
-                    if images:
-                        img_url = images[0].get("url", "")
-                        if img_url:
-                            img_resp = await client.get(img_url)
-                            if img_resp.status_code == 200:
-                                save_dir = Path(output_dir) if output_dir else self.output_dir
-                                save_dir.mkdir(parents=True, exist_ok=True)
-                                
-                                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                                filename = f"{filename_prefix}_{timestamp}.png"
-                                filepath = save_dir / filename
-                                filepath.write_bytes(img_resp.content)
-                                
-                                logger.info(f"Kreator Flow transform saved: {filepath}")
-                                
-                                return {
-                                    "status": "success",
-                                    "image_path": str(filepath),
-                                    "filename": filename,
-                                    "seed": result.get("seed"),
-                                    "provider": "fal.ai",
-                                    "model": "seedream-4.5-edit",
-                                    "method": "kreator_flow_transform"
-                                }
-                    
-                    return {"status": "error", "error": "No images in response"}
-                
-                elif response.status_code == 422:
-                    error = response.json()
-                    logger.warning(f"Content validation error: {error}")
-                    return {"status": "error", "error": f"Content blocked: {error}"}
-                
-                else:
-                    logger.error(f"API error {response.status_code}: {response.text[:200]}")
-                    return {"status": "error", "error": f"API error: {response.status_code}"}
-                    
-        except httpx.TimeoutException:
-            logger.error("Request timeout")
-            return {"status": "error", "error": "Request timeout (>300s)"}
-        except Exception as e:
-            logger.error(f"Exception: {str(e)}")
-            return {"status": "error", "error": str(e)}
 
 
 fal_seedream_service = FalSeedreamService()
