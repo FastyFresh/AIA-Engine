@@ -2,6 +2,8 @@
 Background Analyzer using Grok Vision
 Analyzes source images and maps backgrounds to our preset library.
 Uses xAI Grok vision (blueprint:python_xai)
+
+See docs/starbright_transformation_guide.md for full documentation.
 """
 import os
 import base64
@@ -9,41 +11,56 @@ import json
 from pathlib import Path
 from openai import OpenAI
 
-# Background presets from our library
+# Background presets - PURE room types only (no combined spaces)
 BACKGROUND_PRESETS = {
     "apartment_bedroom_day": {
-        "description": "spacious bright modern luxury penthouse bedroom, floor-to-ceiling windows with natural morning sunlight, high double-height ceilings, designer furniture, king size bed with rumpled white sheets, personal items scattered",
-        "keywords": ["bedroom", "bed", "morning", "daylight", "bright"]
+        "description": "Luxury bedroom interior only, king size bed with rumpled white sheets as focal point, elegant nightstands with lamps, soft morning sunlight through sheer curtains, warm wood floors, personal items on dresser, NO living room furniture, NO sofa, NO dining area, NO open floor plan",
+        "keywords": ["bedroom", "bed", "morning", "daylight", "bright", "intimate", "lingerie", "bra", "underwear"]
     },
     "apartment_bedroom_night": {
-        "description": "modern luxury penthouse bedroom, warm evening ambient lighting, floor-to-ceiling windows showing city lights at night, cozy atmosphere, king size bed with rumpled sheets",
-        "keywords": ["bedroom", "bed", "night", "evening", "dark", "ambient"]
+        "description": "Luxury bedroom interior only, king size bed with rumpled sheets, warm ambient bedside lighting, city lights visible through window, intimate cozy atmosphere, nightstands with soft lamps, NO living room, NO sofa, NO open concept space",
+        "keywords": ["bedroom", "bed", "night", "evening", "dark", "ambient", "intimate"]
     },
     "apartment_living_day": {
-        "description": "spacious modern luxury penthouse living room, bright natural daylight through floor-to-ceiling windows, designer sofa and furniture, high ceilings, minimalist decor",
-        "keywords": ["living room", "sofa", "couch", "lounge", "daylight"]
+        "description": "Modern luxury penthouse living room, black leather tufted sofa and armchairs, glass coffee table with books, floor-to-ceiling windows with city skyline view, bright natural daylight, modern abstract art on walls, hardwood floors, NO bed, NO bedroom visible",
+        "keywords": ["living room", "sofa", "couch", "lounge", "daylight", "casual", "clothed"]
     },
     "apartment_living_night": {
-        "description": "modern luxury penthouse living room, warm evening lighting, floor-to-ceiling windows with city skyline at night, designer furniture",
-        "keywords": ["living room", "sofa", "night", "evening"]
+        "description": "Modern luxury penthouse living room, black leather tufted sofa, warm evening ambient lighting, floor-to-ceiling windows showing city skyline at night, modern fireplace, hardwood floors, NO bed, NO bedroom visible",
+        "keywords": ["living room", "sofa", "night", "evening", "social"]
     },
     "bathroom_luxury": {
-        "description": "spacious luxury marble bathroom, modern fixtures, large mirror, bright lighting, spa-like atmosphere",
-        "keywords": ["bathroom", "mirror", "sink", "shower", "bath"]
+        "description": "Spacious luxury marble bathroom, large frameless mirror, modern vessel sink, rainfall shower visible, spa-like atmosphere with plants, bright even lighting, fluffy white towels",
+        "keywords": ["bathroom", "mirror", "sink", "shower", "bath", "towel", "spa"]
     },
     "gym_modern": {
-        "description": "modern high-end private gym, exercise equipment, mirrored walls, bright lighting",
-        "keywords": ["gym", "fitness", "workout", "exercise", "equipment"]
+        "description": "Modern high-end private home gym, exercise equipment like dumbbells and yoga mat, large mirrors on wall, bright motivational lighting, rubber flooring",
+        "keywords": ["gym", "fitness", "workout", "exercise", "equipment", "athletic", "sports"]
     },
     "studio_white": {
-        "description": "professional photography studio with pure white seamless background, soft diffused lighting",
-        "keywords": ["studio", "white background", "plain", "simple", "professional"]
+        "description": "Professional photography studio with pure white seamless paper backdrop, visible lighting equipment and stands, soft diffused studio lighting, clean minimal setup",
+        "keywords": ["studio", "white background", "plain", "simple", "professional", "photoshoot", "clean"]
     },
     "outdoor_pool": {
-        "description": "luxury infinity pool overlooking ocean or city, sunset golden hour lighting, palm trees",
-        "keywords": ["pool", "outdoor", "sunset", "beach", "water"]
+        "description": "Luxury infinity pool overlooking ocean or cityscape, golden hour sunset lighting, palm trees and tropical plants, poolside loungers with towels",
+        "keywords": ["pool", "outdoor", "sunset", "beach", "water", "swim", "bikini", "tropical"]
     }
 }
+
+# Outfit to background mapping - intimate wear goes to bedroom only
+OUTFIT_BACKGROUND_RULES = {
+    "lingerie": "apartment_bedroom",
+    "bra": "apartment_bedroom",
+    "underwear": "apartment_bedroom",
+    "panties": "apartment_bedroom",
+    "negligee": "apartment_bedroom",
+    "bikini": "outdoor_pool",
+    "swimsuit": "outdoor_pool",
+    "workout": "gym_modern",
+    "athletic": "gym_modern",
+    "sports": "gym_modern"
+}
+
 
 class BackgroundAnalyzer:
     def __init__(self):
@@ -62,7 +79,7 @@ class BackgroundAnalyzer:
         ext = Path(image_path).suffix.lower()
         mime = {".jpg": "jpeg", ".jpeg": "jpeg", ".png": "png", ".webp": "webp"}.get(ext, "jpeg")
         
-        preset_list = "\n".join([f"- {k}: {v['description']}" for k, v in BACKGROUND_PRESETS.items()])
+        preset_list = "\n".join([f"- {k}: {v['description'][:100]}..." for k, v in BACKGROUND_PRESETS.items()])
         
         response = self.client.chat.completions.create(
             model="grok-2-vision-1212",
@@ -71,15 +88,22 @@ class BackgroundAnalyzer:
                 "content": [
                     {
                         "type": "text",
-                        "text": f"""Analyze the background/setting of this image. 
+                        "text": f"""Analyze this image and provide:
 
-First, describe what you see in the background (room type, lighting, time of day, key elements).
-
-Then, choose the BEST matching preset from this list:
+1. Background/setting description (room type, lighting, time of day)
+2. What the person is wearing (outfit type)
+3. Best matching preset from this list:
 {preset_list}
 
+IMPORTANT RULES:
+- If wearing lingerie/underwear/bra → MUST use apartment_bedroom_day or apartment_bedroom_night
+- If wearing bikini/swimwear → MUST use outdoor_pool
+- If wearing workout clothes → MUST use gym_modern
+- If on white/plain background → use studio_white
+- Otherwise match based on the background in the image
+
 Respond with JSON:
-{{"background_description": "brief description of what you see", "time_of_day": "day or night", "matched_preset": "preset_name", "confidence": 0.0-1.0}}"""
+{{"background_description": "what you see", "outfit_type": "clothing description", "time_of_day": "day or night", "matched_preset": "preset_name", "confidence": 0.0-1.0}}"""
                     },
                     {
                         "type": "image_url",
@@ -94,9 +118,24 @@ Respond with JSON:
         result = json.loads(response.choices[0].message.content)
         matched = result.get("matched_preset", "apartment_bedroom_day")
         
-        # Get the full description for the matched preset
-        preset_info = BACKGROUND_PRESETS.get(matched, BACKGROUND_PRESETS["apartment_bedroom_day"])
-        result["preset_description"] = preset_info["description"]
+        # Override based on outfit if detected
+        outfit = result.get("outfit_type", "").lower()
+        for keyword, bg_prefix in OUTFIT_BACKGROUND_RULES.items():
+            if keyword in outfit:
+                time = result.get("time_of_day", "day")
+                if bg_prefix in ["apartment_bedroom", "apartment_living"]:
+                    matched = f"{bg_prefix}_{time}"
+                else:
+                    matched = bg_prefix
+                result["outfit_override"] = True
+                break
+        
+        # Ensure matched preset exists
+        if matched not in BACKGROUND_PRESETS:
+            matched = "apartment_bedroom_day"
+        
+        result["matched_preset"] = matched
+        result["preset_description"] = BACKGROUND_PRESETS[matched]["description"]
         
         return result
 
