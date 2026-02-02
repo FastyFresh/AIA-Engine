@@ -10,49 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 284,
-  "approved_count": 214,
+  "total_generations": 287,
+  "approved_count": 217,
   "rejected_count": 70,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_standing_pose_20260127_210404.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-27T21:19:54.562257",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_sitting_pose_20260127_210306.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-27T21:19:55.643167",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_cozy_bedroom_20260127_191410.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-27T21:19:57.497624",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_livingroom_v4_20260127_222009.png",
       "prompt": "",
@@ -663,7 +624,46 @@
       "approved": true,
       "timestamp": "2026-02-02T23:23:02.117658",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/gallery/starbright_monroe/starbright_nonai_noise_20260202_232727.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-02T23:28:01.621859",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/gallery/starbright_monroe/starbright_antidetect_final_20260202_232602.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-02T23:28:09.615370",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/gallery/starbright_monroe/starbright_antidetect_v1_20260202_232602.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-02T23:28:13.195565",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-02T23:23:02.119247"
+  "last_updated": "2026-02-02T23:28:13.197171"
 }
