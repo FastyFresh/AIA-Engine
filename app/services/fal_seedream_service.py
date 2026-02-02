@@ -420,7 +420,11 @@ Photorealistic, high detail, sharp focus, 8K quality."""
             "image_size": "auto_4K",
             "num_images": 1,
             "enable_safety_checker": False,
-            "negative_prompt": negative_prompt
+            "negative_prompt": negative_prompt,
+            "strength": 0.35,  # 0.25-0.40 sweet spot for face preservation (0.5+ changes bone structure)
+            "guidance_scale": 5.5,  # 4.5-6.0 for portraits (higher pushes toward generic archetypes)
+            "num_inference_steps": 30,
+            "seed": 42  # Lock seed for identity consistency
         }
         
         try:
