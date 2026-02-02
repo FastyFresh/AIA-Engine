@@ -5,7 +5,7 @@ integrations = ["stripe:2.0.0", "javascript_object_storage:2.0.0"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["ffmpeg", "freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "tcl", "tk", "undollar", "unzip", "zip", "zlib", "mailutils", "lsof"]
+packages = ["ffmpeg", "freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "tcl", "tk", "undollar", "unzip", "zip", "zlib"]
 
 [workflows]
 runButton = "Project"

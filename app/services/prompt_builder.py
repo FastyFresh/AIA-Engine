@@ -43,9 +43,9 @@ INFLUENCER_IDENTITIES = {
             "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure, "
             "small natural A-cup breasts, proportionate feminine figure"
         ),
-        "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
-        "body_ref": "content/references/starbright_monroe/body_reference.webp",
-        "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.webp",
+        "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.png",
+        "body_ref": "content/references/starbright_monroe/body_reference.png",
+        "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.png",
         "output_dir": "content/generated/starbright_monroe",
     },
     "luna_vale": {

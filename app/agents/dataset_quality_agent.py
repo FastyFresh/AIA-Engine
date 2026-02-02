@@ -318,7 +318,7 @@ THINK: Would a fan scrolling Twitter IMMEDIATELY recognize this as Starbright? I
             return pending
         
         for filename in os.listdir(training_dir):
-            if filename.startswith(f"{persona}_") and filename.endswith((".png", ".jpg", ".jpeg", ".webp")):
+            if filename.startswith(f"{persona}_") and filename.endswith(".png"):
                 # Check if already has a score file
                 score_file = os.path.join(training_dir, filename.replace(".png", "_score.json"))
                 if not os.path.exists(score_file):
@@ -417,7 +417,7 @@ THINK: Would a fan scrolling Twitter IMMEDIATELY recognize this as Starbright? I
             return stats
         
         for filename in os.listdir(training_dir):
-            if not filename.endswith((".png", ".jpg", ".jpeg", ".webp")):
+            if not filename.endswith((".png", ".jpg", ".jpeg")):
                 continue
             if filename.startswith("ref_"):
                 continue  # Skip reference images

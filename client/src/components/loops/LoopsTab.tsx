@@ -63,9 +63,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
   const [captionedVideos, setCaptionedVideos] = useState<LoopVideo[]>([]);
   const [isLoadingCaptioned, setIsLoadingCaptioned] = useState(false);
   
-  const [omnihumanVideos, setOmnihumanVideos] = useState<LoopVideo[]>([]);
-  const [isLoadingOmnihuman, setIsLoadingOmnihuman] = useState(false);
-  
   const [captionSuggestions, setCaptionSuggestions] = useState<Array<{id: string; lines: string[]; theme?: string; pattern?: string; emotional_mode?: string; formatted: string; source?: string}>>([]);
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<string>("all");
@@ -93,10 +90,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
   const [uploadInfluencer, setUploadInfluencer] = useState<string>("starbright_monroe");
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  
-  const [videoPlayerOpen, setVideoPlayerOpen] = useState(false);
-  const [videoPlayerSrc, setVideoPlayerSrc] = useState<string>("");
-  const [videoPlayerTitle, setVideoPlayerTitle] = useState<string>("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<{
     outfit?: string;
@@ -190,28 +183,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
       setIsLoadingCaptioned(false);
     }
   }, [apiBase, addLog]);
-
-  const loadOmnihumanVideos = useCallback(async () => {
-    setIsLoadingOmnihuman(true);
-    try {
-      const response = await fetch(`${apiBase}/gallery/videos/${selectedInfluencer}?source=omnihuman`);
-      if (!response.ok) throw new Error("Failed to load OmniHuman videos");
-      
-      const data = await response.json();
-      const videos = (data.videos || []).map((v: any) => ({
-        filename: v.filename,
-        path: v.path,
-        size_kb: (v.size_mb || 0) * 1024,
-        created: v.date
-      }));
-      setOmnihumanVideos(videos);
-      addLog("LOOPS", `Loaded ${videos.length} OmniHuman lip-sync videos`, "info");
-    } catch (error: any) {
-      console.error("Failed to load OmniHuman videos:", error);
-    } finally {
-      setIsLoadingOmnihuman(false);
-    }
-  }, [apiBase, selectedInfluencer, addLog]);
 
   const checkTwitterStatus = useCallback(async () => {
     try {
@@ -381,9 +352,8 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
     loadLoops();
     loadMovements();
     loadCaptioned();
-    loadOmnihumanVideos();
     checkTwitterStatus();
-  }, [selectedInfluencer, loadWorkflowType, loadHeroRefs, loadLoops, loadMovements, loadCaptioned, loadOmnihumanVideos, checkTwitterStatus]);
+  }, [selectedInfluencer, loadWorkflowType, loadHeroRefs, loadLoops, loadMovements, loadCaptioned, checkTwitterStatus]);
 
   useEffect(() => {
     if (showCaptionForm && previewVideo && captionSuggestions.length === 0) {
@@ -618,12 +588,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
     setUploadDialogOpen(true);
   };
 
-  const openVideoPlayer = (videoPath: string, title: string) => {
-    setVideoPlayerSrc(`${apiBase}/gallery/video/${videoPath}`);
-    setVideoPlayerTitle(title);
-    setVideoPlayerOpen(true);
-  };
-
   if (workflowType === null) {
     return (
       <div className="h-full flex flex-col items-center justify-center text-muted-foreground">
@@ -662,11 +626,11 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
           <Button 
             variant="outline" 
             size="sm" 
-            onClick={() => { loadHeroRefs(); loadLoops(); loadCaptioned(); loadOmnihumanVideos(); }}
-            disabled={isLoadingRefs || isLoadingLoops || isLoadingCaptioned || isLoadingOmnihuman}
+            onClick={() => { loadHeroRefs(); loadLoops(); loadCaptioned(); }}
+            disabled={isLoadingRefs || isLoadingLoops || isLoadingCaptioned}
             className="border-white/10"
           >
-            <RefreshCw className={`w-4 h-4 mr-1 ${(isLoadingRefs || isLoadingLoops || isLoadingCaptioned || isLoadingOmnihuman) ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 mr-1 ${(isLoadingRefs || isLoadingLoops || isLoadingCaptioned) ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
           
@@ -684,7 +648,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
           <span className="text-purple-400">{heroRefs.length} hero refs</span>
           <span className="text-cyan-400">{loops.length} loops</span>
           <span className="text-pink-400">{captionedVideos.length} captioned</span>
-          <span className="text-orange-400">{omnihumanVideos.length} lip-sync</span>
         </div>
       </div>
 
@@ -701,10 +664,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
           <TabsTrigger value="captioned" className="text-xs font-mono">
             <Type className="w-3 h-3 mr-1" />
             CAPTIONED
-          </TabsTrigger>
-          <TabsTrigger value="omnihuman" className="text-xs font-mono">
-            <Music className="w-3 h-3 mr-1" />
-            LIP_SYNC
           </TabsTrigger>
         </TabsList>
 
@@ -933,77 +892,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </ScrollArea>
-        </TabsContent>
-
-        <TabsContent value="omnihuman" className="flex-1 mt-0">
-          <ScrollArea className="h-full">
-            {isLoadingOmnihuman ? (
-              <div className="flex items-center justify-center h-40">
-                <Loader2 className="w-8 h-8 animate-spin text-primary" />
-              </div>
-            ) : omnihumanVideos.length === 0 ? (
-              <div className="text-center py-12 text-muted-foreground">
-                <Music className="w-10 h-10 mx-auto mb-3 opacity-30" />
-                <p>No lip-sync videos yet</p>
-                <p className="text-xs mt-2">OmniHuman videos will appear here when generated</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {omnihumanVideos.map((video) => (
-                  <div 
-                    key={video.path}
-                    className="relative group rounded-lg overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all cursor-pointer"
-                    onClick={() => openVideoPlayer(video.path, video.filename)}
-                  >
-                    <div className="w-full aspect-[9/16] bg-black/40 flex items-center justify-center relative">
-                      <video 
-                        src={`${apiBase}/gallery/video/${video.path}`}
-                        className="w-full h-full object-cover"
-                        muted
-                        loop
-                        playsInline
-                        onMouseEnter={(e) => e.currentTarget.play()}
-                        onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all">
-                        <div className="w-12 h-12 rounded-full bg-orange-500/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Play className="w-6 h-6 text-white fill-white ml-1" />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-orange-500/90">
-                      LIP-SYNC
-                    </div>
-                    
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-                      <p className="text-[10px] text-white/80 truncate">{video.filename}</p>
-                      <p className="text-[9px] text-white/50 mt-1">{Math.round(video.size_kb)}KB</p>
-                      <div className="flex items-center gap-1 mt-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="flex-1 h-7 bg-orange-600 hover:bg-orange-500 text-white text-[10px]"
-                          onClick={(e) => { e.stopPropagation(); openVideoPlayer(video.path, video.filename); }}
-                        >
-                          <Play className="w-3 h-3 mr-1" />
-                          Watch
-                        </Button>
-                        <a 
-                          href={`${apiBase}/gallery/video/${video.path}`}
-                          download={video.filename}
-                          className="inline-flex items-center justify-center h-7 px-2 bg-white/10 hover:bg-white/20 rounded text-[10px]"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Download className="w-3 h-3" />
-                        </a>
                       </div>
                     </div>
                   </div>
@@ -1713,44 +1601,6 @@ export function LoopsTab({ backendUrl, useLiveMode, addLog }: LoopsTabProps) {
                   Upload & Save
                 </>
               )}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={videoPlayerOpen} onOpenChange={setVideoPlayerOpen}>
-        <DialogContent className="glass-panel border-white/10 text-foreground sm:max-w-[800px] max-h-[90vh]">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Play className="w-5 h-5 text-orange-400" />
-              {videoPlayerTitle}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex justify-center bg-black rounded-lg overflow-hidden">
-            <video
-              key={videoPlayerSrc}
-              src={videoPlayerSrc}
-              className="max-h-[70vh] w-auto"
-              controls
-              autoPlay
-              playsInline
-            />
-          </div>
-          <DialogFooter className="gap-2">
-            <a 
-              href={videoPlayerSrc}
-              download={videoPlayerTitle}
-              className="inline-flex items-center justify-center gap-2 h-9 px-4 bg-orange-600 hover:bg-orange-500 rounded-md text-sm font-medium"
-            >
-              <Download className="w-4 h-4" />
-              Download
-            </a>
-            <Button
-              variant="outline"
-              onClick={() => setVideoPlayerOpen(false)}
-              className="border-white/20"
-            >
-              Close
             </Button>
           </DialogFooter>
         </DialogContent>
