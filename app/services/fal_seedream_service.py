@@ -419,7 +419,9 @@ Shot on Canon EOS R5 with 85mm f/1.4 lens. Photorealistic, real photograph, natu
             "image_size": "auto_4K",
             "num_images": 1,
             "enable_safety_checker": False,
-            "negative_prompt": negative_prompt
+            "negative_prompt": negative_prompt,
+            "strength": 0.4,  # Lower = more identity preservation from references
+            "guidance_scale": 7.5  # Recommended range for photorealism
         }
         
         try:
