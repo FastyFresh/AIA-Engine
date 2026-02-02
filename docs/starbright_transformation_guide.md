@@ -21,7 +21,7 @@ AI-powered influencer content generation using Fal.ai Seedream 4.5 to transform 
 - Reference: `content/references/starbright_monroe/body_reference.webp`
 
 ### Hair
-- Color: MUST be honey-brown (NOT black, NOT dark)
+- Color: MUST be dark brown (rich brown, NOT black, NOT light/honey colored)
 - Style: Can match source image (straight, wavy, ponytail, etc.)
 - Length: Long
 
@@ -202,6 +202,23 @@ We have dedicated background reference images for consistency:
 **Remaining to refine:**
 - Living room shows cream sofas - should be black leather for consistency
 
+### Test: V6 (dark brown hair focus)
+- Updated hair color spec to "dark brown" (was "honey-brown")
+- Added explicit "do NOT blend with source" for face
+- Result: Hair still not dark enough, face still slightly blended
+
+### Test: V7 (photorealistic + dark brown hair)
+- Added "photorealistic photograph, NOT cartoon, NOT illustration" 
+- Hair described as "DARK BROWN (like chocolate or espresso)"
+- Negative prompts: cartoon, illustration, anime, stylized, light hair colors
+- **Result: SUCCESS** - Dark brown hair, black leather furniture, photorealistic quality
+
+**V7 Key Improvements:**
+- Hair is properly dark brown ✓
+- Black leather furniture in living room ✓
+- More photorealistic, less cartoonish ✓
+- Pose and outfit preserved ✓
+
 ---
 
 ## Next Steps
@@ -210,9 +227,11 @@ We have dedicated background reference images for consistency:
 3. [x] Found existing background reference images
 4. [x] Fix prompt structure to avoid multiple-person generation
 5. [x] Always copy generated images to gallery
-6. [ ] Update living room description to use black leather furniture
-7. [ ] Full batch re-run with final configuration
-8. [ ] Document final working configuration
+6. [x] Update living room description to use black leather furniture
+7. [x] Fix hair color to dark brown
+8. [x] Fix cartoonish face issue with photorealistic emphasis
+9. [ ] Full batch re-run with V7 configuration
+10. [ ] Document final working configuration
 
 ---
 
