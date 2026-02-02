@@ -395,11 +395,13 @@ class FalSeedreamService:
         face_descriptors = config.get("face_descriptors", "hazel-brown eyes, full lips, natural freckles, dark brown hair")
         body_descriptors = config.get("body_descriptors", "slim petite healthy build, natural A-cup")
         
-        # KREATOR FLOW PROMPT v9 - PROVEN WORKING (from transformation guide)
+        # KREATOR FLOW PROMPT v9 with stronger body language
         prompt = f"""A portrait of Starbright, using the EXACT pose from reference3: {pose_description}.
 
 Replace the face with facial features from reference1: {face_descriptors}.
-Replace the body with proportions from reference2: {body_descriptors}.
+Replace the body with EXACT proportions from reference2: {body_descriptors}.
+
+CRITICAL: Do NOT use body proportions from reference3. The body MUST match reference2's proportions exactly.
 
 KEEP from reference3: The exact body position, hand placement, camera angle, {background_description}, {outfit_description} outfit.
 

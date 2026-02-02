@@ -309,22 +309,22 @@ After extensive testing, we discovered the **Kreator Flow prompt structure** tha
 2. **reference2** (Figure 2): Body reference - `body_reference.webp`
 3. **reference3** (Figure 3): Pose source image (the image to transform)
 
-### Kreator Flow Prompt Template (v10 - Updated Feb 2, 2026)
+### Kreator Flow Prompt Template (v9.1 - Updated Feb 2, 2026)
 
 ```
-Generate image with:
-- Face: EXACTLY from reference1 ([FACE DESCRIPTORS])
-- Body: EXACTLY from reference2 ([BODY DESCRIPTORS])
-- From reference3 ONLY copy: pose position, outfit/clothing, camera angle
+A portrait of Starbright, using the EXACT pose from reference3: [DETAILED POSE DESCRIPTION].
+
+Replace the face with facial features from reference1: [FACE DESCRIPTORS].
+Replace the body with EXACT proportions from reference2: [BODY DESCRIPTORS].
 
 CRITICAL: Do NOT use body proportions from reference3. The body MUST match reference2's proportions exactly.
 
-Pose from reference3: [DETAILED POSE DESCRIPTION].
-Outfit from reference3: [OUTFIT DESCRIPTION].
-[BACKGROUND SECTION].
+KEEP from reference3: The exact body position, hand placement, camera angle, [BACKGROUND], [OUTFIT] outfit.
 
 Photorealistic, high detail, sharp focus, 8K quality.
 ```
+
+**Key improvement in v9.1**: Added "EXACT proportions" and "CRITICAL: Do NOT use body proportions from reference3" to prevent source model's body from overriding the A-cup reference.
 
 ### Starbright Identity Descriptors
 
@@ -390,8 +390,12 @@ result = await fal_service.transform_with_pose_source(
 - v4: Stronger body reference, pure room backgrounds
 - v5: Fixed multiple-person generation issue
 - v6-v8: Hair color and photorealism improvements
-- **v9: KREATOR FLOW METHOD - WORKING SOLUTION** (Feb 2, 2026)
+- v9: KREATOR FLOW METHOD (Feb 2, 2026)
   - Explicit KEEP/REPLACE prompt structure
   - Reference order: face, body, pose source
   - Detailed pose descriptions
-  - Successfully preserves identity + pose + outfit
+- **v9.1: KREATOR FLOW + STRONGER BODY** (Feb 2, 2026)
+  - Added "EXACT proportions" to body replacement line
+  - Added CRITICAL instruction: "Do NOT use body proportions from reference3"
+  - Added body negative prompts: "large bust, big chest, curvy, busty"
+  - Successfully prevents source model's body from overriding A-cup reference
