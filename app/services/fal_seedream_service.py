@@ -335,6 +335,7 @@ class FalSeedreamService:
         pose_description: str,
         outfit_description: str,
         background_description: str = "indoor room",
+        background_ref_path: Optional[str] = None,
         aspect_ratio: str = "portrait_4_3",
         output_dir: Optional[str] = None,
         filename_prefix: str = "transformed"
@@ -343,17 +344,19 @@ class FalSeedreamService:
         Transform a source image to Starbright using the KREATOR FLOW method.
         
         This is the PROVEN WORKING approach for pose/outfit transfer with identity preservation.
-        Uses 3 references: face (reference1), body (reference2), pose source (reference3).
+        Uses 3-4 references: face (ref1), body (ref2), pose source (ref3), optional background (ref4).
         
         The prompt explicitly states:
-        - What to KEEP from the pose source (pose, outfit, camera angle, background)
+        - What to KEEP from the pose source (pose, outfit, camera angle)
         - What to REPLACE with Starbright's identity (face features, body proportions)
+        - Optional: What background to use from ref4
         
         Args:
             pose_source_path: Path to the source image to transform
-            pose_description: Detailed description of the pose (e.g., "leaning forward with hands on thighs")
-            outfit_description: Description of the outfit to preserve (e.g., "white bralette and red shorts")
-            background_description: Description of the background (e.g., "indoor room with gray walls")
+            pose_description: Detailed description of the pose
+            outfit_description: Description of the outfit to preserve
+            background_description: Description of the background
+            background_ref_path: Optional path to background reference image
             aspect_ratio: Output aspect ratio
             output_dir: Optional output directory
             filename_prefix: Prefix for output filename
@@ -376,24 +379,34 @@ class FalSeedreamService:
         pose_uri = self._encode_image(pose_source_path)
         
         # KREATOR FLOW PROMPT STRUCTURE - PROVEN WORKING
-        # Order: face (reference1), body (reference2), pose (reference3)
+        # Order: face (ref1), body (ref2), pose (ref3), optional background (ref4)
         image_urls = [face_uri, body_uri, pose_uri]
+        
+        # Optional background reference as 4th image
+        background_prompt_section = ""
+        if background_ref_path and Path(background_ref_path).exists():
+            bg_uri = self._encode_image(background_ref_path)
+            image_urls.append(bg_uri)
+            background_prompt_section = f"Use the background/environment from reference4. "
+            logger.info(f"Added background reference: {background_ref_path}")
         
         # Get Starbright identity descriptors
         config = INFLUENCER_IDENTITIES.get(self.influencer_id, INFLUENCER_IDENTITIES["starbright_monroe"])
         face_descriptors = config.get("face_descriptors", "hazel-brown eyes, full lips, natural freckles, dark brown hair")
         body_descriptors = config.get("body_descriptors", "slim petite healthy build, natural A-cup")
         
-        prompt = f"""A portrait of Starbright, using the EXACT pose from reference3: {pose_description}.
+        # HYPER-REALISTIC prompt structure
+        prompt = f"""Hyper-realistic photograph of a real woman. Using the EXACT pose from reference3: {pose_description}.
 
-Replace the face with facial features from reference1: {face_descriptors}.
+Replace the face with facial features from reference1: {face_descriptors}, natural skin texture with visible pores and subtle imperfections.
 Replace the body with proportions from reference2: {body_descriptors}.
 
-KEEP from reference3: The exact body position, hand placement, camera angle, {background_description}, {outfit_description} outfit.
+KEEP from reference3: The exact body position, hand placement, camera angle, {outfit_description} outfit.
+{background_prompt_section}{background_description}.
 
-Photorealistic, high detail, sharp focus, 8K quality."""
+Shot on Canon EOS R5 with 85mm f/1.4 lens. Photorealistic, real photograph, natural skin with visible pores and texture, high detail, sharp focus, 8K ultra detailed. NOT a 3D render, NOT CGI, NOT digital art."""
 
-        negative_prompt = f"Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, {self.default_negative_prompt}"
+        negative_prompt = f"cartoon, illustration, 3D render, CGI, digital art, anime, painting, drawing, artificial, plastic skin, smooth skin, airbrushed, over-processed, fake looking, Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, {self.default_negative_prompt}"
         
         headers = {
             "Authorization": f"Key {self.fal_key}",
