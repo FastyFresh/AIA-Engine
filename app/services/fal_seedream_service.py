@@ -395,15 +395,15 @@ class FalSeedreamService:
         face_descriptors = config.get("face_descriptors", "hazel-brown eyes, full lips, natural freckles, dark brown hair")
         body_descriptors = config.get("body_descriptors", "slim petite healthy build, natural A-cup")
         
-        # KREATOR FLOW PROMPT v9 with stronger body language
-        prompt = f"""A portrait of Starbright, using the EXACT pose from reference3: {pose_description}.
+        # Direct subject reference approach - use face/body from references directly
+        prompt = f"""Same person from reference1, same body from reference2, in the pose from reference3: {pose_description}.
 
-Replace the face with facial features from reference1: {face_descriptors}.
-Replace the body with EXACT proportions from reference2: {body_descriptors}.
+Subject face from reference1: {face_descriptors}.
+Subject body from reference2: {body_descriptors}.
 
-CRITICAL: Do NOT use body proportions from reference3. The body MUST match reference2's proportions exactly.
+From reference3 ONLY use: pose position, camera angle, {outfit_description} outfit.
 
-KEEP from reference3: The exact body position, hand placement, camera angle, {background_description}, {outfit_description} outfit.
+{background_prompt_section}{background_description}.
 
 Photorealistic, high detail, sharp focus, 8K quality."""
 
@@ -421,8 +421,7 @@ Photorealistic, high detail, sharp focus, 8K quality."""
             "num_images": 1,
             "enable_safety_checker": False,
             "negative_prompt": negative_prompt,
-            "strength": 0.35,  # 0.25-0.40 sweet spot for face preservation (0.5+ changes bone structure)
-            "guidance_scale": 5.5,  # 4.5-6.0 for portraits (higher pushes toward generic archetypes)
+            "guidance_scale": 5.5,  # 4.5-6.0 for portraits
             "num_inference_steps": 30,
             "seed": 42  # Lock seed for identity consistency
         }
