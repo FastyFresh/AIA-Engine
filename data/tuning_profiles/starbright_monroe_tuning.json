@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 283,
-  "approved_count": 213,
+  "total_generations": 284,
+  "approved_count": 214,
   "rejected_count": 70,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_balcony_20260127_180639.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-27T18:07:43.621502",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_standing_pose_20260127_210404.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": true,
       "timestamp": "2026-02-02T23:19:51.458925",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/gallery/starbright_monroe/starbright_realism_final_20260202_232105.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-02T23:23:02.117658",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-02T23:19:51.460536"
+  "last_updated": "2026-02-02T23:23:02.119247"
 }
