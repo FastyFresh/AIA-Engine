@@ -16,11 +16,34 @@ import random
 from pathlib import Path
 
 
-CAMERA_SETTINGS = "Shot on Canon EOS R5, 85mm f/1.4 lens"
-SKIN_TEXTURE = "natural skin texture with visible pores"
-QUALITY_SETTINGS = "8K ultra detailed, cinematic lighting"
-HYPERREAL_SKIN = "natural skin texture with visible pores, fine skin detail, slight natural skin imperfections, photorealistic skin tones, no plastic skin, no airbrushed, no over-smoothed, no beauty filter"
-HYPERREAL_QUALITY = "8K ultra detailed, cinematic color grading, professional fashion photography"
+CAMERA_SETTINGS = "Shot on Canon EOS R5, 85mm f/1.4 lens, shallow depth of field"
+SKIN_TEXTURE = "natural skin texture with visible pores, subtle imperfections and tonal variations"
+QUALITY_SETTINGS = "high resolution, film grain, candid professional photography feel, true-to-life colors"
+
+HYPERREAL_SKIN = (
+    "detailed skin texture with visible pores, natural microtexture, "
+    "subtle imperfections and tonal variations for lifelike authenticity, "
+    "faint natural sheen, slight skin asymmetry, natural freckles, "
+    "subtle under-eye shadows, realistic skin tones with natural variation"
+)
+
+HYPERREAL_QUALITY = (
+    "high resolution, shallow depth of field, film grain, "
+    "candid professional photography feel, true-to-life colors, "
+    "soft studio lighting with subtle gradients, natural casual pose"
+)
+
+FABRIC_REALISM = (
+    "realistic fabric flow, natural wrinkles, random creases, "
+    "gravity-affected drape, visible texture and subtle wear"
+)
+
+ANTI_DETECTION_NEGATIVE = (
+    "smooth skin, plastic skin, airbrushed, poreless, beauty filter, over-smoothed, "
+    "idealized fabric, perfect flow, glossy, CGI, unnatural perfection, "
+    "symmetrical face, perfect symmetry, flawless skin, perfect lighting, "
+    "stock photo, 3D render, digital art, illustration, anime"
+)
 
 CONSISTENCY_BACKGROUNDS = {
     "luxury_apartment": "modern luxury apartment studio with neutral tones, floor-to-ceiling windows, minimalist decor, soft natural daylight",
@@ -43,9 +66,9 @@ INFLUENCER_IDENTITIES = {
             "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure, "
             "small natural A-cup breasts, proportionate feminine figure"
         ),
-        "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.png",
-        "body_ref": "content/references/starbright_monroe/body_reference.png",
-        "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.png",
+        "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
+        "body_ref": "content/references/starbright_monroe/body_reference_canonical.webp",
+        "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.webp",
         "output_dir": "content/generated/starbright_monroe",
     },
     "luna_vale": {
@@ -114,7 +137,8 @@ class PromptBuilder:
         outfit: str,
         pose: str = "standing confidently",
         lighting: str = "soft natural lighting",
-        additional: str = ""
+        additional: str = "",
+        anti_detection: bool = True
     ) -> str:
         """
         Build a prompt for fal.ai Seedream 4.5 with direct identity description.
@@ -128,23 +152,42 @@ class PromptBuilder:
             pose: Body positioning
             lighting: Lighting setup
             additional: Extra prompt elements
+            anti_detection: Enable anti-AI-detection prompt enhancements
         
         Returns:
             Formatted prompt string
         """
-        prompt = (
-            "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
-            f"Maintain her EXACT facial features: {self.identity}. "
-            f"She is {pose}, wearing {outfit}, in {scene}, {lighting}. "
-            f"{CAMERA_SETTINGS}, {SKIN_TEXTURE}, {QUALITY_SETTINGS}"
-        )
+        if anti_detection:
+            prompt = (
+                "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
+                f"Maintain her EXACT facial features: {self.identity}. "
+                f"Photorealistic portrait, {pose}, {lighting} with subtle gradients. "
+                f"Wearing {outfit} with {FABRIC_REALISM}. "
+                f"In {scene}. "
+                f"{HYPERREAL_SKIN}. "
+                f"{CAMERA_SETTINGS}, {HYPERREAL_QUALITY}"
+            )
+        else:
+            prompt = (
+                "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
+                f"Maintain her EXACT facial features: {self.identity}. "
+                f"She is {pose}, wearing {outfit}, in {scene}, {lighting}. "
+                f"{CAMERA_SETTINGS}, {SKIN_TEXTURE}, {QUALITY_SETTINGS}"
+            )
         
         if additional:
             prompt += f". {additional}"
         
         return prompt
     
-    def build_research_prompt(self, narrative_prompt: str) -> str:
+    def get_negative_prompt(self, anti_detection: bool = True) -> str:
+        """Get the negative prompt, optionally with anti-detection enhancements."""
+        base_negative = CONSISTENCY_NEGATIVE_PROMPT
+        if anti_detection:
+            return f"{base_negative}, {ANTI_DETECTION_NEGATIVE}"
+        return base_negative
+    
+    def build_research_prompt(self, narrative_prompt: str, anti_detection: bool = True) -> str:
         """
         Build a prompt from a research-derived narrative.
         
@@ -153,6 +196,7 @@ class PromptBuilder:
         
         Args:
             narrative_prompt: The narrative prompt from research agent
+            anti_detection: Enable anti-AI-detection prompt enhancements
         
         Returns:
             Full prompt with identity and camera settings
@@ -164,9 +208,16 @@ class PromptBuilder:
             "STRICTLY match Figure 2 body proportions: petite slender frame, slim narrow waist, small natural bust, no exaggerated curves. "
         )
         
-        camera_suffix = (
-            f" {CAMERA_SETTINGS}, {SKIN_TEXTURE}, {QUALITY_SETTINGS}."
-        )
+        if anti_detection:
+            camera_suffix = (
+                f" {HYPERREAL_SKIN}. "
+                f"Clothing with {FABRIC_REALISM}. "
+                f"{CAMERA_SETTINGS}, {HYPERREAL_QUALITY}."
+            )
+        else:
+            camera_suffix = (
+                f" {CAMERA_SETTINGS}, {SKIN_TEXTURE}, {QUALITY_SETTINGS}."
+            )
         
         return identity_prefix + narrative_prompt + camera_suffix
     
