@@ -5,10 +5,10 @@ integrations = ["stripe:2.0.0", "javascript_object_storage:2.0.0"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["ffmpeg", "freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "lsof", "mailutils", "openjpeg", "tcl", "tk", "undollar", "unzip", "zip", "zlib"]
+packages = ["ffmpeg", "freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "tcl", "tk", "undollar", "unzip", "zip", "zlib", "mailutils", "lsof"]
 
 [workflows]
-run = "echo AGENT_SAFE_RUN && sleep 1"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -37,4 +37,4 @@ externalPort = 80
 
 [deployment]
 deploymentTarget = "vm"
-run = "echo AGENT_SAFE_RUN && sleep 1"
+run = ["bash", "-c", "uvicorn app.main:app --host 0.0.0.0 & python -m app.telegram.run_bots"]
