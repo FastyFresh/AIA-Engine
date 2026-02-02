@@ -309,15 +309,19 @@ After extensive testing, we discovered the **Kreator Flow prompt structure** tha
 2. **reference2** (Figure 2): Body reference - `body_reference.webp`
 3. **reference3** (Figure 3): Pose source image (the image to transform)
 
-### Kreator Flow Prompt Template
+### Kreator Flow Prompt Template (v10 - Updated Feb 2, 2026)
 
 ```
-A portrait of Starbright, using the EXACT pose from reference3: [DETAILED POSE DESCRIPTION].
+Generate image with:
+- Face: EXACTLY from reference1 ([FACE DESCRIPTORS])
+- Body: EXACTLY from reference2 ([BODY DESCRIPTORS])
+- From reference3 ONLY copy: pose position, outfit/clothing, camera angle
 
-Replace the face with facial features from reference1: [FACE DESCRIPTORS].
-Replace the body with proportions from reference2: [BODY DESCRIPTORS].
+CRITICAL: Do NOT use body proportions from reference3. The body MUST match reference2's proportions exactly.
 
-KEEP from reference3: The exact body position, hand placement, camera angle, [BACKGROUND], [OUTFIT] outfit.
+Pose from reference3: [DETAILED POSE DESCRIPTION].
+Outfit from reference3: [OUTFIT DESCRIPTION].
+[BACKGROUND SECTION].
 
 Photorealistic, high detail, sharp focus, 8K quality.
 ```
@@ -337,8 +341,10 @@ slim petite healthy build, natural A-cup, feminine proportions, fair skin
 ### Negative Prompt
 
 ```
-Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, [standard body negative prompts]
+Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, large bust, big chest, curvy, busty, [standard body negative prompts]
 ```
+
+**Key body negative terms**: "large bust, big chest, curvy, busty" - prevents source model's body from overriding A-cup reference.
 
 ### Example Working Prompt
 

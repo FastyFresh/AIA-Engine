@@ -628,5 +628,9 @@
   "content/archives/starbright_monroe/bgref_fixed_20260202_034651.png": "rejected",
   "content/archives/starbright_monroe/explicit_body_ref_20260202_040058.png": "rejected",
   "content/archives/starbright_monroe/replicate_kreator_20260202_035904.png": "rejected",
-  "content/archives/starbright_monroe/original_prompt_test_20260202_035713.png": "rejected"
+  "content/archives/starbright_monroe/original_prompt_test_20260202_035713.png": "rejected",
+  "content/archives/starbright_monroe/identity_v2_20260202_035433.png": "rejected",
+  "content/archives/starbright_monroe/body_neg_prompt_20260202_040300.png": "rejected",
+  "content/generated/starbright_monroe/batch5_615554787_20260202_020604.png": "approved",
+  "content/final/starbright_monroe/batch5_615554787_20260202_020604.png": "final"
 }
