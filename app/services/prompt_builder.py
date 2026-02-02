@@ -44,6 +44,8 @@ INFLUENCER_IDENTITIES = {
             "small natural A-cup chest, petite but healthy looking frame"
         ),
         # KREATOR FLOW descriptors - used for transform_with_pose_source method
+        # identity_anchor: Short textual anchor for Seedream 4.5 face consistency (per best practices)
+        "identity_anchor": "soft oval face, hazel-brown almond eyes, full natural lips with defined cupid's bow, light freckles across nose and cheeks, high cheekbones, dark brown straight hair",
         "face_descriptors": "hazel-brown eyes, full lips with cupid's bow, natural freckles across nose and cheeks, dark brown straight hair, soft oval jaw, high cheekbones",
         "body_descriptors": "slim petite healthy build, natural A-cup, feminine proportions, fair skin",
         "negative_prompt_additions": "large breasts, big breasts, busty, prominent bust, enhanced chest, voluptuous, curvy chest, cleavage, exaggerated chest, big bust, medium breasts, C-cup, D-cup, augmented, skeletal, anorexic, emaciated, too thin, bony, underweight, malnourished, gaunt, skin and bones",

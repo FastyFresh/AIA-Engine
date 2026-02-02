@@ -395,18 +395,21 @@ class FalSeedreamService:
         face_descriptors = config.get("face_descriptors", "hazel-brown eyes, full lips, natural freckles, dark brown hair")
         body_descriptors = config.get("body_descriptors", "slim petite healthy build, natural A-cup")
         
-        # HYPER-REALISTIC prompt structure
-        prompt = f"""Hyper-realistic photograph of a real woman. Using the EXACT pose from reference3: {pose_description}.
+        # KREATOR FLOW PROMPT - with explicit body reference (per transformation guide)
+        prompt = f"""Generate image with:
+- Face: EXACTLY from reference1 ({face_descriptors})
+- Body: EXACTLY from reference2 ({body_descriptors})
+- From reference3 ONLY copy: pose position, outfit/clothing, camera angle
 
-Replace the face with facial features from reference1: {face_descriptors}, natural skin texture with visible pores and subtle imperfections.
-Replace the body with proportions from reference2: {body_descriptors}.
+CRITICAL: Do NOT use body proportions from reference3. The body MUST match reference2's proportions exactly.
 
-KEEP from reference3: The exact body position, hand placement, camera angle, {outfit_description} outfit.
+Pose from reference3: {pose_description}.
+Outfit from reference3: {outfit_description}.
 {background_prompt_section}{background_description}.
 
-Shot on Canon EOS R5 with 85mm f/1.4 lens. Photorealistic, real photograph, natural skin with visible pores and texture, high detail, sharp focus, 8K ultra detailed. NOT a 3D render, NOT CGI, NOT digital art."""
+Photorealistic, high detail, sharp focus, 8K quality."""
 
-        negative_prompt = f"cartoon, illustration, 3D render, CGI, digital art, anime, painting, drawing, artificial, plastic skin, smooth skin, airbrushed, over-processed, fake looking, Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, {self.default_negative_prompt}"
+        negative_prompt = f"Original influencer's face, blue eyes, green eyes, black hair, blonde hair, light hair, different face, wrong identity, large bust, big chest, curvy, busty, {self.default_negative_prompt}"
         
         headers = {
             "Authorization": f"Key {self.fal_key}",

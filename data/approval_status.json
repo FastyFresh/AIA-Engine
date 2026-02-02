@@ -613,5 +613,20 @@
   "content/generated/starbright_monroe/kreator_style_test.png": "approved",
   "content/final/starbright_monroe/kreator_style_test.png": "final",
   "content/archives/starbright_monroe/bgref_hotel_test_20260202_032847.png": "rejected",
-  "content/archives/starbright_monroe/identity_test_s04_20260202_033837.png": "rejected"
+  "content/archives/starbright_monroe/identity_test_s04_20260202_033837.png": "rejected",
+  "content/generated/starbright_monroe/batch5_610884540_20260202_020122.png": "approved",
+  "content/final/starbright_monroe/batch5_610884540_20260202_020122.png": "final",
+  "content/generated/starbright_monroe/batch5_610071553_20260202_015843.png": "approved",
+  "content/final/starbright_monroe/batch5_610071553_20260202_015843.png": "final",
+  "content/generated/starbright_monroe/batch5_608219047_20260202_015858.png": "approved",
+  "content/final/starbright_monroe/batch5_608219047_20260202_015858.png": "final",
+  "content/generated/starbright_monroe/kreator_method_verified_20260202_015603.png": "approved",
+  "content/final/starbright_monroe/kreator_method_verified_20260202_015603.png": "final",
+  "content/generated/starbright_monroe/batch5_610095720_20260202_015842.png": "approved",
+  "content/final/starbright_monroe/batch5_610095720_20260202_015842.png": "final",
+  "content/archives/starbright_monroe/optimal_test_v1.png": "rejected",
+  "content/archives/starbright_monroe/bgref_fixed_20260202_034651.png": "rejected",
+  "content/archives/starbright_monroe/explicit_body_ref_20260202_040058.png": "rejected",
+  "content/archives/starbright_monroe/replicate_kreator_20260202_035904.png": "rejected",
+  "content/archives/starbright_monroe/original_prompt_test_20260202_035713.png": "rejected"
 }
