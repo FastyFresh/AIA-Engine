@@ -586,5 +586,9 @@
   "content/gallery/starbright_monroe/starbright_tiff_convert_q30.jpg": "approved",
   "content/final/starbright_monroe/starbright_tiff_convert_q30.jpg": "final",
   "content/gallery/starbright_monroe/starbright_bmp_convert_q30.jpg": "approved",
-  "content/final/starbright_monroe/starbright_bmp_convert_q30.jpg": "final"
+  "content/final/starbright_monroe/starbright_bmp_convert_q30.jpg": "final",
+  "content/gallery/starbright_monroe/starbright_dct_attack_q30.jpg": "approved",
+  "content/final/starbright_monroe/starbright_dct_attack_q30.jpg": "final",
+  "content/gallery/starbright_monroe/starbright_iphone_exif_q30.jpg": "approved",
+  "content/final/starbright_monroe/starbright_iphone_exif_q30.jpg": "final"
 }

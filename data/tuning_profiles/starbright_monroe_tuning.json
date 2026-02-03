@@ -10,36 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 295,
-  "approved_count": 225,
+  "total_generations": 297,
+  "approved_count": 227,
   "rejected_count": 70,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_tennis_dress_20260127_212234.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-27T23:50:32.341980",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_pink_boyshorts_v4_20260127_235304.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-28T00:21:18.927096",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_pink_boyshorts_v3_20260127_235154.png",
       "prompt": "",
@@ -663,7 +637,33 @@
       "approved": true,
       "timestamp": "2026-02-03T00:40:05.704834",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/gallery/starbright_monroe/starbright_dct_attack_q30.jpg",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-03T01:10:38.599760",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/gallery/starbright_monroe/starbright_iphone_exif_q30.jpg",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-03T01:10:40.075445",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-03T00:40:05.706548"
+  "last_updated": "2026-02-03T01:10:40.076908"
 }

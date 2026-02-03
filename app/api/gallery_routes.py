@@ -1,6 +1,7 @@
 """Gallery and content serving routes."""
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, BackgroundTasks
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
 from pathlib import Path
 from datetime import datetime
 import os
@@ -8,8 +9,18 @@ import json
 import logging
 import zipfile
 import tempfile
+import asyncio
 
 logger = logging.getLogger(__name__)
+
+omnihuman_jobs = {}
+
+
+class OmniHumanRequest(BaseModel):
+    image_path: str
+    audio_path: str
+    resolution: str = "720p"
+    turbo_mode: bool = False
 
 router = APIRouter(prefix="/gallery", tags=["Gallery"])
 
@@ -352,3 +363,63 @@ async def download_all_gallery_files(influencer: str, source: str = "all"):
         filename=zip_filename,
         headers={"Content-Disposition": f"attachment; filename={zip_filename}"}
     )
+
+
+async def run_omnihuman_job(job_id: str, image_path: str, audio_path: str, resolution: str, turbo_mode: bool):
+    from app.services.omnihuman_service import OmniHumanService
+    
+    omnihuman_jobs[job_id] = {"status": "processing", "started": datetime.now().isoformat()}
+    
+    try:
+        service = OmniHumanService()
+        result = await service.generate_talking_video(
+            image_path=image_path,
+            audio_path=audio_path,
+            resolution=resolution,
+            turbo_mode=turbo_mode,
+            filename_prefix=f"omnihuman_{job_id[:8]}"
+        )
+        omnihuman_jobs[job_id] = {
+            "status": result.get("status"),
+            "video_path": result.get("video_path"),
+            "error": result.get("error"),
+            "completed": datetime.now().isoformat()
+        }
+    except Exception as e:
+        omnihuman_jobs[job_id] = {"status": "error", "error": str(e)}
+
+
+@router.post("/omnihuman/generate")
+async def generate_omnihuman_video(request: OmniHumanRequest, background_tasks: BackgroundTasks):
+    import uuid
+    
+    if not Path(request.image_path).exists():
+        raise HTTPException(status_code=400, detail=f"Image not found: {request.image_path}")
+    if not Path(request.audio_path).exists():
+        raise HTTPException(status_code=400, detail=f"Audio not found: {request.audio_path}")
+    
+    job_id = str(uuid.uuid4())
+    omnihuman_jobs[job_id] = {"status": "queued"}
+    
+    background_tasks.add_task(
+        run_omnihuman_job, job_id, request.image_path, request.audio_path, 
+        request.resolution, request.turbo_mode
+    )
+    
+    return {
+        "job_id": job_id,
+        "status": "queued",
+        "message": "OmniHuman video generation started. Check /gallery/omnihuman/status/{job_id} for progress."
+    }
+
+
+@router.get("/omnihuman/status/{job_id}")
+async def check_omnihuman_status(job_id: str):
+    if job_id not in omnihuman_jobs:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return omnihuman_jobs[job_id]
+
+
+@router.get("/omnihuman/jobs")
+async def list_omnihuman_jobs():
+    return omnihuman_jobs
