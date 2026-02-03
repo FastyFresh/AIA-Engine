@@ -270,6 +270,7 @@ async def get_gallery_videos(influencer: str, source: str = Query(default="all")
     
     video_folders = {
         "omnihuman": Path("content/videos/omnihuman"),
+        "face_swapped": Path("content/videos/face_swapped"),
         "loops": Path("content/loops"),
     }
     
