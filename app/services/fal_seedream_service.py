@@ -186,20 +186,28 @@ class FalSeedreamService:
                         if img_url:
                             img_resp = await client.get(img_url)
                             if img_resp.status_code == 200:
+                                from app.services.antidetect_processor import antidetect_processor
+                                
                                 save_dir = Path(output_dir) if output_dir else self.output_dir
                                 save_dir.mkdir(parents=True, exist_ok=True)
                                 
                                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                                filename = f"{filename_prefix}_{timestamp}.png"
-                                filepath = save_dir / filename
-                                filepath.write_bytes(img_resp.content)
                                 
-                                logger.info(f"Image saved: {filepath}")
+                                original_filename = f"{filename_prefix}_{timestamp}.png"
+                                original_filepath = save_dir / original_filename
+                                original_filepath.write_bytes(img_resp.content)
+                                logger.info(f"Original saved: {original_filepath}")
+                                
+                                antidetect_filename = f"{filename_prefix}_{timestamp}_antidetect_q30.jpg"
+                                antidetect_filepath = save_dir / antidetect_filename
+                                antidetect_processor.process(original_filepath, antidetect_filepath)
+                                logger.info(f"Anti-detect version saved: {antidetect_filepath}")
                                 
                                 return {
                                     "status": "success",
-                                    "image_path": str(filepath),
-                                    "filename": filename,
+                                    "image_path": str(antidetect_filepath),
+                                    "original_path": str(original_filepath),
+                                    "filename": antidetect_filename,
                                     "seed": result.get("seed"),
                                     "provider": "fal.ai",
                                     "model": "seedream-4.5-edit"
