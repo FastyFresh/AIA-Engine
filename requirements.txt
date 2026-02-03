@@ -37,3 +37,4 @@ stripe
 tweepy
 uvicorn[standard]
 replicate
+piexif
