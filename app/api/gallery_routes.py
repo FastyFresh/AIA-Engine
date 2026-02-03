@@ -202,9 +202,18 @@ async def serve_gallery_image(path: str):
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="Image not found")
     
+    suffix = file_path.suffix.lower()
+    media_types = {
+        ".png": "image/png",
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".webp": "image/webp",
+    }
+    media_type = media_types.get(suffix, "image/png")
+    
     return FileResponse(
         file_path,
-        media_type="image/png",
+        media_type=media_type,
         headers={"Cache-Control": "public, max-age=3600"}
     )
 
