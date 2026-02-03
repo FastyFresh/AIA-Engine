@@ -442,6 +442,83 @@ class ReplicateClient:
         result.reference_used = source_face_path
         return result.to_dict()
 
+    async def video_face_swap(
+        self,
+        target_video_path: str,
+        source_face_path: str,
+        output_dir: str = "content/videos/face_swapped",
+        filename_prefix: str = "swapped"
+    ) -> Dict[str, Any]:
+        """Video face swap using roop model - swaps face in video"""
+        token_check = self._check_token()
+        if token_check:
+            return token_check
+            
+        if not os.path.exists(target_video_path):
+            return {"status": "error", "message": f"Target video not found: {target_video_path}"}
+        if not os.path.exists(source_face_path):
+            return {"status": "error", "message": f"Source face not found: {source_face_path}"}
+        
+        os.makedirs(output_dir, exist_ok=True)
+        
+        logger.info(f"Video face swap: {source_face_path} -> {target_video_path}")
+        
+        try:
+            import fal_client
+            source_url = fal_client.upload_file(source_face_path)
+            video_url = fal_client.upload_file(target_video_path)
+            logger.info(f"Uploaded files to fal storage")
+        except Exception as e:
+            logger.error(f"File upload error: {e}")
+            return {"status": "error", "message": f"File upload failed: {e}"}
+        
+        input_data = {
+            "swap_image": source_url,
+            "target_video": video_url
+        }
+        
+        version = "11b6bf0f4e14d808f655e87e5448233cceff10a45f659d71539cafb7163b2e84"
+        
+        try:
+            async with httpx.AsyncClient(timeout=600.0) as client:
+                prediction = await self._create_prediction(client, input_data, version=version)
+                
+                if prediction.get("status") == "error":
+                    return prediction
+                
+                prediction_id = prediction.get("id")
+                logger.info(f"Video face swap submitted: {prediction_id}")
+                
+                final = await self._wait_for_prediction(client, prediction_id, max_attempts=120, poll_interval=5)
+                
+                if final.get("status") == "succeeded":
+                    output_url = final.get("output")
+                    if isinstance(output_url, list):
+                        output_url = output_url[0]
+                    
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"{filename_prefix}_{timestamp}.mp4"
+                    filepath = Path(output_dir) / filename
+                    
+                    resp = await client.get(output_url)
+                    if resp.status_code == 200:
+                        filepath.write_bytes(resp.content)
+                        logger.info(f"Video face swap saved: {filepath}")
+                        return {
+                            "status": "success",
+                            "video_path": str(filepath),
+                            "video_url": output_url
+                        }
+                    else:
+                        return {"status": "error", "message": f"Download failed: {resp.status_code}"}
+                else:
+                    error_msg = final.get("error") or f"Status: {final.get('status')}"
+                    return {"status": "error", "message": f"Prediction failed: {error_msg}"}
+                
+        except Exception as e:
+            logger.error(f"Video face swap error: {e}")
+            return {"status": "error", "message": str(e)}
+
     async def generate_with_pulid(
         self,
         prompt: str,
