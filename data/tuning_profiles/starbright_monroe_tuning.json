@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 289,
-  "approved_count": 219,
+  "total_generations": 290,
+  "approved_count": 220,
   "rejected_count": 70,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_sailor_day_20260127_222941.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-27T23:21:03.643972",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_pink_dress_night_20260127_222608.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": true,
       "timestamp": "2026-02-03T00:26:07.995127",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/gallery/starbright_monroe/starbright_extreme_q30.jpg",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-03T00:28:03.950268",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-03T00:26:07.997280"
+  "last_updated": "2026-02-03T00:28:03.951451"
 }
