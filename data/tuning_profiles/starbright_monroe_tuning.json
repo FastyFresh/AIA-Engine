@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 323,
-  "approved_count": 229,
+  "total_generations": 324,
+  "approved_count": 230,
   "rejected_count": 94,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_bunny_v2_standing_20260202_071647.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": false,
-      "timestamp": "2026-02-02T07:41:46.156114",
-      "notes": "Rejected via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_bunny_v1_front_20260202_071601.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": false,
       "timestamp": "2026-02-04T09:19:09.246315",
       "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_blackhair_20260204_092136.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-04T09:22:09.209149",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-04T09:19:09.246361"
+  "last_updated": "2026-02-04T09:22:09.209186"
 }
