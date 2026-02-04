@@ -519,6 +519,173 @@ class ReplicateClient:
             logger.error(f"Video face swap error: {e}")
             return {"status": "error", "message": str(e)}
 
+    async def pose_transfer(
+        self,
+        pose_reference_path: str,
+        prompt: str,
+        output_dir: str = "content/raw",
+        filename_prefix: str = "pose_transfer",
+        negative_prompt: str = "ugly, deformed, noisy, blurry, low quality, cartoon, anime",
+        num_inference_steps: int = 30,
+        guidance_scale: float = 7.5,
+        controlnet_conditioning_scale: float = 0.8,
+        face_swap_source: str = None
+    ) -> dict:
+        """
+        Generate image matching pose/camera angle from reference using SDXL ControlNet OpenPose.
+        Optionally face-swap to lock in identity.
+        
+        Args:
+            pose_reference_path: Path to reference image with desired pose
+            prompt: Text prompt describing the subject/style
+            face_swap_source: Optional path to face image for identity lock
+        """
+        import fal_client
+        
+        if not Path(pose_reference_path).exists():
+            return {"status": "error", "message": f"Pose reference not found: {pose_reference_path}"}
+        
+        try:
+            pose_url = fal_client.upload_file(pose_reference_path)
+            logger.info(f"Uploaded pose reference: {pose_url}")
+        except Exception as e:
+            return {"status": "error", "message": f"Upload failed: {e}"}
+        
+        input_data = {
+            "image": pose_url,
+            "prompt": prompt,
+            "negative_prompt": negative_prompt,
+            "num_inference_steps": num_inference_steps,
+            "guidance_scale": guidance_scale,
+            "controlnet_conditioning_scale": controlnet_conditioning_scale
+        }
+        
+        version = "d63e0b238b2d963d90348e2dad19830fbe372a7a43d90d234b2b63cae76d4397"
+        
+        try:
+            async with httpx.AsyncClient(timeout=300.0) as client:
+                prediction = await self._create_prediction(client, input_data, version=version)
+                
+                if "error" in prediction:
+                    return {"status": "error", "message": prediction.get("error")}
+                
+                prediction_id = prediction.get("id")
+                final = await self._wait_for_prediction(client, prediction_id, max_attempts=60, poll_interval=5)
+                
+                if final.get("status") == "succeeded":
+                    output = final.get("output")
+                    if isinstance(output, list) and output:
+                        output_url = output[0]
+                    elif isinstance(output, str):
+                        output_url = output
+                    else:
+                        return {"status": "error", "message": "No output URL"}
+                    
+                    os.makedirs(output_dir, exist_ok=True)
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"{filename_prefix}_{timestamp}.png"
+                    filepath = Path(output_dir) / filename
+                    
+                    resp = await client.get(output_url)
+                    if resp.status_code == 200:
+                        filepath.write_bytes(resp.content)
+                        logger.info(f"Pose transfer saved: {filepath}")
+                        
+                        result = {
+                            "status": "success",
+                            "image_path": str(filepath),
+                            "image_url": output_url
+                        }
+                        
+                        if face_swap_source and Path(face_swap_source).exists():
+                            swap_result = await self.image_face_swap(
+                                target_image_path=str(filepath),
+                                source_face_path=face_swap_source,
+                                output_dir=output_dir,
+                                filename_prefix=f"{filename_prefix}_facelock"
+                            )
+                            if swap_result.get("status") == "success":
+                                result["face_locked_path"] = swap_result.get("image_path")
+                                result["face_locked"] = True
+                        
+                        return result
+                    else:
+                        return {"status": "error", "message": f"Download failed: {resp.status_code}"}
+                else:
+                    error_msg = final.get("error") or f"Status: {final.get('status')}"
+                    return {"status": "error", "message": f"Prediction failed: {error_msg}"}
+                    
+        except Exception as e:
+            logger.error(f"Pose transfer error: {e}")
+            return {"status": "error", "message": str(e)}
+
+    async def image_face_swap(
+        self,
+        target_image_path: str,
+        source_face_path: str,
+        output_dir: str = "content/raw",
+        filename_prefix: str = "face_swap"
+    ) -> dict:
+        """Swap face in a still image using roop model."""
+        import fal_client
+        
+        for path in [target_image_path, source_face_path]:
+            if not Path(path).exists():
+                return {"status": "error", "message": f"File not found: {path}"}
+        
+        try:
+            source_url = fal_client.upload_file(source_face_path)
+            target_url = fal_client.upload_file(target_image_path)
+        except Exception as e:
+            return {"status": "error", "message": f"Upload failed: {e}"}
+        
+        input_data = {
+            "source_image": source_url,
+            "target_image": target_url,
+            "weight": 0.5
+        }
+        
+        version = "d5900f9ebed33e7ae08a07f17e0d98b4ebc68ab9528a70462afc3899cfe23bab"
+        
+        try:
+            async with httpx.AsyncClient(timeout=300.0) as client:
+                prediction = await self._create_prediction(client, input_data, version=version)
+                
+                if "error" in prediction:
+                    return {"status": "error", "message": prediction.get("error")}
+                
+                prediction_id = prediction.get("id")
+                final = await self._wait_for_prediction(client, prediction_id, max_attempts=60, poll_interval=5)
+                
+                if final.get("status") == "succeeded":
+                    output = final.get("output")
+                    if isinstance(output, dict):
+                        output_url = output.get("image")
+                    elif isinstance(output, list):
+                        output_url = output[0]
+                    else:
+                        output_url = output
+                    
+                    if not output_url:
+                        return {"status": "error", "message": "No output URL in response"}
+                    
+                    os.makedirs(output_dir, exist_ok=True)
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"{filename_prefix}_{timestamp}.png"
+                    filepath = Path(output_dir) / filename
+                    
+                    resp = await client.get(output_url)
+                    if resp.status_code == 200:
+                        filepath.write_bytes(resp.content)
+                        return {"status": "success", "image_path": str(filepath)}
+                    else:
+                        return {"status": "error", "message": f"Download failed: {resp.status_code}"}
+                else:
+                    return {"status": "error", "message": f"Failed: {final.get('error')}"}
+                    
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+
     async def generate_with_pulid(
         self,
         prompt: str,

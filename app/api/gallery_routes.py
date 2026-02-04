@@ -181,6 +181,22 @@ async def get_gallery_images(influencer: str, source: str = Query(default="all")
                     "source": "final"
                 })
     
+    if source in ["all", "pose_transfer"]:
+        pose_folder = Path("content/pose_transfer")
+        if pose_folder.exists():
+            for file in pose_folder.glob("*.png"):
+                if file.name in final_filenames:
+                    continue
+                stat = file.stat()
+                images.append({
+                    "filename": file.name,
+                    "path": str(file),
+                    "date": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M"),
+                    "size_kb": round(stat.st_size / 1024, 1),
+                    "mtime": stat.st_mtime,
+                    "source": "pose_transfer"
+                })
+    
     images.sort(key=lambda x: x["mtime"], reverse=True)
     
     for img in images:
