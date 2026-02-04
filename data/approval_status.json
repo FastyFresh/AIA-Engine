@@ -578,5 +578,7 @@
   "content/gallery/starbright_monroe/starbright_extreme_q30.jpg": "approved",
   "content/final/starbright_monroe/starbright_extreme_q30.jpg": "final",
   "content/seedream4_output/starbright_transform_20260204_044402.png": "approved",
-  "content/final/starbright_monroe/starbright_transform_20260204_044402.png": "final"
+  "content/final/starbright_monroe/starbright_transform_20260204_044402.png": "final",
+  "content/archives/starbright_monroe/starbright_pose_faceswap_20260204_050517.png": "rejected",
+  "content/archives/starbright_monroe/starbright_controlnet_pose_20260204_050025.png": "rejected"
 }
