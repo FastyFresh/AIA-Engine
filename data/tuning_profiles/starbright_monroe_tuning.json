@@ -10,88 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 324,
+  "total_generations": 330,
   "approved_count": 230,
-  "rejected_count": 94,
+  "rejected_count": 100,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_bunny_v1_front_20260202_071601.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-02T07:41:54.081628",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_bunny_v3_side_20260202_071732.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-02T07:41:58.966784",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_bunny_back_20260202_071419.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-02T07:42:01.759529",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_pink_dress_20260202_070552.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-02T07:42:29.323955",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_batch5_616177128_20260202_075151.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-02T23:18:28.139035",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_batch5_610071553_20260202_075247.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-02T23:18:43.645190",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_batch5_618243808_20260202_075220.png",
       "prompt": "",
@@ -663,7 +585,85 @@
       "approved": true,
       "timestamp": "2026-02-04T09:22:09.209149",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/flux_kontext_face_20260204_093237.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T09:33:51.752479",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/flux_kontext_20260204_093141.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T09:33:53.627058",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_selfie_v2_20260204_092657.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T09:33:56.330517",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_selfie_bedroom_20260204_092410.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T09:34:00.874705",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_pigtails_sporty_20260204_092408.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T09:34:03.002827",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_standing_window_20260204_092408.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T09:34:04.949602",
+      "notes": "Rejected via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-04T09:22:09.209186"
+  "last_updated": "2026-02-04T09:34:04.949640"
 }
