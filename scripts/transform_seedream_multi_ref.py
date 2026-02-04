@@ -26,7 +26,7 @@ BG_REF = "attached_assets/reference,_living_room,_background_1770181950292.png"
 
 OUTPUT_DIR = "content/seedream4_output"
 
-MULTI_REF_PROMPT = """Using Image 1 for pose, outfit and camera angle.
+MULTI_REF_PROMPT = """Using Image 1 for pose, outfit, hairstyle and camera angle.
 Using Image 2 for facial features, skin texture, and facial structure.
 Using Image 3 for body proportions, body type, and physique.
 Using Image 4 for background environment and lighting.
@@ -35,6 +35,7 @@ Generate a hyper-realistic photograph of a young woman:
 - Face: Take exact facial features from Image 2 - the olive-brown eyes, natural skin texture with visible pores, subtle freckles, dark brown hair color, and facial bone structure. Preserve all minor skin imperfections and realistic skin details.
 - Body: Apply the slim petite body type from Image 3 - extremely thin slender frame, very narrow tiny waist, slim hips, long thin legs.
 - Pose: Replicate the exact pose, body position, and camera angle from Image 1. Keep the clothing style - cropped black top with white collar, matching outfit aesthetic.
+- Hairstyle: Keep the exact hairstyle from Image 1 - long hair styled in pigtails.
 - Background: Place the subject in the modern luxury living room from Image 4 - hardwood floors, black leather sofa, warm ambient lighting.
 
 Style: Shot on Canon EOS R5, 85mm f/1.4 lens, shallow depth of field, professional fashion photography.
@@ -43,7 +44,7 @@ Lighting: Warm natural light from Image 4 environment.
 
 Preserve facial identity from Image 2 unchanged.
 Preserve body proportions from Image 3 unchanged.
-Keep pose and outfit from Image 1.
+Keep pose, outfit and hairstyle from Image 1.
 Match background and lighting from Image 4."""
 
 
@@ -78,7 +79,7 @@ async def transform_with_multi_ref():
     payload = {
         "prompt": MULTI_REF_PROMPT,
         "image_urls": [pose_b64, face_b64, body_b64, bg_b64],
-        "image_size": "auto_4K",
+        "image_size": {"width": 1080, "height": 1350},
         "num_images": 1,
         "max_images": 1,
         "enable_safety_checker": False,

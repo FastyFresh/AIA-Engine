@@ -275,7 +275,27 @@ scripts/transform_seedream_multi_ref.py
 2. **Preservation Rules**: End the prompt with explicit preservation commands for each element
 3. **Hyper-Realism**: Include "visible pores, subtle imperfections, minor skin flaws" for authentic skin
 4. **Negative Prompt**: Block smooth/plastic skin and wrong identity features (wrong eye color, hair type)
-5. **Image Size**: Use `auto_4K` for maximum quality and detail retention
+5. **Match Aspect Ratio**: Use the exact dimensions from the pose reference image for best pose matching
+6. **Hairstyle Preservation**: Explicitly state hairstyle in prompt (e.g., "hair styled in pigtails") to preserve from reference
+
+### Image Size Configuration
+
+For best pose matching, use exact dimensions from the pose reference rather than `auto_4K`:
+
+```python
+# Get reference dimensions first
+from PIL import Image
+ref = Image.open("pose_reference.jpg")
+width, height = ref.width, ref.height  # e.g., 1080x1350 for 4:5 ratio
+
+# Use in payload
+"image_size": {"width": width, "height": height}
+```
+
+Common aspect ratios:
+- **4:5 Portrait**: 1080x1350 (Instagram standard)
+- **3:4 Portrait**: 1080x1440 
+- **9:16 Portrait**: 1080x1920 (Stories/Reels)
 
 ### Comparison with Other Methods
 
