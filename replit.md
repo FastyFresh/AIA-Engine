@@ -188,39 +188,50 @@ content/generated/{influencer}/ # Legacy output directory
 ### Overview
 This workflow transforms a reference pose image into Starbright Monroe using 4 reference images for optimal control over pose, identity, and environment. SEEDream 4.5 supports up to 10 reference images.
 
-### Reference Image Order (Critical)
-The order of images in `image_urls` determines how SEEDream interprets each reference:
+### Reference Image Order (Critical - Tested Feb 4, 2026)
+The order of images in `image_urls` determines how SEEDream interprets each reference. After extensive testing, the optimal order is:
 
-| Position | Purpose | Example |
-|----------|---------|---------|
-| Image 1 | Pose/outfit reference | Source image with desired pose and clothing |
-| Image 2 | Face reference | Starbright's hyper-realistic face with skin texture |
-| Image 3 | Body reference | Starbright's body proportions and physique |
-| Image 4 | Background reference | Target environment/setting |
+| Position | Purpose | Priority | Notes |
+|----------|---------|----------|-------|
+| Image 1 | Pose/outfit reference | Highest | Gets strongest weight for pose, clothing, hairstyle |
+| Image 2 | Background reference | Medium | Best position for background - maintains layout AND orientation |
+| Image 3 | Face reference | Medium | Starbright's face with skin texture |
+| Image 4 | Body reference | Lower | Body proportions and physique |
+
+**Background Position Testing Results:**
+
+| BG Position | Layout Fidelity | Orientation | Result |
+|-------------|-----------------|-------------|--------|
+| Image 4 | Poor (kitchen instead of hallway) | Correct | ❌ Wrong elements |
+| Image 1 | Good (correct hallway) | Flipped/mirrored | ⚠️ Reversed |
+| **Image 2** | Good (correct hallway) | Correct (sofa on left) | ✅ Best result |
+
+**Key Finding:** Background works best in Image 2 position - it gets enough priority to preserve room layout while maintaining correct spatial orientation.
 
 ### Optimal Prompt Structure
 Use explicit reference assignment pattern - tell the model exactly what to take from each image:
 
 ```
-Using Image 1 for pose, outfit and camera angle.
-Using Image 2 for facial features, skin texture, and facial structure.
-Using Image 3 for body proportions, body type, and physique.
-Using Image 4 for background environment and lighting.
+Using Image 1 for pose, outfit, hairstyle and camera angle.
+Using Image 2 for background environment, room layout, and lighting.
+Using Image 3 for facial features, skin texture, and facial structure.
+Using Image 4 for body proportions, body type, and physique.
 
 Generate a hyper-realistic photograph of a young woman:
-- Face: Take exact facial features from Image 2 - the olive-brown eyes, natural skin texture with visible pores, subtle freckles, dark brown hair color, and facial bone structure. Preserve all minor skin imperfections and realistic skin details.
-- Body: Apply the slim petite body type from Image 3 - extremely thin slender frame, very narrow tiny waist, slim hips, long thin legs.
 - Pose: Replicate the exact pose, body position, and camera angle from Image 1. Keep the clothing style from Image 1.
-- Background: Place the subject in the environment from Image 4.
+- Hairstyle: Keep the exact hairstyle from Image 1.
+- Background: Use the exact room layout from Image 2 - preserve furniture positions (e.g., sofa on left side), lighting, and architectural elements.
+- Face: Take exact facial features from Image 3 - the olive-brown eyes, natural skin texture with visible pores, subtle freckles, dark brown hair color, and facial bone structure. Preserve all minor skin imperfections and realistic skin details.
+- Body: Apply the slim petite body type from Image 4 - extremely thin slender frame, very narrow tiny waist, slim hips, long thin legs.
 
 Style: Shot on Canon EOS R5, 85mm f/1.4 lens, shallow depth of field, professional fashion photography.
 Skin: Hyper-realistic with natural texture, visible pores, subtle imperfections, minor skin flaws for authenticity.
-Lighting: Match lighting from Image 4 environment.
+Lighting: Warm natural light from Image 2 environment.
 
-Preserve facial identity from Image 2 unchanged.
-Preserve body proportions from Image 3 unchanged.
-Keep pose and outfit from Image 1.
-Match background and lighting from Image 4.
+Keep pose, outfit and hairstyle from Image 1.
+Preserve background layout from Image 2 unchanged.
+Preserve facial identity from Image 3 unchanged.
+Preserve body proportions from Image 4 unchanged.
 ```
 
 ### API Endpoint (fal.ai)
@@ -246,14 +257,14 @@ def encode_image(path: str) -> str:
 
 # Encode all 4 references
 pose_b64 = encode_image("path/to/pose_reference.jpg")
+bg_b64 = encode_image("path/to/background.png")
 face_b64 = encode_image("path/to/starbright_face.webp")
 body_b64 = encode_image("path/to/starbright_body.webp")
-bg_b64 = encode_image("path/to/background.png")
 
 payload = {
     "prompt": MULTI_REF_PROMPT,  # See prompt structure above
-    "image_urls": [pose_b64, face_b64, body_b64, bg_b64],  # Order matters!
-    "image_size": "auto_4K",
+    "image_urls": [pose_b64, bg_b64, face_b64, body_b64],  # Order matters! BG in position 2
+    "image_size": {"width": 1080, "height": 1350},  # Match pose reference dimensions
     "num_images": 1,
     "max_images": 1,
     "enable_safety_checker": False,
