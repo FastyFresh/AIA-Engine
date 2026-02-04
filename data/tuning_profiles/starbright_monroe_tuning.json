@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 293,
-  "approved_count": 221,
+  "total_generations": 294,
+  "approved_count": 222,
   "rejected_count": 72,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_livingroom_v3_20260127_221911.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-01-27T23:49:48.742870",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_livingroom_v1_20260127_221719.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": false,
       "timestamp": "2026-02-04T05:13:46.587468",
       "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_multiref_20260204_052757.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-04T05:31:39.028979",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-04T05:13:46.590197"
+  "last_updated": "2026-02-04T05:31:39.030056"
 }

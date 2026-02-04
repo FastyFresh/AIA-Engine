@@ -26,26 +26,26 @@ BG_REF = "attached_assets/reference,_living_room,_background_1770181950292.png"
 
 OUTPUT_DIR = "content/seedream4_output"
 
-MULTI_REF_PROMPT = """Using Image 1 for pose, outfit, hairstyle and camera angle.
-Using Image 2 for facial features, skin texture, and facial structure.
-Using Image 3 for body proportions, body type, and physique.
-Using Image 4 for background environment and lighting.
+MULTI_REF_PROMPT = """Using Image 1 for background environment, room layout, and lighting.
+Using Image 2 for pose, outfit, hairstyle and camera angle.
+Using Image 3 for facial features, skin texture, and facial structure.
+Using Image 4 for body proportions, body type, and physique.
 
 Generate a hyper-realistic photograph of a young woman:
-- Face: Take exact facial features from Image 2 - the olive-brown eyes, natural skin texture with visible pores, subtle freckles, dark brown hair color, and facial bone structure. Preserve all minor skin imperfections and realistic skin details.
-- Body: Apply the slim petite body type from Image 3 - extremely thin slender frame, very narrow tiny waist, slim hips, long thin legs.
-- Pose: Replicate the exact pose, body position, and camera angle from Image 1. Keep the clothing style - cropped black top with white collar, matching outfit aesthetic.
-- Hairstyle: Keep the exact hairstyle from Image 1 - long hair styled in pigtails.
-- Background: Place the subject in the modern luxury living room from Image 4 - hardwood floors, black leather sofa, warm ambient lighting.
+- Background: Use the exact room layout from Image 1 - luxury living room with black leather tufted sofa, hardwood floors, hallway with dark wooden doors visible behind (NOT a kitchen), warm ambient cove lighting.
+- Face: Take exact facial features from Image 3 - the olive-brown eyes, natural skin texture with visible pores, subtle freckles, dark brown hair color, and facial bone structure. Preserve all minor skin imperfections and realistic skin details.
+- Body: Apply the slim petite body type from Image 4 - extremely thin slender frame, very narrow tiny waist, slim hips, long thin legs.
+- Pose: Replicate the exact pose, body position, and camera angle from Image 2. Keep the clothing style - cropped black top with white collar, matching outfit aesthetic.
+- Hairstyle: Keep the exact hairstyle from Image 2 - long hair styled in pigtails.
 
 Style: Shot on Canon EOS R5, 85mm f/1.4 lens, shallow depth of field, professional fashion photography.
 Skin: Hyper-realistic with natural texture, visible pores, subtle imperfections, minor skin flaws for authenticity.
-Lighting: Warm natural light from Image 4 environment.
+Lighting: Warm natural light from Image 1 environment.
 
-Preserve facial identity from Image 2 unchanged.
-Preserve body proportions from Image 3 unchanged.
-Keep pose, outfit and hairstyle from Image 1.
-Match background and lighting from Image 4."""
+Preserve background layout from Image 1 unchanged.
+Preserve facial identity from Image 3 unchanged.
+Preserve body proportions from Image 4 unchanged.
+Keep pose, outfit and hairstyle from Image 2."""
 
 
 def encode_image(path: str) -> str:
@@ -78,7 +78,7 @@ async def transform_with_multi_ref():
     
     payload = {
         "prompt": MULTI_REF_PROMPT,
-        "image_urls": [pose_b64, face_b64, body_b64, bg_b64],
+        "image_urls": [bg_b64, pose_b64, face_b64, body_b64],
         "image_size": {"width": 1080, "height": 1350},
         "num_images": 1,
         "max_images": 1,
@@ -89,10 +89,10 @@ async def transform_with_multi_ref():
     print("="*60)
     print("SEEDream 4.5 Multi-Reference Transformation")
     print("="*60)
-    print("Image 1: Pose/outfit reference")
-    print("Image 2: Face reference (Starbright)")
-    print("Image 3: Body reference (Starbright)")
-    print("Image 4: Background reference")
+    print("Image 1: Background reference (PRIORITY)")
+    print("Image 2: Pose/outfit reference")
+    print("Image 3: Face reference (Starbright)")
+    print("Image 4: Body reference (Starbright)")
     print("="*60)
     print("Sending request...")
     
