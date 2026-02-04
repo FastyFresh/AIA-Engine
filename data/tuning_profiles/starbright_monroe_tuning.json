@@ -10,75 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 338,
-  "approved_count": 232,
-  "rejected_count": 106,
+  "total_generations": 343,
+  "approved_count": 233,
+  "rejected_count": 110,
   "feedback_history": [
-    {
-      "image_path": "content/gallery/starbright_monroe/starbright_extreme_q20.jpg",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-03T00:26:07.995127",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/gallery/starbright_monroe/starbright_extreme_q30.jpg",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-03T00:28:03.950268",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_transform_20260204_044402.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-04T04:52:58.200280",
-      "notes": "Approved via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_pose_faceswap_20260204_050517.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": false,
-      "timestamp": "2026-02-04T05:13:44.831482",
-      "notes": "Rejected via gallery workflow"
-    },
-    {
-      "image_path": "content/seedream4_output/starbright_controlnet_pose_20260204_050025.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": false,
-      "timestamp": "2026-02-04T05:13:46.587468",
-      "notes": "Rejected via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_multiref_20260204_052757.png",
       "prompt": "",
@@ -663,7 +598,72 @@
       "approved": false,
       "timestamp": "2026-02-04T10:00:31.478373",
       "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_seiza_seed789_20260204_192147.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-04T19:22:56.310004",
+      "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_seiza_seed2024_20260204_192150.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T19:23:03.713556",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_seiza_str65_20260204_191824.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T19:24:30.626940",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_seiza_seed456_20260204_192137.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T19:24:47.664843",
+      "notes": "Rejected via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/temp_toe_mask.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": false,
+      "timestamp": "2026-02-04T19:25:24.467669",
+      "notes": "Rejected via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-04T10:00:31.479414"
+  "last_updated": "2026-02-04T19:25:24.469408"
 }
