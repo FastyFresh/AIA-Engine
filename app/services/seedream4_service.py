@@ -247,27 +247,19 @@ class Seedream4Service:
                                 logger.error("Insufficient disk space after cleanup")
                                 return {"status": "error", "error": "Disk quota exceeded - cleanup performed, please retry"}
                             
-                            from app.services.antidetect_processor import antidetect_processor
-                            
                             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                            original_filename = f"{filename_prefix}_{timestamp}.png"
-                            original_path = self.output_dir / original_filename
+                            filename = f"{filename_prefix}_{timestamp}.png"
+                            save_path = self.output_dir / filename
                             
-                            with open(original_path, "wb") as f:
+                            with open(save_path, "wb") as f:
                                 f.write(img_response.content)
                             
-                            logger.info(f"Saved original: {original_path}")
-                            
-                            antidetect_filename = f"{filename_prefix}_{timestamp}_antidetect_q30.jpg"
-                            antidetect_path = self.output_dir / antidetect_filename
-                            antidetect_processor.process(original_path, antidetect_path)
-                            logger.info(f"Saved anti-detect version: {antidetect_path}")
+                            logger.info(f"Saved image: {save_path}")
                             
                             return {
                                 "status": "success",
-                                "image_path": str(antidetect_path),
-                                "original_path": str(original_path),
-                                "filename": antidetect_filename,
+                                "image_path": str(save_path),
+                                "filename": filename,
                                 "prediction_id": prediction_id,
                                 "prompt": prompt,
                                 "provider": "replicate"
@@ -399,27 +391,19 @@ class Seedream4Service:
                                 logger.error("Insufficient disk space after cleanup")
                                 return {"status": "error", "error": "Disk quota exceeded - cleanup performed, please retry"}
                             
-                            from app.services.antidetect_processor import antidetect_processor
-                            
                             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                            original_filename = f"{filename_prefix}_{timestamp}.png"
-                            original_path = self.output_dir / original_filename
+                            filename = f"{filename_prefix}_{timestamp}.png"
+                            save_path = self.output_dir / filename
                             
-                            with open(original_path, "wb") as f:
+                            with open(save_path, "wb") as f:
                                 f.write(img_response.content)
                             
-                            logger.info(f"Saved original: {original_path}")
-                            
-                            antidetect_filename = f"{filename_prefix}_{timestamp}_antidetect_q30.jpg"
-                            antidetect_path = self.output_dir / antidetect_filename
-                            antidetect_processor.process(original_path, antidetect_path)
-                            logger.info(f"Saved anti-detect version: {antidetect_path}")
+                            logger.info(f"Saved image: {save_path}")
                             
                             return {
                                 "status": "success",
-                                "image_path": str(antidetect_path),
-                                "original_path": str(original_path),
-                                "filename": antidetect_filename,
+                                "image_path": str(save_path),
+                                "filename": filename,
                                 "prediction_id": prediction_id,
                                 "prompt": prompt,
                                 "refs_used": len(image_refs),
@@ -557,27 +541,19 @@ class Seedream4Service:
                                 logger.error("Insufficient disk space after cleanup")
                                 return {"status": "error", "error": "Disk quota exceeded"}
                             
-                            from app.services.antidetect_processor import antidetect_processor
-                            
                             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                            original_filename = f"{filename_prefix}_{timestamp}.png"
-                            original_path = self.output_dir / original_filename
+                            filename = f"{filename_prefix}_{timestamp}.png"
+                            save_path = self.output_dir / filename
                             
-                            with open(original_path, "wb") as f:
+                            with open(save_path, "wb") as f:
                                 f.write(img_response.content)
                             
-                            logger.info(f"Saved original: {original_path}")
-                            
-                            antidetect_filename = f"{filename_prefix}_{timestamp}_antidetect_q30.jpg"
-                            antidetect_path = self.output_dir / antidetect_filename
-                            antidetect_processor.process(original_path, antidetect_path)
-                            logger.info(f"Saved anti-detect version: {antidetect_path}")
+                            logger.info(f"Saved transformed image: {save_path}")
                             
                             return {
                                 "status": "success",
-                                "image_path": str(antidetect_path),
-                                "original_path": str(original_path),
-                                "filename": antidetect_filename,
+                                "image_path": str(save_path),
+                                "filename": filename,
                                 "prediction_id": prediction_id,
                                 "prompt": prompt,
                                 "source_image": source_image_path,

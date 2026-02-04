@@ -47,30 +47,20 @@ class AvatarRealismPipeline:
         }.get(ext, 'image/png')
         return f"data:{mime};base64,{base64.b64encode(data).decode()}"
     
-    def _save_image(self, url_or_bytes: any, prefix: str, apply_antidetect: bool = True) -> Path:
-        """Download and save image from URL or bytes, optionally with anti-detection processing"""
-        from app.services.antidetect_processor import antidetect_processor
-        
+    def _save_image(self, url_or_bytes: any, prefix: str) -> Path:
+        """Download and save image from URL or bytes"""
         ts = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filepath = self.output_dir / f"{prefix}_{ts}.png"
         
         if isinstance(url_or_bytes, bytes):
-            image_bytes = url_or_bytes
+            filepath.write_bytes(url_or_bytes)
         else:
             url = url_or_bytes.url if hasattr(url_or_bytes, 'url') else str(url_or_bytes)
             resp = httpx.get(url, timeout=120.0)
-            image_bytes = resp.content
+            filepath.write_bytes(resp.content)
         
-        original_filepath = self.output_dir / f"{prefix}_{ts}.png"
-        original_filepath.write_bytes(image_bytes)
-        logger.info(f"Saved original: {original_filepath}")
-        
-        if apply_antidetect:
-            antidetect_filepath = self.output_dir / f"{prefix}_{ts}_antidetect_q30.jpg"
-            antidetect_processor.process(original_filepath, antidetect_filepath)
-            logger.info(f"Saved anti-detect version: {antidetect_filepath}")
-            return antidetect_filepath
-        
-        return original_filepath
+        logger.info(f"Saved: {filepath}")
+        return filepath
     
     def step1_generate_avatar(
         self,
