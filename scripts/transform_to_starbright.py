@@ -14,7 +14,7 @@ from datetime import datetime
 
 FAL_EDIT_URL = "https://fal.run/fal-ai/bytedance/seedream/v4.5/edit"
 
-SOURCE_IMAGE = "attached_assets/SnapInsta.to_620843531_18046715069707094_6001070742702245101_n_1770180004242.jpg"
+SOURCE_IMAGE = "attached_assets/SnapInsta.to_621833016_17877935706467396_2868144746515660684_n_1770180720096.jpg"
 FACE_REF = "content/references/starbright_monroe/starbright_face_reference_v3.webp"
 BODY_REF = "content/references/starbright_monroe/body_reference_canonical.webp"
 OUTPUT_DIR = "content/seedream4_output"
@@ -84,7 +84,7 @@ bright natural daylight flooding the room, minimalist contemporary furniture,
 neutral tones with white marble accents, elegant sophisticated interior design.
 
 Maintain the EXACT same pose, camera angle, and body positioning as Figure 3.
-Dress her in a stylish burgundy satin dress with anime-style print.
+Dress her in a stylish fitted black mini dress with thin straps, black thigh-high stockings.
 
 {CAMERA_SETTINGS}. {SKIN_TEXTURE}. 
 Professional fashion photography, bright natural lighting, high-key exposure, 
