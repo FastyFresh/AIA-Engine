@@ -1,6 +1,6 @@
 # AIA Engine - Replit Hub Edition
 
-*Last Updated: January 27, 2026*
+*Last Updated: February 4, 2026*
 
 ## Overview
 The Autonomous AI Influencer Agent Engine is a multi-agent system designed to generate hyper-realistic, photorealistic AI influencer content for multiple personas (Starbright Monroe, Luna Vale) under Firepie LLC. It automates content creation, optimization, and multi-platform distribution using a "micro-loop workflow" which combines curated hero images with micro-movement video generation.
@@ -180,6 +180,113 @@ content/seedream4_output/     # Raw generated images
 content/final/{influencer}/   # Approved/curated images
 content/generated/{influencer}/ # Legacy output directory
 ```
+
+---
+
+## SEEDream 4.5 Multi-Reference Transformation Workflow (Feb 4, 2026 - PRODUCTION READY)
+
+### Overview
+This workflow transforms a reference pose image into Starbright Monroe using 4 reference images for optimal control over pose, identity, and environment. SEEDream 4.5 supports up to 10 reference images.
+
+### Reference Image Order (Critical)
+The order of images in `image_urls` determines how SEEDream interprets each reference:
+
+| Position | Purpose | Example |
+|----------|---------|---------|
+| Image 1 | Pose/outfit reference | Source image with desired pose and clothing |
+| Image 2 | Face reference | Starbright's hyper-realistic face with skin texture |
+| Image 3 | Body reference | Starbright's body proportions and physique |
+| Image 4 | Background reference | Target environment/setting |
+
+### Optimal Prompt Structure
+Use explicit reference assignment pattern - tell the model exactly what to take from each image:
+
+```
+Using Image 1 for pose, outfit and camera angle.
+Using Image 2 for facial features, skin texture, and facial structure.
+Using Image 3 for body proportions, body type, and physique.
+Using Image 4 for background environment and lighting.
+
+Generate a hyper-realistic photograph of a young woman:
+- Face: Take exact facial features from Image 2 - the olive-brown eyes, natural skin texture with visible pores, subtle freckles, dark brown hair color, and facial bone structure. Preserve all minor skin imperfections and realistic skin details.
+- Body: Apply the slim petite body type from Image 3 - extremely thin slender frame, very narrow tiny waist, slim hips, long thin legs.
+- Pose: Replicate the exact pose, body position, and camera angle from Image 1. Keep the clothing style from Image 1.
+- Background: Place the subject in the environment from Image 4.
+
+Style: Shot on Canon EOS R5, 85mm f/1.4 lens, shallow depth of field, professional fashion photography.
+Skin: Hyper-realistic with natural texture, visible pores, subtle imperfections, minor skin flaws for authenticity.
+Lighting: Match lighting from Image 4 environment.
+
+Preserve facial identity from Image 2 unchanged.
+Preserve body proportions from Image 3 unchanged.
+Keep pose and outfit from Image 1.
+Match background and lighting from Image 4.
+```
+
+### API Endpoint (fal.ai)
+```
+POST https://fal.run/fal-ai/bytedance/seedream/v4.5/edit
+```
+
+### Python Implementation
+```python
+import httpx
+import base64
+from pathlib import Path
+
+FAL_URL = "https://fal.run/fal-ai/bytedance/seedream/v4.5/edit"
+
+def encode_image(path: str) -> str:
+    with open(path, "rb") as f:
+        data = base64.b64encode(f.read()).decode()
+    ext = Path(path).suffix.lower()
+    mime = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", 
+            ".png": "image/png", ".webp": "image/webp"}.get(ext, "image/png")
+    return f"data:{mime};base64,{data}"
+
+# Encode all 4 references
+pose_b64 = encode_image("path/to/pose_reference.jpg")
+face_b64 = encode_image("path/to/starbright_face.webp")
+body_b64 = encode_image("path/to/starbright_body.webp")
+bg_b64 = encode_image("path/to/background.png")
+
+payload = {
+    "prompt": MULTI_REF_PROMPT,  # See prompt structure above
+    "image_urls": [pose_b64, face_b64, body_b64, bg_b64],  # Order matters!
+    "image_size": "auto_4K",
+    "num_images": 1,
+    "max_images": 1,
+    "enable_safety_checker": False,
+    "negative_prompt": "cartoon, anime, illustration, blue eyes, grey eyes, black hair, wavy hair, curly hair, extra limbs, deformed, blurry skin, plastic skin, airbrushed, overly smooth skin"
+}
+
+headers = {"Authorization": f"Key {FAL_KEY}", "Content-Type": "application/json"}
+response = await httpx.AsyncClient().post(FAL_URL, headers=headers, json=payload)
+```
+
+### Script Location
+```
+scripts/transform_seedream_multi_ref.py
+```
+
+### Key Best Practices
+
+1. **Explicit Reference Assignment**: Always specify "Using Image X for Y" at the start of the prompt
+2. **Preservation Rules**: End the prompt with explicit preservation commands for each element
+3. **Hyper-Realism**: Include "visible pores, subtle imperfections, minor skin flaws" for authentic skin
+4. **Negative Prompt**: Block smooth/plastic skin and wrong identity features (wrong eye color, hair type)
+5. **Image Size**: Use `auto_4K` for maximum quality and detail retention
+
+### Comparison with Other Methods
+
+| Method | Pose Control | Identity Control | Best For |
+|--------|--------------|------------------|----------|
+| SEEDream Multi-Ref (4 images) | Good | Excellent | Full character transformation |
+| ControlNet + Face Swap | Excellent | Good | Exact pose matching |
+| SEEDream (2 refs: face+body) | Loose | Good | Quick generations |
+
+### Output
+Results saved to: `content/seedream4_output/starbright_multiref_*.png`
 
 ---
 
