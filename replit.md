@@ -1,6 +1,6 @@
 # AIA Engine - Replit Hub Edition
 
-*Last Updated: February 4, 2026*
+*Last Updated: February 6, 2026*
 
 ## Overview
 The Autonomous AI Influencer Agent Engine is a multi-agent system designed to generate hyper-realistic, photorealistic AI influencer content for multiple personas (Starbright Monroe, Luna Vale) under Firepie LLC. It automates content creation, optimization, and multi-platform distribution using a "micro-loop workflow" which combines curated hero images with micro-movement video generation.
@@ -183,141 +183,174 @@ content/generated/{influencer}/ # Legacy output directory
 
 ---
 
-## SEEDream 4.5 Multi-Reference Transformation Workflow (Feb 4, 2026 - PRODUCTION READY)
+## SEEDream 4.5 Enhanced 5-Reference Transformation Workflow (Feb 6, 2026 - PRODUCTION READY)
 
 ### Overview
-This workflow transforms a reference pose image into Starbright Monroe using 4 reference images for optimal control over pose, identity, and environment. SEEDream 4.5 supports up to 10 reference images.
+This workflow transforms a reference pose image into Starbright Monroe using **5 reference images** for maximum control over pose, identity, body, and environment. SEEDream 4.5 supports up to 10 reference images. The enhanced workflow uses 2 face references + 2 body references for stronger identity consistency.
 
-### Reference Image Order (Critical - Tested Feb 4, 2026)
-The order of images in `image_urls` determines how SEEDream interprets each reference. After extensive testing, the optimal order is:
+### Reference Image Order (Critical - Tested Feb 6, 2026)
+The order of images in `image_urls` determines how SEEDream interprets each reference:
 
-| Position | Purpose | Priority | Notes |
-|----------|---------|----------|-------|
-| Image 1 | Pose/outfit reference | Highest | Gets strongest weight for pose, clothing, hairstyle |
-| Image 2 | Background reference | Medium | Best position for background - maintains layout AND orientation |
-| Image 3 | Face reference | Medium | Starbright's face with skin texture |
-| Image 4 | Body reference | Lower | Body proportions and physique |
+| Position | Purpose | File | Notes |
+|----------|---------|------|-------|
+| Image 1 | **Pose/outfit/hairstyle reference** | User-provided pose image | Gets strongest weight for pose, clothing, hairstyle, camera angle |
+| Image 2 | **Face reference #1** | `starbright_face_reference_v3.webp` | Primary face identity |
+| Image 3 | **Face reference #2** | `starbright_face_canonical.png` | Reinforces facial identity (2 > 1 for consistency) |
+| Image 4 | **Body reference #1** | `body_reference_goal.webp` | Primary body proportions |
+| Image 5 | **Body reference #2** | `body_reference_ivory.webp` | Reinforces body shape & skin tone |
 
-**Background Position Testing Results:**
+### Current Reference Images (Starbright Monroe)
+```
+Face 1:  content/references/starbright_monroe/starbright_face_reference_v3.webp
+Face 2:  content/references/starbright_monroe/canonical_face/starbright_face_canonical.png
+Body 1:  content/references/starbright_monroe/body_reference_goal.webp
+Body 2:  content/references/starbright_monroe/body_reference_ivory.webp
+```
 
-| BG Position | Layout Fidelity | Orientation | Result |
-|-------------|-----------------|-------------|--------|
-| Image 4 | Poor (kitchen instead of hallway) | Correct | ❌ Wrong elements |
-| Image 1 | Good (correct hallway) | Flipped/mirrored | ⚠️ Reversed |
-| **Image 2** | Good (correct hallway) | Correct (sofa on left) | ✅ Best result |
+### Key Parameters
 
-**Key Finding:** Background works best in Image 2 position - it gets enough priority to preserve room layout while maintaining correct spatial orientation.
+| Parameter | Optimal Value | Description |
+|-----------|---------------|-------------|
+| `guidance_scale` | **7.0** | Strict pose adherence (was 5.5, upgraded for tighter pose matching) |
+| `image_size` | `{"width": 1080, "height": 1350}` | Instagram 4:5 portrait standard |
+| `enable_safety_checker` | `false` | Required for content generation |
+| `num_images` / `max_images` | `1` | One image per generation |
 
-### Optimal Prompt Structure
-Use explicit reference assignment pattern - tell the model exactly what to take from each image:
+### Guidance Scale Evolution
+- **5.5**: Good identity but loose pose matching
+- **7.0**: Strict pose matching + good identity (current production setting)
+- Higher values may over-constrain the model
+
+### Optimal Prompt Structure (Feb 6, 2026 - Strict Pose Version)
 
 ```
-Using Image 1 for pose, outfit, hairstyle and camera angle.
-Using Image 2 for background environment, room layout, and lighting.
-Using Image 3 for facial features, skin texture, and facial structure.
-Using Image 4 for body proportions, body type, and physique.
+CRITICAL INSTRUCTION: You MUST replicate the EXACT pose, body position, limb placement, camera angle, and framing from Image 1 with pixel-level precision.
 
-Generate a hyper-realistic photograph of a young woman:
-- Pose: Replicate the exact pose, body position, and camera angle from Image 1. Keep the clothing style from Image 1.
-- Hairstyle: Keep the exact hairstyle from Image 1.
-- Background: Use the exact room layout from Image 2 - preserve furniture positions (e.g., sofa on left side), lighting, and architectural elements.
-- Face: Take exact facial features from Image 3 - the olive-brown eyes, natural skin texture with visible pores, subtle freckles, dark brown hair color, and facial bone structure. Preserve all minor skin imperfections and realistic skin details.
-- Body: Apply the slim petite body type from Image 4 - extremely thin slender frame, very narrow tiny waist, slim hips, long thin legs.
+Using Image 1 as the STRICT pose, outfit, hairstyle, camera angle, and composition reference.
+Using Image 2 for facial identity ONLY (NOT hairstyle, NOT pose).
+Using Image 3 as second facial identity reference ONLY (NOT hairstyle, NOT pose).
+Using Image 4 for body proportions and skin tone ONLY (NOT pose).
+Using Image 5 as second body reference for body shape and skin tone ONLY (NOT pose).
 
-Style: Shot on Canon EOS R5, 85mm f/1.4 lens, shallow depth of field, professional fashion photography.
-Skin: Hyper-realistic with natural texture, visible pores, subtle imperfections, minor skin flaws for authenticity.
-Lighting: Warm natural light from Image 2 environment.
+POSE (COPY EXACTLY FROM IMAGE 1):
+[Ultra-precise description of every limb position, body angle, head tilt, camera perspective, and framing from the reference image. Be extremely specific about left/right arm positions, leg angles, lean direction, head tilt direction, camera height/distance.]
 
-Keep pose, outfit and hairstyle from Image 1.
-Preserve background layout from Image 2 unchanged.
-Preserve facial identity from Image 3 unchanged.
-Preserve body proportions from Image 4 unchanged.
+OUTFIT (FROM IMAGE 1): [Detailed outfit description]
+HAIRSTYLE (FROM IMAGE 1 ONLY): [Hair description] IGNORE hairstyle in Image 2 and Image 3.
+BACKGROUND: [Either "from Image 1" or new background description]
+
+FACE (from Image 2 and Image 3 ONLY):
+  * Olive-brown warm eyes with exact eye shape
+  * Very pale porcelain ivory white skin tone
+  * Natural freckles scattered across nose and cheeks
+  * Exact nose shape, lip shape, and jawline
+  * Natural skin texture with visible pores
+
+BODY (from Image 4 and Image 5 ONLY):
+  * Extremely thin slender frame with very narrow tiny waist
+  * Slim narrow hips with long thin slender legs
+  * Small natural A-cup breasts
+  * Very pale porcelain ivory white skin tone
+
+ABSOLUTE RULES:
+1. POSE from Image 1 exactly
+2. CAMERA ANGLE identical to Image 1
+3. Hair from Image 1 ONLY
+4. Face identity from Image 2 and Image 3 ONLY
+5. Body proportions from Image 4 and Image 5 ONLY
 ```
+
+### Background Swap Technique
+To change the background while keeping everything else from the pose reference:
+- Add to prompt: `BACKGROUND (CHANGE FROM IMAGE 1 - USE THIS NEW BACKGROUND INSTEAD): [new bg description]`
+- Add to negative prompt: `dark room, dim lighting, moody lighting, dark background` (if switching to bright)
+- Works best with detailed background descriptions (furniture, lighting, materials, atmosphere)
+
+**Proven luxury apartment background prompt:**
+```
+Modern luxury high-rise apartment bedroom. Bright natural daylight flooding in from large floor-to-ceiling windows. Clean white walls, light hardwood or marble floors. Minimalist modern furniture - clean lines, neutral tones. Expensive looking bedding - crisp white duvet and pillows on a modern platform bed with upholstered headboard. Bright, airy, spacious, well-lit. Penthouse aesthetic.
+```
+
+### Hairstyle Preservation Rules
+- **ALWAYS** specify hairstyle explicitly in the prompt with "FROM IMAGE 1 ONLY"
+- **ALWAYS** add "IGNORE hairstyle in Image 2 and Image 3"
+- For special hairstyles (pigtails, braids), add competing styles to negative prompt:
+  - Pigtails: add `loose hair, hair down, single ponytail, bun, braid` to negative prompt
+  - Straight: add `wavy hair, curly hair` to negative prompt
+
+### Negative Prompt (Production)
+```
+cartoon, anime, illustration, painting, blue eyes, grey eyes, green eyes, wavy hair, curly hair, short hair, bob haircut, pixie cut, extra limbs, extra fingers, deformed, blurry skin, plastic skin, airbrushed, overly smooth skin, mannequin, tan skin, dark skin, different face, wrong face, different person, muscular, thick thighs, wide hips, large breasts, extra arms, extra legs, mutated hands, fused fingers, too many fingers, missing fingers, bad anatomy, different pose, wrong pose, different angle, wrong camera angle
+```
+Add `dark room, dim lighting, moody lighting, dark background` when using bright luxury background.
 
 ### API Endpoint (fal.ai)
 ```
 POST https://fal.run/fal-ai/bytedance/seedream/v4.5/edit
 ```
 
-### Python Implementation
+### Python Implementation (Production)
 ```python
-import httpx
-import base64
+import httpx, base64, asyncio
 from pathlib import Path
 
 FAL_URL = "https://fal.run/fal-ai/bytedance/seedream/v4.5/edit"
+
+FACE_REF_1 = "content/references/starbright_monroe/starbright_face_reference_v3.webp"
+FACE_REF_2 = "content/references/starbright_monroe/canonical_face/starbright_face_canonical.png"
+BODY_REF_1 = "content/references/starbright_monroe/body_reference_goal.webp"
+BODY_REF_2 = "content/references/starbright_monroe/body_reference_ivory.webp"
 
 def encode_image(path: str) -> str:
     with open(path, "rb") as f:
         data = base64.b64encode(f.read()).decode()
     ext = Path(path).suffix.lower()
-    mime = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", 
+    mime = {".jpg": "image/jpeg", ".jpeg": "image/jpeg",
             ".png": "image/png", ".webp": "image/webp"}.get(ext, "image/png")
     return f"data:{mime};base64,{data}"
 
-# Encode all 4 references
-pose_b64 = encode_image("path/to/pose_reference.jpg")
-bg_b64 = encode_image("path/to/background.png")
-face_b64 = encode_image("path/to/starbright_face.webp")
-body_b64 = encode_image("path/to/starbright_body.webp")
-
 payload = {
-    "prompt": MULTI_REF_PROMPT,  # See prompt structure above
-    "image_urls": [pose_b64, bg_b64, face_b64, body_b64],  # Order matters! BG in position 2
-    "image_size": {"width": 1080, "height": 1350},  # Match pose reference dimensions
+    "prompt": PROMPT,
+    "image_urls": [
+        encode_image("pose_reference.jpg"),   # Image 1: Pose
+        encode_image(FACE_REF_1),              # Image 2: Face #1
+        encode_image(FACE_REF_2),              # Image 3: Face #2
+        encode_image(BODY_REF_1),              # Image 4: Body #1
+        encode_image(BODY_REF_2),              # Image 5: Body #2
+    ],
+    "image_size": {"width": 1080, "height": 1350},
     "num_images": 1,
     "max_images": 1,
+    "guidance_scale": 7.0,
     "enable_safety_checker": False,
-    "negative_prompt": "cartoon, anime, illustration, blue eyes, grey eyes, black hair, wavy hair, curly hair, extra limbs, deformed, blurry skin, plastic skin, airbrushed, overly smooth skin"
+    "negative_prompt": NEGATIVE
 }
 
 headers = {"Authorization": f"Key {FAL_KEY}", "Content-Type": "application/json"}
-response = await httpx.AsyncClient().post(FAL_URL, headers=headers, json=payload)
+async with httpx.AsyncClient(timeout=300.0) as client:
+    resp = await client.post(FAL_URL, headers=headers, json=payload)
 ```
 
-### Script Location
-```
-scripts/transform_seedream_multi_ref.py
-```
-
-### Key Best Practices
-
-1. **Explicit Reference Assignment**: Always specify "Using Image X for Y" at the start of the prompt
-2. **Preservation Rules**: End the prompt with explicit preservation commands for each element
-3. **Hyper-Realism**: Include "visible pores, subtle imperfections, minor skin flaws" for authentic skin
-4. **Negative Prompt**: Block smooth/plastic skin and wrong identity features (wrong eye color, hair type)
-5. **Match Aspect Ratio**: Use the exact dimensions from the pose reference image for best pose matching
-6. **Hairstyle Preservation**: Explicitly state hairstyle in prompt (e.g., "hair styled in pigtails") to preserve from reference
-
-### Image Size Configuration
-
-For best pose matching, use exact dimensions from the pose reference rather than `auto_4K`:
-
+### Batch Processing
+Multiple images can be transformed in parallel using `asyncio.gather()`:
 ```python
-# Get reference dimensions first
-from PIL import Image
-ref = Image.open("pose_reference.jpg")
-width, height = ref.width, ref.height  # e.g., 1080x1350 for 4:5 ratio
-
-# Use in payload
-"image_size": {"width": width, "height": height}
+tasks = [transform_single(client, headers, img, face1, face2, body1, body2) for img in IMAGES]
+results = await asyncio.gather(*tasks)
 ```
 
-Common aspect ratios:
-- **4:5 Portrait**: 1080x1350 (Instagram standard)
-- **3:4 Portrait**: 1080x1440 
-- **9:16 Portrait**: 1080x1920 (Stories/Reels)
+### Key Best Practices (Updated Feb 6, 2026)
 
-### Comparison with Other Methods
-
-| Method | Pose Control | Identity Control | Best For |
-|--------|--------------|------------------|----------|
-| SEEDream Multi-Ref (4 images) | Good | Excellent | Full character transformation |
-| ControlNet + Face Swap | Excellent | Good | Exact pose matching |
-| SEEDream (2 refs: face+body) | Loose | Good | Quick generations |
+1. **5 References > 4 References**: 2 face refs + 2 body refs dramatically improves identity consistency
+2. **Guidance 7.0**: Use 7.0 for strict pose matching (up from 5.5)
+3. **Ultra-Precise Pose Descriptions**: Describe every limb position, body angle, head tilt, camera height/distance, and left/right directions explicitly
+4. **Explicit Reference Assignment**: Always specify "Using Image X for Y ONLY (NOT Z)" to prevent bleed
+5. **Hairstyle Isolation**: Always explicitly state hair comes from Image 1 ONLY, never from face references
+6. **Background Swap**: Can freely change background via prompt while keeping pose/outfit/identity from references
+7. **Negative Prompt Tuning**: Add competing styles to negative prompt (e.g., "loose hair" when pigtails needed)
+8. **Parallel Batch Processing**: Run multiple transformations simultaneously with asyncio.gather()
 
 ### Output
-Results saved to: `content/seedream4_output/starbright_multiref_*.png`
+Results saved to: `content/seedream4_output/starbright_*.png`
 
 ---
 
