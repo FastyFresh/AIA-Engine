@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 388,
-  "approved_count": 265,
+  "total_generations": 389,
+  "approved_count": 266,
   "rejected_count": 123,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_seiza_seed789_20260204_192147.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-04T19:22:56.310004",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_seiza_seed2024_20260204_192150.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": true,
       "timestamp": "2026-02-06T08:29:12.339236",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_spacebuns_luxbed_20260206_232042.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-06T23:28:15.087157",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-06T08:29:12.340676"
+  "last_updated": "2026-02-06T23:28:15.091625"
 }
