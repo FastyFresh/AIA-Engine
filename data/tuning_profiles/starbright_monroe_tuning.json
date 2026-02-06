@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 366,
-  "approved_count": 251,
+  "total_generations": 367,
+  "approved_count": 252,
   "rejected_count": 115,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_test_1_20260204_065613.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": false,
-      "timestamp": "2026-02-04T08:45:12.922745",
-      "notes": "Rejected via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_whitebg_v2_20260204_084510.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": true,
       "timestamp": "2026-02-06T00:33:15.177888",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_red_dress_pigtails_livingroom_20260206_003925.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-06T00:41:14.578083",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-06T00:33:15.180296"
+  "last_updated": "2026-02-06T00:41:14.580827"
 }
