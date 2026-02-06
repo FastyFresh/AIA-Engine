@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 359,
-  "approved_count": 244,
+  "total_generations": 360,
+  "approved_count": 245,
   "rejected_count": 115,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_MASTER_v2_seed123.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": false,
-      "timestamp": "2026-02-04T08:39:45.828628",
-      "notes": "Rejected via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_master_4_20260204_070657.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": true,
       "timestamp": "2026-02-06T00:09:48.555220",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_sailor_bed_legs_v2_20260206_002237.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-06T00:24:58.374180",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-06T00:09:48.560468"
+  "last_updated": "2026-02-06T00:24:58.376159"
 }
