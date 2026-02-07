@@ -30,6 +30,7 @@ from app.api.venice_routes import router as venice_router
 from app.api.unified_routes import router as unified_router
 from app.api.workflow_routes import router as workflow_router
 from app.api.object_storage_routes import router as object_storage_router, uploads_router
+from app.api.openclaw_routes import router as openclaw_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -69,6 +70,7 @@ app.include_router(unified_router)
 app.include_router(workflow_router)
 app.include_router(object_storage_router)
 app.include_router(uploads_router)
+app.include_router(openclaw_router)
 
 orchestrator = Orchestrator()
 content_service = ContentService()

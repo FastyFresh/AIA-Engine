@@ -488,6 +488,57 @@ Successfully developed kneeling pose series with male figure. Key learnings:
 
 ---
 
+## OpenClaw VPS Integration (Jan 30, 2026 - Updated Feb 7, 2026)
+
+### Architecture
+OpenClaw on VPS (browser automation, DM management, social posting) + AIA Engine on Replit (content generation) connected via webhooks.
+
+### VPS Details
+- **Provider:** Vultr (Atlanta)
+- **IP:** 45.32.219.67
+- **Port:** 18789
+- **OS:** Ubuntu 22.04 x64
+- **OpenClaw Version:** 2026.2.6-3 (updated Feb 7, 2026)
+
+### Security (Updated Feb 7, 2026)
+- All credentials stored in Replit Secrets (OPENCLAW_GATEWAY_TOKEN, OPENCLAW_WEBHOOK_TOKEN, OPENCLAW_VPS_PASSWORD)
+- CVE-2026-25253 patched (one-click RCE fix)
+- All February 2026 security patches applied (gateway credential exfil, sandbox bypass, voice/webhook allowlist bypass, WhatsApp hijack)
+- File permissions hardened (700 on .openclaw dir, 600 on auth-profiles.json)
+- Security audit: 0 critical, 1 warn (model tier), 2 info
+
+### Webhook Endpoints (AIA Engine -> OpenClaw VPS)
+```
+POST http://45.32.219.67:18789/hooks/wake   # Wake/ping
+POST http://45.32.219.67:18789/hooks/agent  # Send agent task
+```
+
+### API Endpoints (OpenClaw -> AIA Engine)
+```
+GET  /api/openclaw/health          # Health check
+GET  /api/openclaw/capabilities    # List capabilities
+GET  /api/openclaw/content/list    # List generated content
+GET  /api/openclaw/content/heroes  # Get hero images
+POST /api/openclaw/generate/image  # Generate image
+POST /api/openclaw/generate/caption # Generate caption
+GET  /api/openclaw/vps/status      # Check VPS status
+POST /api/openclaw/vps/agent       # Send task to VPS agent
+```
+Authentication: Bearer token via Authorization header (uses OPENCLAW_WEBHOOK_TOKEN secret)
+
+### Systemd Service (on VPS)
+```bash
+systemctl status openclaw
+systemctl restart openclaw
+journalctl -u openclaw -f
+```
+
+### Connected Channels
+- WhatsApp (linked, via Baileys)
+- Webhook hooks (enabled)
+
+---
+
 ## Project File Structure
 
 ```
