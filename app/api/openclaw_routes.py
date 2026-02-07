@@ -21,8 +21,10 @@ router = APIRouter(prefix="/api/openclaw", tags=["openclaw"])
 
 def verify_webhook_token(authorization: str = Header(None), x_openclaw_token: str = Header(None)) -> bool:
     webhook_secret = os.getenv("OPENCLAW_WEBHOOK_TOKEN", "")
-    if not webhook_secret:
-        raise HTTPException(status_code=500, detail="Webhook token not configured")
+    aia_engine_key = os.getenv("AIA_ENGINE_API_KEY", "")
+
+    if not webhook_secret and not aia_engine_key:
+        raise HTTPException(status_code=500, detail="No authentication tokens configured")
 
     token = None
     if authorization and authorization.startswith("Bearer "):
@@ -33,10 +35,12 @@ def verify_webhook_token(authorization: str = Header(None), x_openclaw_token: st
     if not token:
         raise HTTPException(status_code=401, detail="Missing authentication token")
 
-    if not hmac.compare_digest(token, webhook_secret):
-        raise HTTPException(status_code=401, detail="Invalid token")
+    if webhook_secret and hmac.compare_digest(token, webhook_secret):
+        return True
+    if aia_engine_key and hmac.compare_digest(token, aia_engine_key):
+        return True
 
-    return True
+    raise HTTPException(status_code=401, detail="Invalid token")
 
 
 OPENCLAW_VPS_IP = os.getenv("OPENCLAW_VPS_IP", "45.32.219.67")
