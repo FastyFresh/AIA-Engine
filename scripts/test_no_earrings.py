@@ -27,9 +27,9 @@ async def main():
     for bg in backgrounds:
         full_prompt = (
             f"Figure 1 face identity, Figure 2 body proportions, Figure 3 exact pose and outfit. "
-            f"A young woman with {identity_block}, "
-            f"bare ears, "
-            f"wearing the exact same cute printed two-piece outfit as Figure 3 with headband, "
+            f"A 19-year-old woman with {identity_block}, "
+            f"bare ears with absolutely no earrings no jewelry no accessories on ears, "
+            f"wearing the exact same Hello Kitty bikini outfit as Figure 3 with cat ear headband, "
             f"{bg['bg']}. "
             f"Shot on Canon EOS R5, 85mm f/1.4 lens, natural skin texture visible, 8K detail"
         )
