@@ -322,12 +322,66 @@ These endpoints are available on the AIA Engine and could be exposed to OpenClaw
 | POST | `/api/lora/generate` | Generate with LoRA |
 | POST | `/api/lora/generate-sdxl` | Generate with SDXL LoRA |
 
-### Posting & Distribution
+### Twitter/X Posting (Full Integration)
+
+AIA Engine has a complete Twitter/X integration with OAuth 2.0 + OAuth 1.0a:
+
+**Connected Account**: @Starbright2003
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/workflow/auto-post` | Auto-post to configured platforms |
-| GET | `/manual_queue` | Get manual posting queue |
-| POST | `/manual_queue/mark_posted` | Mark item as posted |
+| GET | `/api/twitter/status` | Check Twitter connection status and authorized user |
+| GET | `/api/twitter/auth` | Start OAuth 2.0 authorization flow (browser redirect) |
+| GET | `/api/twitter/callback` | OAuth callback handler (automatic) |
+| POST | `/api/twitter/post` | Post a text-only tweet |
+| POST | `/api/twitter/post-full` | Post tweet with media (image or video) |
+| GET | `/api/twitter/compose` | Preview a composed post before sending |
+| GET | `/api/twitter/disconnect` | Disconnect Twitter account |
+
+**How Twitter Posting Works:**
+
+1. **Text-only tweets** use OAuth 2.0 (scopes: tweet.read, tweet.write, users.read, offline.access)
+2. **Media uploads** (images/videos) use OAuth 1.0a — Twitter requires this for media
+3. The system automatically handles token refresh for long-lived sessions
+
+**Auto-Post Flow:**
+- When content is approved via `/workflow/approve?auto_post=true`, the system automatically:
+  1. Generates a caption using Grok (persona-specific tone)
+  2. Generates optimized hashtags (no AI tags)
+  3. Generates a DFans CTA
+  4. Composes the full post (caption + hashtags + CTA)
+  5. Uploads the media via OAuth 1.0a
+  6. Posts the tweet via OAuth 1.0a with media attached
+  7. Returns the tweet URL
+
+**Post with Media Request:**
+```json
+POST /api/twitter/post-full
+{
+    "text": "Your caption text here #hashtags",
+    "media_path": "content/seedream4_output/starbright_xxx.png",
+    "influencer": "starbright_monroe"
+}
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "tweet_id": "1234567890",
+    "tweet_url": "https://twitter.com/i/status/1234567890",
+    "media_type": "image"
+}
+```
+
+**Important**: OpenClaw Hub can trigger Twitter posts through AIA Engine's API — all Twitter credentials stay in AIA Engine. OpenClaw Hub does NOT need its own Twitter API keys for Starbright's account.
+
+### Posting & Distribution (General)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/workflow/auto-post` | Auto-post approved image to X with AI captions/hashtags/CTA |
+| GET | `/manual_queue` | Get manual posting queue (Instagram/TikTok) |
+| POST | `/manual_queue/mark_posted` | Mark item as manually posted |
 
 ### Pipeline Control
 | Method | Endpoint | Description |
