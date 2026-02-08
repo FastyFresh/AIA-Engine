@@ -69,7 +69,7 @@ INFLUENCER_IDENTITIES = {
             "clothing hangs loosely on her thin frame"
         ),
         "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
-        "body_ref": "content/references/starbright_monroe/body_reference_blue_bodysuit_v2.webp",
+        "body_ref": "content/references/starbright_monroe/body_reference_omnime09.png",
         "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.webp",
         "output_dir": "content/generated/starbright_monroe",
     },

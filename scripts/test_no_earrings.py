@@ -15,11 +15,11 @@ async def main():
     
     backgrounds = [
         {
-            "name": "studio_v3",
+            "name": "studio_v4",
             "bg": "standing in a professional photography studio, clean white seamless backdrop, soft diffused studio lighting from above, overcast cool neutral lighting"
         },
         {
-            "name": "bedroom_v3",
+            "name": "bedroom_v4",
             "bg": "standing in a bright minimalist white bedroom, sheer curtains with soft natural daylight streaming through, white bedding visible behind, cool overcast soft daylight"
         },
     ]
