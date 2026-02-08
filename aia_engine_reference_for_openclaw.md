@@ -16,7 +16,7 @@ It is deployed as a separate Replit application and exposes API endpoints for ex
 ## Personas / AI Influencers
 
 ### Starbright Monroe (`starbright_monroe`) — Primary
-- **Identity**: 19-year-old woman, very pale porcelain ivory white skin, straight sleek dark brown hair, warm olive-brown eyes, natural freckles across nose and cheeks, extremely thin slender petite body, small natural A-cup breasts
+- **Identity**: 19-year-old woman, extremely pale porcelain ivory white cool-toned skin, straight sleek dark brown hair past shoulders, olive-brown eyes, natural freckles across nose and cheeks, very petite slim boyish straight figure like a young ballet dancer, delicate bony frame with no prominent curves, clothing hangs loosely on her thin frame
 - **Aesthetic**: Lifestyle & wellness, confident, warm, flirty brunette model
 - **Platforms**: Twitter/X (@Starbright2003), DFans (primary monetization), Instagram, TikTok
 - **Voice**: Warm, personal, lightly flirty

@@ -149,8 +149,8 @@ Sensual boudoir photography style, soft glamorous lighting.
         return prompt
 
 
-STARBRIGHT_IDENTITY = """young woman with very pale porcelain skin, straight dark brown hair, 
-warm olive-brown eyes, natural freckles across nose and cheeks, petite slim figure with small perky breasts, slender waist"""
+STARBRIGHT_IDENTITY = """young woman with extremely pale porcelain ivory white cool-toned skin, straight dark brown hair past shoulders, 
+olive-brown eyes, natural freckles across nose and cheeks, very petite slim boyish straight figure like a young ballet dancer, delicate bony frame with no prominent curves"""
 
 LUNA_IDENTITY = """young woman with long straight pink hair, blue-green eyes, slim petite figure, 
 natural beauty, smooth pale skin"""

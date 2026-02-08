@@ -320,11 +320,15 @@ class Seedream4Service:
             
             # Default anatomical negative prompt for body consistency
             default_negative = (
+                "curvy body, voluptuous, hourglass figure, wide hips, thick thighs, "
+                "tan skin, warm skin tone, golden skin, bronze skin, dark skin, "
+                "blonde hair, red hair, light hair, "
                 "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
                 "deformed body, disproportionate body, unnatural anatomy, distorted proportions, "
                 "elongated limbs, stretched arms, stretched legs, unrealistic limb length, "
                 "mutated hands, fused fingers, too many fingers, missing fingers, "
-                "bad anatomy, wrong anatomy, unrealistic body, mannequin, plastic skin"
+                "bad anatomy, wrong anatomy, unrealistic body, mannequin, plastic skin, "
+                "cartoon, illustration, painting, anime, 3d render"
             )
             
             final_negative = negative_prompt if negative_prompt else default_negative

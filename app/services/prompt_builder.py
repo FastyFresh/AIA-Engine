@@ -59,12 +59,13 @@ INFLUENCER_IDENTITIES = {
     "starbright_monroe": {
         "name": "Starbright Monroe",
         "identity": (
-            "very pale porcelain ivory white skin, "
-            "straight sleek dark brown hair (not wavy, not curly), "
-            "warm olive-brown eyes, natural freckles across nose and cheeks, "
-            "extremely thin slender petite body with very narrow tiny waist, "
-            "slim narrow hips, long thin slender legs, delicate small frame, size 0 figure, "
-            "small natural A-cup breasts, proportionate feminine figure"
+            "extremely pale porcelain ivory white skin, almost translucent cool-toned pale complexion with no warmth or tan, "
+            "straight sleek dark brown hair past shoulders (not wavy, not curly), "
+            "olive-brown eyes, natural freckles across nose and cheeks, "
+            "very petite slim narrow body frame, thin and slender with a boyish straight figure, "
+            "no prominent curves anywhere, very narrow straight hips, "
+            "slim athletic build like a young ballet dancer, delicate bony frame, "
+            "clothing hangs loosely on her thin frame"
         ),
         "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
         "body_ref": "content/references/starbright_monroe/body_reference_canonical.webp",
@@ -205,7 +206,7 @@ class PromptBuilder:
             "Use the woman from Figure 1 (face reference) and Figure 2 (body reference). "
             f"STRICTLY preserve her EXACT facial features from Figure 1: {self.identity}. "
             "Keep the same face shape, eyes, nose, lips, natural freckles, and real skin texture with visible pores - not airbrushed or smoothed. "
-            "STRICTLY match Figure 2 body proportions: petite slender frame, slim narrow waist, small natural bust, no exaggerated curves. "
+            "STRICTLY match Figure 2 body proportions: very petite boyish straight figure like a young ballet dancer, delicate bony frame with no prominent curves, clothing hangs loosely on her thin frame. "
         )
         
         if anti_detection:

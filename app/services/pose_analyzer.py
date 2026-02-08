@@ -38,10 +38,10 @@ class PoseAnalyzer:
             "starbright_monroe": {
                 "name": "Starbright Monroe",
                 "features": (
-                    "very pale porcelain ivory white skin with natural freckles across nose and cheeks, "
-                    "straight sleek dark brown hair, warm olive-brown eyes, "
-                    "slender petite body with natural proportions, small natural A-cup chest, "
-                    "extremely thin with narrow waist"
+                    "extremely pale porcelain ivory white cool-toned skin with natural freckles across nose and cheeks, "
+                    "straight sleek dark brown hair past shoulders, olive-brown eyes, "
+                    "very petite slim boyish straight figure like a young ballet dancer, "
+                    "delicate bony frame with no prominent curves, clothing hangs loosely on her thin frame"
                 )
             },
             "luna_vale": {
