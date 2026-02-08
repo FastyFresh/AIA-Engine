@@ -60,11 +60,12 @@ INFLUENCER_IDENTITIES = {
         "name": "Starbright Monroe",
         "identity": (
             "extremely pale porcelain ivory white skin, almost translucent cool-toned pale complexion with no warmth or tan, "
-            "straight sleek dark brown hair past shoulders (not wavy, not curly), "
-            "olive-brown eyes, natural freckles across nose and cheeks, "
+            "straight sleek dark brown hair past shoulders (dark brown NOT black, not wavy, not curly), "
+            "distinctive warm olive-brown hazel eyes (NOT green, NOT grey, NOT blue), "
+            "prominent visible natural freckles scattered across nose and cheeks, "
             "very petite slim narrow body frame, thin and slender with a boyish straight figure, "
             "no prominent curves anywhere, very narrow straight hips, "
-            "slim athletic build like a young ballet dancer, delicate bony frame, "
+            "slim athletic build like a young ballet dancer, delicate small frame, "
             "clothing hangs loosely on her thin frame"
         ),
         "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",

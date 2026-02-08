@@ -318,11 +318,14 @@ class Seedream4Service:
                 image_refs.append(bg_b64)
                 logger.info(f"Using 3-reference generation with background: {background_ref}")
             
-            # Default anatomical negative prompt for body consistency
+            # Default negative prompt for identity and body consistency
             default_negative = (
                 "curvy body, voluptuous, hourglass figure, wide hips, thick thighs, "
                 "tan skin, warm skin tone, golden skin, bronze skin, dark skin, "
-                "blonde hair, red hair, light hair, "
+                "green eyes, grey eyes, gray eyes, blue eyes, light eyes, "
+                "black hair, jet black hair, blonde hair, red hair, light hair, "
+                "no earrings, no jewelry, no accessories on ears, no piercings, no hoop earrings, no stud earrings, "
+                "smooth skin, flawless skin, airbrushed skin, "
                 "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
                 "deformed body, disproportionate body, unnatural anatomy, distorted proportions, "
                 "elongated limbs, stretched arms, stretched legs, unrealistic limb length, "
@@ -477,7 +480,10 @@ class Seedream4Service:
             default_negative = (
                 "curvy body, voluptuous, hourglass figure, wide hips, thick thighs, "
                 "tan skin, warm skin tone, golden skin, bronze skin, dark skin, "
-                "blonde hair, red hair, light hair, "
+                "green eyes, grey eyes, gray eyes, blue eyes, light eyes, "
+                "black hair, jet black hair, blonde hair, red hair, light hair, "
+                "no earrings, no jewelry, no accessories on ears, no piercings, no hoop earrings, no stud earrings, "
+                "smooth skin, flawless skin, airbrushed skin, "
                 "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
                 "deformed body, disproportionate body, unnatural anatomy, distorted proportions, "
                 "elongated limbs, stretched arms, stretched legs, unrealistic limb length, "
