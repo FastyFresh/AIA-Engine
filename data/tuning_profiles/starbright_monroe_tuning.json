@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 393,
-  "approved_count": 270,
+  "total_generations": 394,
+  "approved_count": 271,
   "rejected_count": 123,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/starbright_multiref_20260204_053259.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": true,
-      "timestamp": "2026-02-05T18:12:53.585052",
-      "notes": "Approved via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/mask_feet_between_knees.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": true,
       "timestamp": "2026-02-07T00:10:11.117877",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_hellokitty_v5_curtain_20260208_185258.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-08T18:55:25.315642",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-07T00:10:11.119080"
+  "last_updated": "2026-02-08T18:55:25.317054"
 }
