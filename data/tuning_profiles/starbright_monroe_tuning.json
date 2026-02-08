@@ -10,23 +10,10 @@
   "guidance_scale_max": 4.0,
   "positive_prompt_additions": [],
   "negative_prompt_additions": [],
-  "total_generations": 394,
-  "approved_count": 271,
+  "total_generations": 395,
+  "approved_count": 272,
   "rejected_count": 123,
   "feedback_history": [
-    {
-      "image_path": "content/seedream4_output/mask_feet_between_knees.png",
-      "prompt": "",
-      "params": {
-        "lora_scale": 0.77,
-        "guidance_scale": 2.5,
-        "num_inference_steps": 30
-      },
-      "quality_score": null,
-      "approved": false,
-      "timestamp": "2026-02-05T23:40:35.687665",
-      "notes": "Rejected via gallery workflow"
-    },
     {
       "image_path": "content/seedream4_output/starbright_seiza_erased2_20260204_192651.png",
       "prompt": "",
@@ -663,7 +650,20 @@
       "approved": true,
       "timestamp": "2026-02-08T18:55:25.315642",
       "notes": "Approved via gallery workflow"
+    },
+    {
+      "image_path": "content/seedream4_output/starbright_stitch_v3_no_bg_20260208_193454.png",
+      "prompt": "",
+      "params": {
+        "lora_scale": 0.77,
+        "guidance_scale": 2.5,
+        "num_inference_steps": 30
+      },
+      "quality_score": null,
+      "approved": true,
+      "timestamp": "2026-02-08T19:40:57.617655",
+      "notes": "Approved via gallery workflow"
     }
   ],
-  "last_updated": "2026-02-08T18:55:25.317054"
+  "last_updated": "2026-02-08T19:40:57.622134"
 }
