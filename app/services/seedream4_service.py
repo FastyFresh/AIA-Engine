@@ -468,17 +468,22 @@ class Seedream4Service:
             
             face_b64 = self.encode_image(face_path)
             body_b64 = self.encode_image(body_path)
+            source_b64 = self.encode_image(source_image_path)
             
-            image_refs = [face_b64, body_b64]
+            image_refs = [face_b64, body_b64, source_b64]
             
             full_prompt = prompt
             
             default_negative = (
+                "curvy body, voluptuous, hourglass figure, wide hips, thick thighs, "
+                "tan skin, warm skin tone, golden skin, bronze skin, dark skin, "
+                "blonde hair, red hair, light hair, "
                 "extra limbs, extra legs, extra arms, extra fingers, missing limbs, "
                 "deformed body, disproportionate body, unnatural anatomy, distorted proportions, "
                 "elongated limbs, stretched arms, stretched legs, unrealistic limb length, "
                 "mutated hands, fused fingers, too many fingers, missing fingers, "
-                "bad anatomy, wrong anatomy, unrealistic body, mannequin, plastic skin"
+                "bad anatomy, wrong anatomy, unrealistic body, mannequin, plastic skin, "
+                "cartoon, illustration, painting, anime, 3d render"
             )
             
             final_negative = negative_prompt if negative_prompt else default_negative
