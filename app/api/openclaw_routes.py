@@ -63,6 +63,14 @@ class CaptionRequest(BaseModel):
     count: int = 3
 
 
+class TransformRequest(BaseModel):
+    reference_image_url: str
+    influencer: str = "starbright_monroe"
+    prompt: Optional[str] = None
+    style: Optional[str] = None
+    aspect_ratio: str = "portrait_4_3"
+
+
 class AgentRequest(BaseModel):
     message: str
     name: str = "AIA"
@@ -74,7 +82,7 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "AIA Engine",
-        "version": "1.3.0",
+        "version": "1.4.0",
         "openclaw_integration": True,
         "timestamp": datetime.now().isoformat()
     }
@@ -87,12 +95,25 @@ async def get_capabilities():
         "content_types": ["image", "video", "caption"],
         "platforms": ["twitter", "instagram", "tiktok", "dfans"],
         "endpoints": {
-            "generate_image": "POST /api/openclaw/generate/image",
+            "transform_image": "POST /api/openclaw/transform - Transform source image into Starbright (3-ref workflow)",
+            "generate_image": "POST /api/openclaw/generate/image - Generate new image from prompt only",
             "generate_caption": "POST /api/openclaw/generate/caption",
             "list_content": "GET /api/openclaw/content/list",
             "get_hero_images": "GET /api/openclaw/content/heroes",
+            "download_content": "GET /api/openclaw/content/download/{filename}",
             "vps_status": "GET /api/openclaw/vps/status",
             "send_agent_task": "POST /api/openclaw/vps/agent"
+        },
+        "transform_schema": {
+            "endpoint": "POST /api/openclaw/transform",
+            "body": {
+                "reference_image_url": "URL of the source image to transform (required)",
+                "influencer": "starbright_monroe (default) or luna_vale",
+                "prompt": "Optional custom prompt override",
+                "style": "Optional style additions",
+                "aspect_ratio": "portrait_4_3 (default)"
+            },
+            "description": "Downloads source image, combines with face+body references, transforms into Starbright identity preserving pose/outfit/setting"
         }
     }
 
@@ -251,6 +272,103 @@ async def generate_caption(
         return {"success": False, "error": str(e)}
 
 
+@router.post("/transform")
+async def transform_image(
+    request: TransformRequest,
+    authorization: str = Header(None),
+    x_openclaw_token: str = Header(None)
+):
+    verify_webhook_token(authorization, x_openclaw_token)
+
+    try:
+        from app.services.fal_seedream_service import FalSeedreamService
+
+        identity = (
+            "naturally fair light skin with a healthy warm undertone and visible pores, "
+            "straight sleek dark brown hair past shoulders with natural flyaway strands, "
+            "distinctive warm olive-brown hazel eyes with natural catchlight reflections, "
+            "prominent visible natural freckles scattered across nose bridge and upper cheeks, "
+            "petite slim young woman with a thin frame like a young ballet dancer, "
+            "lean toned 19-year-old physique with long legs"
+        )
+
+        prompt = request.prompt or (
+            f"Figure 1 face identity, Figure 2 body proportions, Figure 3 exact pose outfit and setting. "
+            f"Single photograph of one 19-year-old woman recreating the exact pose and outfit from Figure 3. "
+            f"NO split screen, NO collage, NO multiple panels, just one single continuous photo. "
+            f"She has {identity}, "
+            f"bare ears with absolutely no earrings no jewelry no accessories on ears, "
+            f"RAW photo, unretouched, real human skin with visible pores, "
+            f"shot on Canon EOS R5, 35mm f/1.4 lens, natural skin texture, 8K detail, photorealistic"
+        )
+        if request.style:
+            prompt += f", {request.style}"
+
+        service = FalSeedreamService(influencer_id=request.influencer)
+        result = await service.transform_with_source(
+            source_image_url=request.reference_image_url,
+            prompt=prompt,
+            aspect_ratio=request.aspect_ratio,
+            filename_prefix=f"transform_{request.influencer}"
+        )
+
+        return {
+            "success": result.get("status") == "success",
+            "image_path": result.get("image_path"),
+            "filename": result.get("filename"),
+            "prompt": prompt,
+            "influencer": request.influencer,
+            "source_url": request.reference_image_url,
+            "mode": "3-ref-transform",
+            "details": result
+        }
+    except Exception as e:
+        logger.error(f"Transform failed: {e}")
+        return {"success": False, "error": str(e)}
+
+
+@router.get("/content/download/{filename}")
+async def download_content(
+    filename: str,
+    authorization: str = Header(None),
+    x_openclaw_token: str = Header(None)
+):
+    verify_webhook_token(authorization, x_openclaw_token)
+
+    from pathlib import Path
+    from fastapi.responses import FileResponse
+    import re
+
+    safe_name = Path(filename).name
+    if safe_name != filename or not re.match(r'^[\w\-\.]+$', safe_name):
+        raise HTTPException(status_code=400, detail="Invalid filename")
+
+    allowed_extensions = {".png", ".jpg", ".jpeg", ".webp"}
+    if Path(safe_name).suffix.lower() not in allowed_extensions:
+        raise HTTPException(status_code=400, detail="File type not allowed")
+
+    search_dirs = [
+        Path("content/seedream4_output"),
+        Path("content/generated/starbright_monroe"),
+        Path("content/generated/luna_vale"),
+        Path("content/final/starbright_monroe"),
+        Path("content/final/luna_vale"),
+    ]
+
+    for d in search_dirs:
+        filepath = (d / safe_name).resolve()
+        if not str(filepath).startswith(str(d.resolve())):
+            continue
+        if filepath.exists():
+            return FileResponse(
+                path=str(filepath),
+                filename=safe_name,
+                media_type="image/png"
+            )
+
+    raise HTTPException(status_code=404, detail=f"File not found: {safe_name}")
+
+
 @router.get("/vps/status")
 async def vps_status(
     authorization: str = Header(None),
@@ -325,12 +443,14 @@ async def send_agent_task(
 async def webhook_info():
     return {
         "name": "AIA Engine OpenClaw Integration",
-        "version": "1.3.0",
+        "version": "1.4.0",
         "endpoints": {
-            "POST /api/openclaw/generate/image": "Generate new influencer images",
+            "POST /api/openclaw/transform": "Transform source image into influencer identity (3-ref workflow)",
+            "POST /api/openclaw/generate/image": "Generate new influencer images from prompt",
             "POST /api/openclaw/generate/caption": "Generate captions for social platforms",
             "GET /api/openclaw/content/list": "List available content",
             "GET /api/openclaw/content/heroes": "Get hero images",
+            "GET /api/openclaw/content/download/{filename}": "Download generated image",
             "GET /api/openclaw/vps/status": "Check OpenClaw VPS status",
             "POST /api/openclaw/vps/agent": "Send task to OpenClaw agent on VPS",
             "GET /api/openclaw/health": "Health check",

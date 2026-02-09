@@ -223,6 +223,126 @@ class FalSeedreamService:
             logger.error(f"Exception: {str(e)}")
             return {"status": "error", "error": str(e)}
     
+    async def transform_with_source(
+        self,
+        source_image_url: str,
+        prompt: str,
+        aspect_ratio: str = "portrait_4_3",
+        output_dir: Optional[str] = None,
+        filename_prefix: str = "transform",
+        enable_safety_checker: bool = False,
+        negative_prompt: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """Transform a source image into Starbright using 3-reference conditioning.
+        
+        Uses face ref + body ref + source image (3 refs) with SEEDream 4.5 edit.
+        The source image provides the pose/outfit/setting while face and body refs
+        ensure Starbright's identity is preserved.
+        """
+        if not self.fal_key:
+            return {"status": "error", "error": "FAL_KEY not configured"}
+        
+        face_uri, body_uri = self._get_reference_uris(prompt)
+        if not face_uri or not body_uri:
+            return {"status": "error", "error": "Reference images not found"}
+        
+        source_uri = None
+        try:
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                logger.info(f"Downloading source image from: {source_image_url[:100]}...")
+                resp = await client.get(source_image_url)
+                if resp.status_code == 200:
+                    content_type = resp.headers.get("content-type", "image/jpeg")
+                    mime = "image/jpeg"
+                    if "png" in content_type:
+                        mime = "image/png"
+                    elif "webp" in content_type:
+                        mime = "image/webp"
+                    encoded = base64.b64encode(resp.content).decode()
+                    source_uri = f"data:{mime};base64,{encoded}"
+                    logger.info(f"Source image downloaded and encoded: {len(source_uri)} chars")
+                else:
+                    return {"status": "error", "error": f"Failed to download source image: HTTP {resp.status_code}"}
+        except Exception as e:
+            return {"status": "error", "error": f"Failed to download source image: {str(e)}"}
+        
+        headers = {
+            "Authorization": f"Key {self.fal_key}",
+            "Content-Type": "application/json"
+        }
+        
+        image_size = "auto_4K" if aspect_ratio in ["portrait_4_3", "portrait_16_9", "landscape_4_3", "landscape_16_9", "square"] else aspect_ratio
+        
+        payload = {
+            "prompt": prompt,
+            "image_urls": [face_uri, body_uri, source_uri],
+            "image_size": image_size,
+            "num_images": 1,
+            "max_images": 1,
+            "enable_safety_checker": enable_safety_checker
+        }
+        
+        if negative_prompt:
+            payload["negative_prompt"] = negative_prompt
+        
+        try:
+            async with httpx.AsyncClient(timeout=180.0) as client:
+                logger.info(f"Sending 3-ref transform request to fal.ai Seedream 4.5 edit...")
+                
+                response = await client.post(
+                    FAL_EDIT_URL,
+                    headers=headers,
+                    json=payload
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    images = result.get("images", [])
+                    
+                    if images:
+                        img_url = images[0].get("url", "")
+                        if img_url:
+                            img_resp = await client.get(img_url)
+                            if img_resp.status_code == 200:
+                                save_dir = Path(output_dir) if output_dir else self.output_dir
+                                save_dir.mkdir(parents=True, exist_ok=True)
+                                
+                                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                                filename = f"{filename_prefix}_{timestamp}.png"
+                                filepath = save_dir / filename
+                                filepath.write_bytes(img_resp.content)
+                                
+                                logger.info(f"Transformed image saved: {filepath}")
+                                
+                                return {
+                                    "status": "success",
+                                    "image_path": str(filepath),
+                                    "filename": filename,
+                                    "output_path": str(filepath),
+                                    "seed": result.get("seed"),
+                                    "provider": "fal.ai",
+                                    "model": "seedream-4.5-edit",
+                                    "mode": "3-ref-transform"
+                                }
+                    
+                    return {"status": "error", "error": "No images in response"}
+                
+                elif response.status_code == 422:
+                    error = response.json()
+                    logger.warning(f"Content validation error: {error}")
+                    return {"status": "error", "error": f"Content blocked: {error}"}
+                
+                else:
+                    logger.error(f"API error {response.status_code}: {response.text[:200]}")
+                    return {"status": "error", "error": f"API error: {response.status_code}"}
+                    
+        except httpx.TimeoutException:
+            logger.error("Transform request timeout")
+            return {"status": "error", "error": "Request timeout (>180s)"}
+        except Exception as e:
+            logger.error(f"Transform exception: {str(e)}")
+            return {"status": "error", "error": str(e)}
+
     async def generate_from_research_prompt(
         self,
         narrative_prompt: str,
