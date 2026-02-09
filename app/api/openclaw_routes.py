@@ -170,21 +170,39 @@ async def generate_image(
     try:
         from app.services.fal_seedream_service import FalSeedreamService
 
-        prompt = request.prompt or "Professional photo of Starbright Monroe, extremely pale porcelain ivory white cool-toned skin, straight sleek dark brown hair past shoulders, olive-brown eyes, natural freckles across nose and cheeks, very petite slim boyish straight figure like a young ballet dancer, delicate bony frame with no prominent curves, clothing hangs loosely on her thin frame, natural skin texture with visible pores, 8K ultra detailed, cinematic lighting"
+        identity = (
+            "naturally fair light skin with a healthy warm undertone and visible pores, "
+            "straight sleek dark brown hair past shoulders with natural flyaway strands, "
+            "distinctive warm olive-brown hazel eyes with natural catchlight reflections, "
+            "prominent visible natural freckles scattered across nose bridge and upper cheeks, "
+            "petite slim young woman with a thin frame like a young ballet dancer, "
+            "lean toned 19-year-old physique with long legs"
+        )
+
+        prompt = request.prompt or (
+            f"Figure 1 face identity, Figure 2 body proportions. "
+            f"Single photograph of one 19-year-old woman, "
+            f"NO split screen, NO collage, NO multiple panels, just one single continuous photo. "
+            f"She has {identity}, "
+            f"bare ears with absolutely no earrings no jewelry no accessories on ears, "
+            f"RAW photo, unretouched, real human skin with visible pores, "
+            f"shot on Canon EOS R5, 35mm f/1.4 lens, natural skin texture, 8K detail, photorealistic"
+        )
         if request.style:
             prompt += f", {request.style}"
 
         service = FalSeedreamService()
-        result = await service.generate(
+        result = await service.generate_with_references(
             prompt=prompt,
-            influencer=request.influencer
+            filename_prefix=f"openclaw_{request.influencer}"
         )
 
         return {
-            "success": True,
+            "success": result.get("status") == "success",
             "image_path": result.get("output_path"),
             "prompt": prompt,
-            "influencer": request.influencer
+            "influencer": request.influencer,
+            "details": result
         }
     except Exception as e:
         logger.error(f"Image generation failed: {e}")
@@ -200,24 +218,32 @@ async def generate_caption(
     verify_webhook_token(authorization, x_openclaw_token)
 
     try:
-        from app.tools.llm_client import LLMClient
+        from app.tools.llm_client import LLMClient, PromptConfig
 
         llm = LLMClient()
         persona_name = "Starbright Monroe" if request.influencer == "starbright_monroe" else "Luna Vale"
         mood_str = f" Mood: {request.mood}." if request.mood else ""
         context_str = f" Context: {request.context}." if request.context else ""
 
-        prompt = f"Generate {request.count} unique, engaging social media captions for {persona_name} on {request.platform}.{mood_str}{context_str} Each caption should be flirty, fun, and include relevant hashtags. Do NOT use any AI-related hashtags. Return only the captions, numbered 1-{request.count}."
+        user_prompt = f"Generate {request.count} unique, engaging social media captions for {persona_name} on {request.platform}.{mood_str}{context_str} Each caption should be flirty, fun, and include relevant hashtags. Do NOT use any AI-related hashtags. Return only the captions, numbered 1-{request.count}."
 
-        response = await llm.generate(prompt)
-        captions = [line.strip() for line in response.strip().split("\n") if line.strip() and line.strip()[0].isdigit()]
+        prompt_config = PromptConfig(
+            system_prompt=f"You are a social media content writer for {persona_name}, a popular influencer. Write captions that are authentic, engaging, and match her personality.",
+            user_prompt=user_prompt,
+            max_tokens=1000,
+            temperature=0.8
+        )
+
+        response = await llm.generate_text(prompt_config)
+        response_text = response.content if hasattr(response, 'content') else str(response)
+        captions = [line.strip() for line in response_text.strip().split("\n") if line.strip() and line.strip()[0].isdigit()]
         captions = [c.lstrip("0123456789.)- ") for c in captions][:request.count]
 
         return {
             "success": True,
             "influencer": request.influencer,
             "platform": request.platform,
-            "captions": captions if captions else [response.strip()],
+            "captions": captions if captions else [response_text.strip()],
             "count": len(captions) if captions else 1
         }
     except Exception as e:
