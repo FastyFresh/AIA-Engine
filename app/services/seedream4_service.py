@@ -435,7 +435,9 @@ class Seedream4Service:
         seed: Optional[int] = None,
         filename_prefix: str = "transform",
         size: str = "4K",
-        negative_prompt: Optional[str] = None
+        negative_prompt: Optional[str] = None,
+        body_ref: Optional[str] = None,
+        face_ref: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Transform a source image into Starbright Monroe style.
@@ -451,6 +453,8 @@ class Seedream4Service:
             filename_prefix: Prefix for output filename
             size: Resolution - "2K" or "4K"
             negative_prompt: Things to avoid in generation
+            body_ref: Optional override for body reference image path
+            face_ref: Optional override for face reference image path
         """
         if not self.replicate_api_token:
             return {"status": "error", "error": "REPLICATE_API_TOKEN not configured"}
@@ -458,8 +462,8 @@ class Seedream4Service:
         if not os.path.exists(source_image_path):
             return {"status": "error", "error": f"Source image not found: {source_image_path}"}
         
-        face_path = self.face_ref_path
-        body_path = self.body_ref_path
+        face_path = face_ref or self.face_ref_path
+        body_path = body_ref or self.body_ref_path
         
         if not os.path.exists(face_path):
             return {"status": "error", "error": f"Face reference not found: {face_path}"}
