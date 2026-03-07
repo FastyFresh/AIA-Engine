@@ -3707,7 +3707,7 @@ async def upload_and_identity_transfer(
 @app.get("/api/identity/status")
 async def identity_transfer_status():
     """Check identity transfer service status"""
-    starbright_ref = Path("content/references/starbright_monroe/body_reference_canonical.png")
+    starbright_ref = Path("content/references/starbright_monroe/advanced/01_face_front.jpg")
     return {
         "status": "ready",
         "fal_key_configured": bool(os.getenv("FAL_KEY")),
@@ -3948,8 +3948,8 @@ async def upload_and_pose_transfer(
 @app.get("/api/pose/status")
 async def pose_transfer_status():
     """Check pose transfer service status"""
-    starbright_ref = Path("content/references/starbright_monroe/body_reference_canonical.png")
-    alt_ref = Path("content/references/starbright_monroe/canonical_face/face_01.png")
+    starbright_ref = Path("content/references/starbright_monroe/advanced/01_face_front.jpg")
+    alt_ref = Path("content/references/starbright_monroe/starbright_face_reference_v3.webp")
     
     return {
         "status": "ready",

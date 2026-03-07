@@ -37,7 +37,7 @@ class FalPoseTransferService:
         self.output_dir = Path("content/generated/pose_transfer")
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
-        self.starbright_face_ref = "content/references/starbright_monroe/starbright_face_reference_v2.png"
+        self.starbright_face_ref = "content/references/starbright_monroe/advanced/01_face_front.jpg"
         
         logger.info("Fal.ai Pose Transfer Service initialized (Leffa endpoint)")
     
@@ -60,8 +60,8 @@ class FalPoseTransferService:
             return str(ref_path.absolute())
         
         alt_paths = [
-            "content/references/starbright_monroe/canonical_face/face_01.png",
-            "content/references/starbright_monroe/starbright_001.webp"
+            "content/references/starbright_monroe/advanced/01_face_front.jpg",
+            "content/references/starbright_monroe/starbright_face_reference_v3.webp"
         ]
         for alt in alt_paths:
             if Path(alt).exists():

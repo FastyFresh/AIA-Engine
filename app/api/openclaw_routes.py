@@ -192,10 +192,10 @@ async def generate_image(
         from app.services.fal_seedream_service import FalSeedreamService
 
         identity = (
-            "naturally fair light skin with a healthy warm undertone and visible pores, "
+            "extremely pale porcelain ivory white skin with cool undertones and visible pores, almost translucent pale complexion with NO tan NO warmth, "
             "straight sleek dark brown hair past shoulders with natural flyaway strands, "
             "distinctive warm olive-brown hazel eyes with natural catchlight reflections, "
-            "prominent visible natural freckles scattered across nose bridge and upper cheeks, "
+            "clearly visible prominent natural freckles densely scattered across nose bridge and upper cheeks, freckles MUST be obvious, "
             "petite slim young woman with a thin frame like a young ballet dancer, "
             "lean toned 19-year-old physique with long legs"
         )
@@ -258,7 +258,7 @@ async def generate_caption(
         response = await llm.generate_text(prompt_config)
         response_text = response.content if hasattr(response, 'content') else str(response)
         captions = [line.strip() for line in response_text.strip().split("\n") if line.strip() and line.strip()[0].isdigit()]
-        captions = [c.lstrip("0123456789.)- ") for c in captions][:request.count]
+        captions = [c.lstrip("0123456789.)- ").strip().strip('"').strip("'") for c in captions][:request.count]
 
         return {
             "success": True,
@@ -283,23 +283,22 @@ async def transform_image(
     try:
         from app.services.fal_seedream_service import FalSeedreamService
 
-        identity = (
-            "naturally fair light skin with a healthy warm undertone and visible pores, "
-            "straight sleek dark brown hair past shoulders with natural flyaway strands, "
-            "distinctive warm olive-brown hazel eyes with natural catchlight reflections, "
-            "prominent visible natural freckles scattered across nose bridge and upper cheeks, "
-            "petite slim young woman with a thin frame like a young ballet dancer, "
-            "lean toned 19-year-old physique with long legs"
-        )
-
+        # WINNING FORMULA — locked 2026-02-09
+        # 5-ref system: face, freckle crop, body front, body back, source
         prompt = request.prompt or (
-            f"Figure 1 face identity, Figure 2 body proportions, Figure 3 exact pose outfit and setting. "
-            f"Single photograph of one 19-year-old woman recreating the exact pose and outfit from Figure 3. "
-            f"NO split screen, NO collage, NO multiple panels, just one single continuous photo. "
-            f"She has {identity}, "
-            f"bare ears with absolutely no earrings no jewelry no accessories on ears, "
-            f"RAW photo, unretouched, real human skin with visible pores, "
-            f"shot on Canon EOS R5, 35mm f/1.4 lens, natural skin texture, 8K detail, photorealistic"
+            "Figure 1 face identity and structure. "
+            "Figure 2 shows the EXACT freckle pattern to preserve on face - nose bridge and cheek freckles MUST be visible. "
+            "Figure 3 and Figure 4 show body proportions and skin texture with natural body freckles. "
+            "Figure 5 is the exact pose outfit and setting. "
+            "Single photograph of one 19-year-old woman in Figure 5's pose and outfit. "
+            "NO split screen, NO collage, one single photo. "
+            "Her defining features: pale porcelain skin with cool undertones and visible pores, "
+            "clearly visible natural freckles across nose bridge and cheeks "
+            "(freckles are her signature look and MUST be prominent), "
+            "straight dark brown hair past shoulders, olive-brown hazel eyes, "
+            "very petite slim frame, no earrings, "
+            "RAW photo, unretouched natural skin showing freckles and pores, "
+            "Canon EOS R5, 35mm f/1.4, 8K, photorealistic"
         )
         if request.style:
             prompt += f", {request.style}"
@@ -319,7 +318,7 @@ async def transform_image(
             "prompt": prompt,
             "influencer": request.influencer,
             "source_url": request.reference_image_url,
-            "mode": "3-ref-transform",
+            "mode": "5-ref-transform",
             "details": result
         }
     except Exception as e:
@@ -453,6 +452,9 @@ async def webhook_info():
             "GET /api/openclaw/content/download/{filename}": "Download generated image",
             "GET /api/openclaw/vps/status": "Check OpenClaw VPS status",
             "POST /api/openclaw/vps/agent": "Send task to OpenClaw agent on VPS",
+            "GET /api/openclaw/telegram/system-prompt/{persona_id}": "Get current system prompt for a persona",
+            "PUT /api/openclaw/telegram/system-prompt/{persona_id}": "Update system prompt for a persona",
+            "GET /api/openclaw/files/list": "List files in allowed content directories",
             "GET /api/openclaw/health": "Health check",
             "GET /api/openclaw/capabilities": "List all capabilities"
         },
@@ -462,3 +464,116 @@ async def webhook_info():
             "credentials": "Environment secrets only, never hardcoded"
         }
     }
+
+
+# --- Telegram System Prompt Management ---
+
+@router.get("/telegram/system-prompt/{persona_id}")
+async def get_system_prompt(
+    persona_id: str,
+    authorization: str = Header(None),
+    x_openclaw_token: str = Header(None)
+):
+    """Get the current system prompt for a persona"""
+    verify_webhook_token(authorization, x_openclaw_token)
+
+    from app.telegram.bot_config import PERSONA_SYSTEM_PROMPTS
+
+    if persona_id not in PERSONA_SYSTEM_PROMPTS:
+        raise HTTPException(status_code=404, detail=f"Persona not found: {persona_id}")
+
+    return {
+        "persona_id": persona_id,
+        "system_prompt": PERSONA_SYSTEM_PROMPTS[persona_id],
+        "length": len(PERSONA_SYSTEM_PROMPTS[persona_id]),
+        "retrieved_at": datetime.now().isoformat()
+    }
+
+
+class SystemPromptUpdate(BaseModel):
+    system_prompt: str
+
+
+@router.put("/telegram/system-prompt/{persona_id}")
+async def update_system_prompt(
+    persona_id: str,
+    request: SystemPromptUpdate,
+    authorization: str = Header(None),
+    x_openclaw_token: str = Header(None)
+):
+    """Update the system prompt for a persona (runtime only — does not persist to file)"""
+    verify_webhook_token(authorization, x_openclaw_token)
+
+    from app.telegram.bot_config import PERSONA_SYSTEM_PROMPTS
+
+    if persona_id not in PERSONA_SYSTEM_PROMPTS:
+        raise HTTPException(status_code=404, detail=f"Persona not found: {persona_id}")
+
+    old_length = len(PERSONA_SYSTEM_PROMPTS[persona_id])
+    PERSONA_SYSTEM_PROMPTS[persona_id] = request.system_prompt
+
+    return {
+        "persona_id": persona_id,
+        "status": "updated",
+        "old_length": old_length,
+        "new_length": len(request.system_prompt),
+        "updated_at": datetime.now().isoformat()
+    }
+
+
+# --- File Listing ---
+
+ALLOWED_FILE_DIRS = [
+    "content/final",
+    "content/generated",
+    "content/seedream4_output",
+    "content/telegram",
+    "content/training",
+    "content/references",
+    "content/teasers",
+]
+
+
+@router.get("/files/list")
+async def list_files(
+    directory: str = "content/final",
+    limit: int = 50,
+    authorization: str = Header(None),
+    x_openclaw_token: str = Header(None)
+):
+    """List files in an allowed content directory"""
+    verify_webhook_token(authorization, x_openclaw_token)
+
+    from pathlib import Path
+
+    # Normalize and check against allowed dirs
+    normalized = directory.rstrip("/")
+    allowed = False
+    for allowed_dir in ALLOWED_FILE_DIRS:
+        if normalized == allowed_dir or normalized.startswith(allowed_dir + "/"):
+            allowed = True
+            break
+
+    if not allowed:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Access denied. Allowed directories: {ALLOWED_FILE_DIRS}"
+        )
+
+    target = Path(normalized)
+    if not target.exists():
+        return {"directory": normalized, "files": [], "count": 0}
+
+    files = []
+    for f in sorted(target.rglob("*"), key=lambda p: p.stat().st_mtime, reverse=True):
+        if f.is_file():
+            files.append({
+                "filename": f.name,
+                "path": str(f),
+                "size_kb": round(f.stat().st_size / 1024, 1),
+                "modified": datetime.fromtimestamp(f.stat().st_mtime).isoformat()
+            })
+            if len(files) >= limit:
+                break
+
+    return {"directory": normalized, "files": files, "count": len(files)}

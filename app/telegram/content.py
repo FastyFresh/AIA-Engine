@@ -55,13 +55,13 @@ def get_random_photo(persona_id: str, tier: str) -> Tuple[Optional[str], str]:
     """Get a random photo from the appropriate tier folder with context"""
     persona_folder = "starbright" if "starbright" in persona_id else "luna"
     
+    # All tiers get access to teaser and companion photos (engagement mode)
+    # VIP-only content reserved for future monetization
     tier_folders = []
     if tier == "vip":
         tier_folders = ["vip", "companion", "teaser"]
-    elif tier == "companion":
-        tier_folders = ["companion", "teaser"]
     else:
-        tier_folders = ["teaser"]
+        tier_folders = ["companion", "teaser"]
     
     for folder in tier_folders:
         path = f"{CONTENT_BASE}/{persona_folder}/{folder}"
@@ -126,14 +126,12 @@ class ContentManager:
         """Get context for AI about photo request handling"""
         if has_photo:
             return "[You are about to send a photo. Briefly acknowledge sending it without describing details you can't see. Keep it natural and flirty.]"
-        elif tier == "free":
-            return "[User asked for a photo but they're on free tier. Tease them and suggest subscribing to see more of you.]"
-        return ""
+        return "[No photo available right now. Deflect naturally and flirtily - 'I don't have one ready rn but stay tuned 😏']"
     
     def get_no_photo_upsell_text(self) -> str:
-        """Get persona-specific upsell text when photo not available"""
+        """Get persona-specific text when photo not available - no upsell, just engagement"""
         texts = {
-            "starbright_monroe": "Use /subscribe to unlock my exclusive content 💕",
-            "luna_vale": "Subscribe if you want to see more of me."
+            "starbright_monroe": "I'm putting together something special soon... you'll be the first to know 💕",
+            "luna_vale": "I'm working on something for people I trust... stay close 🌙"
         }
-        return texts.get(self.persona_id, "Subscribe to unlock exclusive content!")
+        return texts.get(self.persona_id, "Something special coming soon!")

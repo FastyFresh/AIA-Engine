@@ -1,0 +1,2743 @@
+{
+  "transform_transform_1772015593921_file_20260225_103318_172441.png": {
+    "tier": "vip",
+    "updated": "2026-02-26T23:00:53.722996",
+    "rating": "nsfw"
+  },
+  "starbright_album2_108.png": {
+    "tier": "free",
+    "updated": "2026-02-26T23:01:09.439341",
+    "rating": "sfw"
+  },
+  "starbright_album2_104.png": {
+    "tier": "basic",
+    "updated": "2026-02-26T23:01:17.719783"
+  },
+  "starbright_album1_001.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:06.461371",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_002.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:08.153077",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_003.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:10.898815",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_004.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:34:12.295452",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_005.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:34:14.152138",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_006.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:27.863900",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_007.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:30.138924",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_008.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:33.020317",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_009.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:34:35.491731",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_010.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:37.687502",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_011.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:39.799282",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_012.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:41.426766",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_013.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:43.298451",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_014.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:45.713850",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_015.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:47.329987",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_016.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:48.869160",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_017.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:50.613685",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_018.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:52.107399",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_019.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:53.673314",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_020.png": {
+    "tier": "vip",
+    "rating": "nsfw",
+    "updated": "2026-02-27T15:34:55.294106",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_021.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:56.975077",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_022.png": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T15:34:58.819114",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_024.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:10.700077",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_025.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:13.260100",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_026.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:16.792905",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_027.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:19.311368",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_028.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:22.724430",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_029.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:25.637163",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_030.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:28.110881",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_031.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:30.406705",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_032.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:33.414793",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_033.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:37.228370",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_034.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:39.569246",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_035.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:41.488940",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_036.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:48.216607",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_037.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:49.621979",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_038.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:52.089940",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_039.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:55.403828",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_040.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:35:57.383088",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_041.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:59.492365",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_042.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:36:01.727153",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_043.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:03.327644",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_044.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:05.119787",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_045.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:36:06.863191",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_046.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:08.356984",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_047.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:10.072066",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_048.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:11.899297",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_049.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:13.792165",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_050.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:15.649009",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_051.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:17.163400",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_052.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:19.675833",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_053.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:22.134813",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_054.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:24.543686",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_055.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:27.356007",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_056.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:29.803506",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_057.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:32.330424",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_058.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:33.830901",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_059.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:36.391502",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_060.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:38.005022",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_061.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:40.376096",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_062.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:36:42.139529",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_063.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:43.876755",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_064.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:45.781606",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_065.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:47.694619",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_066.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:49.684776",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_067.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:51.611948",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_068.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:36:53.494974",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_069.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:55.611791",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_070.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:57.784981",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_071.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:00.350160",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_072.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:02.478929",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_073.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:04.097316",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_074.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:05.937516",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_075.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:07.815372",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_076.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:09.611530",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_077.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:11.453239",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_078.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:13.300037",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_079.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:15.257815",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_080.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:16.913955",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_081.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:18.373606",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_082.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:19.848862",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_083.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:21.430489",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_084.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:23.492515",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_085.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:25.200468",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_086.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:27.467311",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_087.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:28.974304",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_088.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:30.642104",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_089.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:32.342559",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_090.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:34.310747",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_091.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:35.948581",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_092.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:37.460193",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_093.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:40.612573",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_094.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:42.287962",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_095.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:44.250868",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_096.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:46.527675",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_097.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:48.903815",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_098.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:50.774681",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_099.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:52.535255",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_100.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:54.291227",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_101.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:56.237995",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_102.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:58.261992",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_103.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:59.751643",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_104.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:01.677415",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_105.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:03.471034",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_106.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:05.103396",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_107.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:06.911643",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_108.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:08.644230",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_109.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:10.361861",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_110.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:12.307307",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_111.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:14.343483",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_112.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:16.070153",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_113.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:38:17.860908",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_114.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:38:19.976225",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_115.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:24.475568",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_116.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:26.106390",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_117.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:27.992792",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album1_118.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:30.133847",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_001.jpg": {
+    "tier": "companion",
+    "rating": "nsfw",
+    "updated": "2026-02-27T15:38:31.912201",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_002.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:33.382614",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_003.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:35.231668",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_004.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:36.683910",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_005.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:38:38.518526",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_006.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:38:39.920505",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_007.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:41.493989",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_008.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:38:43.471158",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_009.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:38:45.217668",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_010.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:47.013466",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_012.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:57.988249",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_013.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:00.790888",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_014.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:04.210571",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_015.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:06.706202",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_016.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:08.547468",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_017.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:11.090646",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_018.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:39:13.399379",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_019.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:18.552550",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_020.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:21.103401",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_021.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:23.963924",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_022.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:26.368768",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_023.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:39:28.110827",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_024.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:30.995400",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_025.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:34.223788",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_026.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:35.616109",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_027.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:37.248196",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_028.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:38.740860",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_029.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:41.021758",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_030.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:39:43.253966",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_031.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:45.391182",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_033.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:58.469719",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_034.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:00.899286",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_035.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:03.303169",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_037.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:15.692961",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_038.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:17.920221",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_039.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:19.682246",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_040.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:22.766124",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_041.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:24.743295",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_042.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:26.838886",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_043.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:29.019655",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_044.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:30.762045",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_045.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:32.733640",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_046.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:34.659185",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_047.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:40:36.406990",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_048.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:40:38.438793",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_049.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:40.461677",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_050.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:42.645329",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_051.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:44.457306",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_052.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:46.592801",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_053.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:48.345758",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_054.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:50.254304",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_055.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:52.121797",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_056.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:54.808068",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_057.png": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:40:57.136100",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_058.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:59.505630",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_059.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:02.291645",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_060.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:04.677093",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_061.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:07.306828",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_062.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:41:09.371321",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_063.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:11.084299",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_064.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:13.246674",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_065.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:16.009782",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_066.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:17.840977",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_067.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:20.219545",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_068.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:21.948189",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_069.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:24.349684",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_070.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:28.777339",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_071.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:38.305835",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_072.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:50.195739",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_073.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:53.259690",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_074.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:56.292830",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_075.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:58.624233",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_076.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:42:00.785329",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_077.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:03.369732",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_078.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:06.548798",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_079.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:09.021859",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_080.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:11.722748",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_081.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:14.156997",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_082.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:16.839796",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_083.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:19.309002",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_084.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:22.514501",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_085.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:24.882741",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_086.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:27.043315",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_087.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:28.838292",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_088.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:31.045044",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_089.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:32.922806",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_090.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:35.670954",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_091.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:37.936610",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_092.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:40.215988",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_093.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:42.783207",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_094.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:45.777592",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_095.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:48.677715",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_096.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:51.257158",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_097.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:53.858888",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_098.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:56.395742",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_099.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:59.359496",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_100.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:02.202074",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_101.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:04.526016",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_102.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:06.773077",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_103.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:08.827303",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_105.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:11.609464",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_106.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:14.387653",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_107.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:17.151780",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_109.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:19.756053",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_110.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:22.009093",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_111.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:24.162756",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_112.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:25.905014",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_113.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:28.508088",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_114.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:31.326194",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_115.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:33.495968",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_116.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:36.086513",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_117.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:38.543288",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_118.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:41.329522",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_119.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:44.544914",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_120.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:47.714084",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_121.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:49.330181",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "transform_1772013899997_vday_leotard_01.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:44:09.874939",
+    "source_dir": "/root/aia-engine/content/transform_input",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "transform_1772015593921_file.png": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T15:44:11.927702",
+    "source_dir": "/root/aia-engine/content/transform_input",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "transform_1772015644334_file.png": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T15:44:13.922662",
+    "source_dir": "/root/aia-engine/content/transform_input",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "transform_1772096162985_file.png": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T15:44:16.151611",
+    "source_dir": "/root/aia-engine/content/transform_input",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "transform_1772096949934_file.png": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T15:44:18.288456",
+    "source_dir": "/root/aia-engine/content/transform_input",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "transform_1772096999015_file.png": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T15:44:20.608978",
+    "source_dir": "/root/aia-engine/content/transform_input",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "vday_leotard_01.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:44:22.897645",
+    "source_dir": "/root/aia-engine/content/transform_input",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "swapped_20260217_081256.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:47:51.205333",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "swapped_20260217_081549.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:47:52.899033",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "swapped_20260217_081959.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:47:55.034079",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "swapped_20260217_082618.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:47:57.641113",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4"
+  },
+  "starbright_album2_108.jpg": {
+    "tier": "free",
+    "updated": "2026-02-26T23:01:09.439341",
+    "rating": "sfw",
+    "copied_from": "starbright_album2_108.png"
+  },
+  "starbright_album2_104.jpg": {
+    "tier": "basic",
+    "updated": "2026-02-26T23:01:17.719783",
+    "copied_from": "starbright_album2_104.png"
+  },
+  "starbright_album1_003.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:10.898815",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_003.png"
+  },
+  "starbright_album1_007.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:30.138924",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_007.png"
+  },
+  "starbright_album1_008.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:33.020317",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_008.png"
+  },
+  "starbright_album1_009.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:34:35.491731",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_009.png"
+  },
+  "starbright_album1_018.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:52.107399",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_018.png"
+  },
+  "starbright_album1_019.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:53.673314",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_019.png"
+  },
+  "starbright_album1_020.jpg": {
+    "tier": "vip",
+    "rating": "nsfw",
+    "updated": "2026-02-27T15:34:55.294106",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_020.png"
+  },
+  "starbright_album1_021.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:34:56.975077",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_021.png"
+  },
+  "starbright_album1_022.jpg": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T15:34:58.819114",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_022.png"
+  },
+  "starbright_album1_024.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:10.700077",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_024.png"
+  },
+  "starbright_album1_025.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:13.260100",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_025.png"
+  },
+  "starbright_album1_026.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:16.792905",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_026.png"
+  },
+  "starbright_album1_027.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:19.311368",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_027.png"
+  },
+  "starbright_album1_028.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:22.724430",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_028.png"
+  },
+  "starbright_album1_029.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:25.637163",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_029.png"
+  },
+  "starbright_album1_030.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:28.110881",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_030.png"
+  },
+  "starbright_album1_031.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:30.406705",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_031.png"
+  },
+  "starbright_album1_032.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:33.414793",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_032.png"
+  },
+  "starbright_album1_033.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:37.228370",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_033.png"
+  },
+  "starbright_album1_034.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:39.569246",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_034.png"
+  },
+  "starbright_album1_036.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:48.216607",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_036.png"
+  },
+  "starbright_album1_038.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:52.089940",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_038.png"
+  },
+  "starbright_album1_039.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:35:55.403828",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_039.png"
+  },
+  "starbright_album1_052.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:19.675833",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_052.png"
+  },
+  "starbright_album1_053.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:22.134813",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_053.png"
+  },
+  "starbright_album1_054.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:24.543686",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_054.png"
+  },
+  "starbright_album1_055.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:27.356007",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_055.png"
+  },
+  "starbright_album1_056.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:29.803506",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_056.png"
+  },
+  "starbright_album1_057.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:32.330424",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_057.png"
+  },
+  "starbright_album1_058.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:33.830901",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_058.png"
+  },
+  "starbright_album1_059.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:36.391502",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_059.png"
+  },
+  "starbright_album1_061.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:36:40.376096",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_061.png"
+  },
+  "starbright_album1_087.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:28.974304",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_087.png"
+  },
+  "starbright_album1_088.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:30.642104",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_088.png"
+  },
+  "starbright_album1_089.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:32.342559",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_089.png"
+  },
+  "starbright_album1_090.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:37:34.310747",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_090.png"
+  },
+  "starbright_album1_091.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:35.948581",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_091.png"
+  },
+  "starbright_album1_093.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:37:40.612573",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album1_093.png"
+  },
+  "starbright_album2_004.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:36.683910",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_004.png"
+  },
+  "starbright_album2_012.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:38:57.988249",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_012.png"
+  },
+  "starbright_album2_013.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:00.790888",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_013.png"
+  },
+  "starbright_album2_014.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:04.210571",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_014.png"
+  },
+  "starbright_album2_015.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:06.706202",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_015.png"
+  },
+  "starbright_album2_017.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:11.090646",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_017.png"
+  },
+  "starbright_album2_018.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:39:13.399379",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_018.png"
+  },
+  "starbright_album2_019.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:18.552550",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_019.png"
+  },
+  "starbright_album2_020.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:21.103401",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_020.png"
+  },
+  "starbright_album2_021.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:23.963924",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_021.png"
+  },
+  "starbright_album2_022.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:26.368768",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_022.png"
+  },
+  "starbright_album2_024.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:30.995400",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_024.png"
+  },
+  "starbright_album2_025.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:34.223788",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_025.png"
+  },
+  "starbright_album2_029.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:41.021758",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_029.png"
+  },
+  "starbright_album2_030.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:39:43.253966",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_030.png"
+  },
+  "starbright_album2_031.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:45.391182",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_031.png"
+  },
+  "starbright_album2_033.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:39:58.469719",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_033.png"
+  },
+  "starbright_album2_034.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:00.899286",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_034.png"
+  },
+  "starbright_album2_035.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:03.303169",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_035.png"
+  },
+  "starbright_album2_037.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:15.692961",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_037.png"
+  },
+  "starbright_album2_056.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:54.808068",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_056.png"
+  },
+  "starbright_album2_057.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T15:40:57.136100",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_057.png"
+  },
+  "starbright_album2_058.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:40:59.505630",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_058.png"
+  },
+  "starbright_album2_059.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:02.291645",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_059.png"
+  },
+  "starbright_album2_060.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:04.677093",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_060.png"
+  },
+  "starbright_album2_061.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:07.306828",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_061.png"
+  },
+  "starbright_album2_064.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:13.246674",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_064.png"
+  },
+  "starbright_album2_065.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:16.009782",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_065.png"
+  },
+  "starbright_album2_069.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:24.349684",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_069.png"
+  },
+  "starbright_album2_070.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:28.777339",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_070.png"
+  },
+  "starbright_album2_071.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:38.305835",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_071.png"
+  },
+  "starbright_album2_072.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:50.195739",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_072.png"
+  },
+  "starbright_album2_073.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:53.259690",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_073.png"
+  },
+  "starbright_album2_074.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:56.292830",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_074.png"
+  },
+  "starbright_album2_075.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:41:58.624233",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_075.png"
+  },
+  "starbright_album2_077.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:03.369732",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_077.png"
+  },
+  "starbright_album2_078.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:06.548798",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_078.png"
+  },
+  "starbright_album2_079.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:09.021859",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_079.png"
+  },
+  "starbright_album2_080.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:11.722748",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_080.png"
+  },
+  "starbright_album2_081.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:14.156997",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_081.png"
+  },
+  "starbright_album2_082.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:16.839796",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_082.png"
+  },
+  "starbright_album2_083.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:19.309002",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_083.png"
+  },
+  "starbright_album2_084.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:22.514501",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_084.png"
+  },
+  "starbright_album2_085.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:24.882741",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_085.png"
+  },
+  "starbright_album2_090.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:35.670954",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_090.png"
+  },
+  "starbright_album2_091.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:37.936610",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_091.png"
+  },
+  "starbright_album2_092.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:40.215988",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_092.png"
+  },
+  "starbright_album2_093.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:42.783207",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_093.png"
+  },
+  "starbright_album2_094.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:45.777592",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_094.png"
+  },
+  "starbright_album2_095.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:48.677715",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_095.png"
+  },
+  "starbright_album2_096.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:51.257158",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_096.png"
+  },
+  "starbright_album2_097.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:53.858888",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_097.png"
+  },
+  "starbright_album2_098.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:56.395742",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_098.png"
+  },
+  "starbright_album2_099.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:42:59.359496",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_099.png"
+  },
+  "starbright_album2_100.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:02.202074",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_100.png"
+  },
+  "starbright_album2_101.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:04.526016",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_101.png"
+  },
+  "starbright_album2_102.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:06.773077",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_102.png"
+  },
+  "starbright_album2_103.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:08.827303",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_103.png"
+  },
+  "starbright_album2_105.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:11.609464",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_105.png"
+  },
+  "starbright_album2_106.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:14.387653",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_106.png"
+  },
+  "starbright_album2_107.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:17.151780",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_107.png"
+  },
+  "starbright_album2_109.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:19.756053",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_109.png"
+  },
+  "starbright_album2_110.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:22.009093",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_110.png"
+  },
+  "starbright_album2_111.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:24.162756",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_111.png"
+  },
+  "starbright_album2_113.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:28.508088",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_113.png"
+  },
+  "starbright_album2_114.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:31.326194",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_114.png"
+  },
+  "starbright_album2_115.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:33.495968",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_115.png"
+  },
+  "starbright_album2_116.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:36.086513",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_116.png"
+  },
+  "starbright_album2_117.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:38.543288",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_117.png"
+  },
+  "starbright_album2_118.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:41.329522",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_118.png"
+  },
+  "starbright_album2_119.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:44.544914",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_119.png"
+  },
+  "starbright_album2_120.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T15:43:47.714084",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "copied_from": "starbright_album2_120.png"
+  },
+  "starbright_album1_023.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:00.591180",
+    "source_dir": "/root/starbright-studio/content/google_photos_album1",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "starbright_album2_032.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:02.397987",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "starbright_album2_036.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:04.997789",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "starbright_album2_011.png": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:06.802871",
+    "source_dir": "/root/starbright-studio/content/google_photos_album2",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "transform_transform_1772013899997_vday_leotard_01_20260225_100505_80a3f0.png": {
+    "tier": "vip",
+    "rating": "explicit",
+    "updated": "2026-02-27T16:00:08.611519",
+    "source_dir": "/root/aia-engine/content/transform_v3",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "bed_teaser_v3_20260217_202123_0.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:10.497523",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "bed_teaser_v2_20260217_201627_1.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:13.162404",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "bed_recreate_20260217_082451.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:15.250628",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "seedream_20260217_081526.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T16:00:16.934576",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "seedream_20260217_075302.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T16:00:18.762278",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "evael_recreate_20260217_181744.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:20.632514",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "seedream_20260217_071409.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T16:00:22.836529",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "canonical_test_20260217_080649.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T16:00:24.664240",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "bed_teaser_v2_20260217_201627_0.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:27.242012",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "face_only_test_20260217_080846.jpg": {
+    "tier": "free",
+    "rating": "sfw",
+    "updated": "2026-02-27T16:00:29.143811",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  },
+  "bed_teaser_v3_20260217_202123_1.jpg": {
+    "tier": "companion",
+    "rating": "suggestive",
+    "updated": "2026-02-27T16:00:31.479029",
+    "source_dir": "/root/starbright-studio/output/images",
+    "model": "anthropic/claude-sonnet-4",
+    "resized": true
+  }
+}

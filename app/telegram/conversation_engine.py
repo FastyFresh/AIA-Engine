@@ -3,6 +3,7 @@ AI Conversation Engine for Telegram Bots
 Supports multiple providers: OpenRouter (Dolphin), Grok (xAI), and Replicate
 """
 import os
+import re
 import httpx
 import asyncio
 import logging
@@ -84,7 +85,7 @@ class ConversationEngine:
                         "X-Title": "AIA Engine"
                     },
                     json={
-                        "model": "venice/uncensored:free",
+                        "model": "venice/uncensored",
                         "messages": messages,
                         "max_tokens": 300,
                         "temperature": 0.85
@@ -289,6 +290,17 @@ class ConversationEngine:
         
         if response.startswith('"') and response.endswith('"'):
             response = response[1:-1]
+        
+        # Strip asterisk-wrapped roleplay actions: *sends photo*, *blushes*, etc.
+        response = re.sub(r'\*[^*]{1,80}\*', '', response)
+        
+        # Strip bracket-wrapped placeholder tags: [SELFIE HERE], [PHOTO ATTACHED], [IMAGE], etc.
+        response = re.sub(r'\[[^\]]{1,80}\]', '', response)
+        
+        # Clean up leftover whitespace from stripped tags
+        response = re.sub(r'\n{3,}', '\n\n', response)  # collapse triple+ newlines
+        response = re.sub(r'  +', ' ', response)  # collapse double+ spaces
+        response = response.strip()
         
         if len(response) > 500:
             sentences = response.split('. ')

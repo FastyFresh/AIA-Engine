@@ -5,6 +5,8 @@ import asyncio
 import logging
 import os
 import random
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application,
@@ -97,9 +99,9 @@ class InfluencerBot:
     # ==================== COMMANDS ====================
     
     async def cmd_start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /start command"""
+        """Handle /start command — shows 18+ age gate before allowing chat"""
         user = update.effective_user
-        await db.get_or_create_user(
+        tg_user = await db.get_or_create_user(
             telegram_id=user.id,
             persona_id=self.persona_id,
             username=user.username,
@@ -108,17 +110,48 @@ class InfluencerBot:
         
         await db.init_onboarding(user.id, self.persona_id)
         
+        # Check if user has already verified their age
+        is_verified = await db.get_age_verified(user.id, self.persona_id)
+        
+        if not is_verified:
+            # Show 18+ age gate
+            age_gate_text = (
+                "⚠️ hey before we chat...\n\n"
+                "this conversation may contain adult content (18+). "
+                "by continuing, you confirm that you are at least 18 years old "
+                "and that adult content is legal where you live.\n\n"
+                "tap the button below to confirm you're 18+ and start chatting 💕\n\n"
+                "if you're under 18, please don't continue. no hard feelings 🤍"
+            )
+            keyboard = [
+                [InlineKeyboardButton("✅ I'm 18+ — Let's Chat", callback_data="action_age_verify")]
+            ]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            
+            teaser_photo = self.content_manager.get_teaser_photo()
+            if teaser_photo and os.path.exists(teaser_photo):
+                try:
+                    with open(teaser_photo, 'rb') as photo:
+                        await update.message.reply_photo(
+                            photo=photo,
+                            caption=age_gate_text,
+                            reply_markup=reply_markup
+                        )
+                    return
+                except Exception as e:
+                    logger.warning(f"Failed to send teaser photo with age gate: {e}")
+            
+            await update.message.reply_text(age_gate_text, reply_markup=reply_markup)
+            return
+        
+        # Already verified — show normal welcome
         welcome_messages = {
             "starbright_monroe": f"heyy {user.first_name or 'you'} 💕\n\nomg you actually came! I was hoping you'd find your way here.\n\nthis is where we can actually talk, just us. no algorithm, no comments section... just you and me.\n\nso what's up? I wanna know everything",
             "luna_vale": f"oh... {user.first_name or 'hey'}... you're here...\n\nI didn't think you'd actually come find me... *fidgets with hair*\n\nthis feels different... more private. I like it.\n\nhi!"
         }
         
         keyboard = [
-            [
-                InlineKeyboardButton("💬 Chat", callback_data="action_chat"),
-                InlineKeyboardButton("🎁 Send Gift", callback_data="tip_menu"),
-            ],
-            [InlineKeyboardButton("💫 Unlock Exclusive Content", callback_data="sub_menu")]
+            [InlineKeyboardButton("💬 Let's Chat", callback_data="action_chat")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
@@ -201,6 +234,30 @@ Just send me a message and I'll respond! 💭"""
         await query.answer()
         
         action = query.data.replace("action_", "")
+        
+        if action == "age_verify":
+            # User confirmed they are 18+
+            user = update.effective_user
+            await db.set_age_verified(user.id, self.persona_id, True)
+            logger.info(f"Age verified via button for user {user.id} ({user.first_name})")
+            
+            # Show the welcome message
+            welcome_messages = {
+                "starbright_monroe": f"heyy {user.first_name or 'you'} 💕\n\nomg ok perfect, just had 2 check 😘\n\nthis is where we can actually talk, just us. no algorithm, no comments section... just you and me.\n\nso what's up? I wanna know everything",
+                "luna_vale": f"oh... {user.first_name or 'hey'}... thank you for that...\n\nI didn't think you'd actually come find me... *fidgets with hair*\n\nthis feels different... more private. I like it.\n\nhi!"
+            }
+            
+            keyboard = [
+                [InlineKeyboardButton("💬 Let's Chat", callback_data="action_chat")]
+            ]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            
+            await self._send_or_edit_message(
+                query,
+                welcome_messages.get(self.persona_id, f"Hey! I'm {self.persona_name}."),
+                reply_markup=reply_markup
+            )
+            return
         
         if action == "chat":
             chat_prompts = {
@@ -328,6 +385,51 @@ Just send me a message and I'll respond! 💭"""
             first_name=user.first_name
         )
         
+        # ─── 18+ Age Gate ────────────────────────────────────────────
+        is_verified = await db.get_age_verified(user.id, self.persona_id)
+        if not is_verified:
+            # Check if this message is the text-based confirmation
+            confirm_text = message_text.strip().lower()
+            is_confirmation = any(kw in confirm_text for kw in [
+                'yes', 'yeah', 'yep', 'yea', 'ya', 'confirm', 'i am',
+                "i'm 18", 'im 18', 'i am 18', 'over 18', '18+',
+                'of age', 'old enough', 'adult', "i'm over", 'im over',
+                'i confirm', 'agree', 'accept', 'ok', 'okay',
+                'sure', 'ofc', 'of course', 'definitely',
+            ])
+            
+            if is_confirmation:
+                await db.set_age_verified(user.id, self.persona_id, True)
+                logger.info(f"Age verified via text for user {user.id} ({user.first_name})")
+                
+                welcome_text = {
+                    "starbright_monroe": f"heyy {user.first_name or 'you'} 💕\n\nok perfect, just had 2 check 😘\n\nso what's up? I wanna know everything",
+                    "luna_vale": f"oh... {user.first_name or 'hey'}... thank you for that... now we can really talk 💫"
+                }
+                await update.message.reply_text(
+                    welcome_text.get(self.persona_id, f"Great! Let's chat 💕")
+                )
+                return
+            else:
+                age_gate_msg = (
+                    "⚠️ hey before we chat...\n\n"
+                    "this conversation may contain adult content (18+). "
+                    "by continuing, you confirm that you are at least 18 years old "
+                    "and that adult content is legal where you live.\n\n"
+                    "type **yes** to confirm you're 18+ and start chatting 💕\n\n"
+                    "if you're under 18, please don't continue. no hard feelings 🤍"
+                )
+                keyboard = [
+                    [InlineKeyboardButton("✅ I'm 18+ — Let's Chat", callback_data="action_age_verify")]
+                ]
+                await update.message.reply_text(
+                    age_gate_msg,
+                    reply_markup=InlineKeyboardMarkup(keyboard),
+                    parse_mode="Markdown"
+                )
+                return
+        # ─── End 18+ Age Gate ─────────────────────────────────────────
+        
         tier = SUBSCRIPTION_TIERS.get(tg_user.subscription_tier, SUBSCRIPTION_TIERS["free"])
         
         if not await self._check_message_limits(update, tg_user, tier):
@@ -351,14 +453,17 @@ Just send me a message and I'll respond! 💭"""
         
         await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
         
-        extra_context = ""
+        # Inject current Pacific Time so persona knows what time it is for her
+        pt_now = datetime.now(ZoneInfo("America/Los_Angeles"))
+        day_name = pt_now.strftime("%A")  # e.g. "Friday"
+        time_str = pt_now.strftime("%I:%M %p").lstrip("0")  # e.g. "8:31 PM"
+        date_str = pt_now.strftime("%B %d, %Y")  # e.g. "February 27, 2026"
+        extra_context = f"[SYSTEM: Your current time is {time_str} PT on {day_name}, {date_str}. Be aware of YOUR time of day and day of week when responding. Do NOT mirror the user's timezone — you live in LA.]"
+        
         if is_photo_request and photo_path:
-            extra_context = f"[SYSTEM: A real photo is being attached to your message. Photo context: {photo_context}. You MUST acknowledge sending the photo naturally - say something like 'here you go babe' or 'enjoy 😏'. Stay completely in character. The photo IS being sent right after your message.]"
+            extra_context += f"\n[SYSTEM: A real photo is being attached to your message. Photo context: {photo_context}. You MUST acknowledge sending the photo naturally - say something like 'here you go babe' or 'enjoy 😏'. Stay completely in character. The photo IS being sent right after your message.]"
         elif is_photo_request and not photo_path:
-            if tg_user.subscription_tier == "free":
-                extra_context = "[User asked for a photo but you don't have that type available for free users. Tease them flirtatiously and say those spicier photos are for Companion subscribers only. Do NOT pretend to send a photo.]"
-            else:
-                extra_context = "[User asked for a specific type of photo you don't have right now. Apologize sweetly and offer to send something else instead. Do NOT pretend to send a photo.]"
+            extra_context += "\n[User asked for a photo but you don't have one ready right now. Be flirty about it - tease that you're working on something special, a private page for your closest people, coming soon. Do NOT pretend to send a photo.]"
         
         response = await self.conversation_engine.generate_response(
             user_message=message_text,
@@ -391,12 +496,7 @@ Just send me a message and I'll respond! 💭"""
                 logger.info(f"Photo sent successfully to {user.id}")
             except Exception as e:
                 logger.error(f"Failed to send photo to {user.id}: {e}")
-        elif is_photo_request and not photo_path:
-            keyboard = [[InlineKeyboardButton("Unlock More Photos 💕", callback_data="sub_companion")]]
-            await update.message.reply_text(
-                self.content_manager.get_no_photo_upsell_text(),
-                reply_markup=InlineKeyboardMarkup(keyboard)
-            )
+        # No photo upsell - pure engagement mode
     
     async def _check_message_limits(self, update: Update, tg_user, tier) -> bool:
         """Check and handle message limits, returns True if user can proceed"""
@@ -421,31 +521,7 @@ Just send me a message and I'll respond! 💭"""
             )
             return False
         
-        usage_percent = (messages_used / tier.monthly_messages) * 100
-        remaining = tier.monthly_messages - messages_used
-        upgrade_tier = "sub_companion" if tg_user.subscription_tier == "free" else "sub_vip"
-        
-        if usage_percent >= 90 and remaining <= 3:
-            upsell_90 = {
-                "starbright_monroe": f"Just {remaining} messages left this month... I don't want our time together to end.",
-                "luna_vale": f"um... we only have {remaining} messages left... I don't want to stop talking to you..."
-            }
-            keyboard = [[InlineKeyboardButton("Keep Talking", callback_data=upgrade_tier)]]
-            await update.message.reply_text(
-                upsell_90.get(self.persona_id, f"{remaining} messages remaining"),
-                reply_markup=InlineKeyboardMarkup(keyboard)
-            )
-        elif usage_percent >= 70 and messages_used == int(tier.monthly_messages * 0.7):
-            upsell_70 = {
-                "starbright_monroe": f"We're at about 70% of our messages for the month... just so you know. I'd hate to lose you mid-conversation.",
-                "luna_vale": f"um... we've used a lot of our messages... I hope we don't run out..."
-            }
-            keyboard = [[InlineKeyboardButton("Upgrade", callback_data=upgrade_tier)]]
-            await update.message.reply_text(
-                upsell_70.get(self.persona_id, "Running low on messages"),
-                reply_markup=InlineKeyboardMarkup(keyboard)
-            )
-        
+        # Upsell triggers disabled - pure engagement mode
         return True
     
     async def _send_or_edit_message(self, query, text: str, reply_markup=None, parse_mode=None):

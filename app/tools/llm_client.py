@@ -8,7 +8,7 @@ import time
 
 logger = logging.getLogger(__name__)
 
-LLMProvider = Literal["anthropic", "openai", "grok"]
+LLMProvider = Literal["deepseek", "anthropic", "openai", "grok"]
 
 LLM_TIMEOUT_SECONDS = 10
 CIRCUIT_BREAKER_THRESHOLD = 3
@@ -64,10 +64,11 @@ class PromptConfig:
 
 class LLMClient:
     
-    DEFAULT_PROVIDER: LLMProvider = "anthropic"
+    DEFAULT_PROVIDER: LLMProvider = "deepseek"
     
     def __init__(self):
         self._circuit_breakers: Dict[str, CircuitBreaker] = {
+            "deepseek": CircuitBreaker(),
             "anthropic": CircuitBreaker(),
             "openai": CircuitBreaker(),
             "grok": CircuitBreaker(),
@@ -75,6 +76,7 @@ class LLMClient:
         self._clients_initialized = False
         self._anthropic_client = None
         self._openai_client = None
+        self._deepseek_client = None
     
     def _init_clients(self):
         if self._clients_initialized:
@@ -98,6 +100,19 @@ class LLMClient:
             except Exception as e:
                 logger.warning(f"Failed to initialize OpenAI client: {e}")
         
+        # Initialize DeepSeek via OpenRouter
+        openrouter_key = os.environ.get("OPENROUTER_API_KEY")
+        if openrouter_key:
+            try:
+                import openai
+                self._deepseek_client = openai.OpenAI(
+                    api_key=openrouter_key,
+                    base_url="https://openrouter.ai/api/v1"
+                )
+                logger.info("DeepSeek client initialized (via OpenRouter)")
+            except Exception as e:
+                logger.warning(f"Failed to initialize DeepSeek client: {e}")
+        
         self._clients_initialized = True
     
     def _get_available_provider(self, preferred: Optional[LLMProvider] = None) -> Optional[LLMProvider]:
@@ -106,7 +121,7 @@ class LLMClient:
         if preferred:
             providers_to_try.append(preferred)
         
-        providers_to_try.extend([p for p in ["anthropic", "openai", "grok"] if p != preferred])
+        providers_to_try.extend([p for p in ["deepseek", "openai", "grok", "anthropic"] if p != preferred])
         
         for provider in providers_to_try:
             if self._is_provider_available(provider) and self._circuit_breakers[provider].should_allow_request():
@@ -115,7 +130,9 @@ class LLMClient:
         return None
     
     def _is_provider_available(self, provider: LLMProvider) -> bool:
-        if provider == "anthropic":
+        if provider == "deepseek":
+            return self._deepseek_client is not None
+        elif provider == "anthropic":
             return self._anthropic_client is not None
         elif provider == "openai":
             return self._openai_client is not None
@@ -132,7 +149,7 @@ class LLMClient:
         self._init_clients()
         
         preferred = provider or self.DEFAULT_PROVIDER
-        providers_to_try = [preferred] + [p for p in ["anthropic", "openai", "grok"] if p != preferred]
+        providers_to_try = [preferred] + [p for p in ["deepseek", "openai", "grok", "anthropic"] if p != preferred]
         
         last_error = None
         total_start_time = time.time()
@@ -196,7 +213,9 @@ class LLMClient:
         )
     
     async def _call_provider(self, provider: LLMProvider, config: PromptConfig) -> str:
-        if provider == "anthropic":
+        if provider == "deepseek":
+            return await self._call_deepseek(config)
+        elif provider == "anthropic":
             return await self._call_anthropic(config)
         elif provider == "openai":
             return await self._call_openai(config)
@@ -204,6 +223,29 @@ class LLMClient:
             return await self._call_grok(config)
         else:
             raise ValueError(f"Unknown provider: {provider}")
+    
+    async def _call_deepseek(self, config: PromptConfig) -> str:
+        """DeepSeek V3 via OpenRouter — cheapest smart model ($0.27/$1.10 per 1M tokens)"""
+        if not self._deepseek_client:
+            raise RuntimeError("DeepSeek client not initialized")
+        
+        client = self._deepseek_client
+        loop = asyncio.get_event_loop()
+        response = await loop.run_in_executor(
+            None,
+            lambda: client.chat.completions.create(
+                model="deepseek/deepseek-chat",
+                max_tokens=config.max_tokens,
+                temperature=config.temperature,
+                messages=[
+                    {"role": "system", "content": config.system_prompt},
+                    {"role": "user", "content": config.user_prompt}
+                ]
+            )
+        )
+        
+        content = response.choices[0].message.content
+        return content if content else ""
     
     async def _call_anthropic(self, config: PromptConfig) -> str:
         if not self._anthropic_client:
@@ -284,6 +326,13 @@ class LLMClient:
         
         return {
             "providers": {
+                "deepseek": {
+                    "available": self._is_provider_available("deepseek"),
+                    "circuit_open": self._circuit_breakers["deepseek"].is_open,
+                    "failure_count": self._circuit_breakers["deepseek"].failure_count,
+                    "model": "deepseek/deepseek-chat (via OpenRouter)",
+                    "cost": "$0.27/$1.10 per 1M tokens"
+                },
                 "anthropic": {
                     "available": self._is_provider_available("anthropic"),
                     "circuit_open": self._circuit_breakers["anthropic"].is_open,

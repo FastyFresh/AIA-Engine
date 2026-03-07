@@ -33,7 +33,7 @@ class FalInstantIDService:
         self.output_dir = Path("content/generated/identity_transfer")
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
-        self.starbright_face_ref = "content/references/starbright_monroe/body_reference_canonical.png"
+        self.starbright_face_ref = "content/references/starbright_monroe/advanced/01_face_front.jpg"
         
         logger.info("Fal.ai InstantID Service initialized")
     

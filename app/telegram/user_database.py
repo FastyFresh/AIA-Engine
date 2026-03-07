@@ -12,7 +12,7 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 DB_PATH = Path("data/telegram_users.db")
-CURRENT_SCHEMA_VERSION = 4
+CURRENT_SCHEMA_VERSION = 5
 
 @dataclass
 class TelegramUser:
@@ -58,6 +58,7 @@ class UserDatabase:
             2: self._migrate_v2_composite_primary_key,
             3: self._migrate_v3_add_nudge_tracking,
             4: self._migrate_v4_add_webchat_tables,
+            5: self._migrate_v5_add_age_verification,
         }
     
     async def _get_schema_version(self, db) -> int:
@@ -224,6 +225,24 @@ class UserDatabase:
         """)
         
         logger.info("Migration v4: Webchat tables created")
+    
+    async def _migrate_v5_add_age_verification(self, db):
+        """Version 5: Add age_verified column for 18+ gate"""
+        try:
+            cursor = await db.execute("PRAGMA table_info(users)")
+            columns = await cursor.fetchall()
+            column_names = [col[1] for col in columns]
+            
+            if 'age_verified' not in column_names:
+                logger.info("Migration v5: Adding age_verified column")
+                await db.execute("ALTER TABLE users ADD COLUMN age_verified INTEGER DEFAULT 0")
+                # Mark all existing users as verified (they were already chatting)
+                await db.execute("UPDATE users SET age_verified = 1")
+                logger.info("Migration v5: age_verified column added, existing users marked as verified")
+            else:
+                logger.info("Migration v5: age_verified already exists, skipping")
+        except Exception as e:
+            logger.error(f"Migration v5 error: {e}")
     
     async def init_db(self):
         """Initialize database with versioned migrations"""
@@ -608,5 +627,27 @@ class UserDatabase:
                 """, (limit,))
             rows = await cursor.fetchall()
             return [dict(row) for row in rows]
+
+    async def get_age_verified(self, telegram_id: int, persona_id: str) -> bool:
+        """Check if a user has verified they are 18+"""
+        async with aiosqlite.connect(self.db_path) as db:
+            cursor = await db.execute(
+                "SELECT age_verified FROM users WHERE telegram_id = ? AND persona_id = ?",
+                (telegram_id, persona_id)
+            )
+            row = await cursor.fetchone()
+            if row:
+                return bool(row[0])
+            return False
+    
+    async def set_age_verified(self, telegram_id: int, persona_id: str, verified: bool = True):
+        """Set age verification status for a user"""
+        async with aiosqlite.connect(self.db_path) as db:
+            await db.execute(
+                "UPDATE users SET age_verified = ? WHERE telegram_id = ? AND persona_id = ?",
+                (1 if verified else 0, telegram_id, persona_id)
+            )
+            await db.commit()
+            logger.info(f"Age verified set to {verified} for user {telegram_id} / {persona_id}")
 
 db = UserDatabase()

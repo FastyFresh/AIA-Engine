@@ -23,7 +23,7 @@ class VeniceImageService:
     def __init__(self):
         self.api_key = os.environ.get("VENICE_API_KEY")
         self.output_dir = "content/venice_output"
-        self.default_model = "fluently-xl"
+        self.default_model = "lustify-sdxl"
         
         os.makedirs(self.output_dir, exist_ok=True)
     

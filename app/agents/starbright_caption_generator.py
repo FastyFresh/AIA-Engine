@@ -263,7 +263,7 @@ Generate ONE caption. Output ONLY the caption text, no quotes."""
         prompt = self._build_prompt(context, pattern, emotional_mode, movement_type)
         
         try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
+            async with httpx.AsyncClient(timeout=90.0) as client:
                 response = await client.post(
                     self.api_url,
                     headers={

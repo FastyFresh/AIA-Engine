@@ -125,3 +125,21 @@ data/*.db
 
 # Miscellaneous large files
 ziliqT7q
+.env
+
+# Experimental/one-off scripts - keep local only
+generate_*.py
+batch_reels.py
+retry_transform.py
+test_seedream45.py
+nsfw_pipeline_seedream*.py
+nsfw_transform*.py
+nsfw_pose_prompts.json
+publer_post.py
+x_post_tweepy.py
+x_post_via_cdp.py
+x_posted_images.json
+x_ready_thread_*.json
+qc_review_v5.json
+feedback_learning.py
+gallery_server_v4.py

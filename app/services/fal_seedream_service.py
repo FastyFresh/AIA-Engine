@@ -48,12 +48,14 @@ class FalSeedreamService:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
         self.face_ref_path = config["face_ref"]
+        self.freckle_ref_path = config.get("freckle_ref")
         self.body_ref_path = config["body_ref"]
         self.body_ref_back_path = config.get("body_ref_back")
         
         self.prompt_builder = PromptBuilder(influencer_id)
         
         self._face_data_uri = None
+        self._freckle_data_uri = None
         self._body_data_uri = None
         self._body_back_data_uri = None
         
@@ -233,11 +235,14 @@ class FalSeedreamService:
         enable_safety_checker: bool = False,
         negative_prompt: Optional[str] = None
     ) -> Dict[str, Any]:
-        """Transform a source image into Starbright using 3-reference conditioning.
+        """Transform a source image into Starbright using 5-reference conditioning.
         
-        Uses face ref + body ref + source image (3 refs) with SEEDream 4.5 edit.
-        The source image provides the pose/outfit/setting while face and body refs
-        ensure Starbright's identity is preserved.
+        WINNING FORMULA (locked 2026-02-09):
+        Figure 1: Face close-up (identity anchor)
+        Figure 2: Eyes + freckles enhanced crop (freckle pattern lock)
+        Figure 3: Body front (proportions)
+        Figure 4: Body back (rear angles)
+        Figure 5: Source image (pose/outfit/setting)
         """
         if not self.fal_key:
             return {"status": "error", "error": "FAL_KEY not configured"}
@@ -245,6 +250,14 @@ class FalSeedreamService:
         face_uri, body_uri = self._get_reference_uris(prompt)
         if not face_uri or not body_uri:
             return {"status": "error", "error": "Reference images not found"}
+        
+        # Load freckle reference (CRITICAL for identity consistency)
+        freckle_uri = None
+        if self.freckle_ref_path and Path(self.freckle_ref_path).exists():
+            if not self._freckle_data_uri:
+                self._freckle_data_uri = self._encode_image(self.freckle_ref_path)
+                logger.info(f"Cached freckle reference: {len(self._freckle_data_uri)} chars")
+            freckle_uri = self._freckle_data_uri
         
         source_uri = None
         try:
@@ -273,9 +286,25 @@ class FalSeedreamService:
         
         image_size = "auto_4K" if aspect_ratio in ["portrait_4_3", "portrait_16_9", "landscape_4_3", "landscape_16_9", "square"] else aspect_ratio
         
+        # Build 5-ref image stack (winning formula)
+        image_urls = [face_uri]
+        if freckle_uri:
+            image_urls.append(freckle_uri)
+        image_urls.append(body_uri)
+        # Add back body ref if available
+        if hasattr(self, '_body_back_data_uri') and self._body_back_data_uri:
+            image_urls.append(self._body_back_data_uri)
+        elif self.body_ref_back_path and Path(self.body_ref_back_path).exists():
+            if not self._body_back_data_uri:
+                self._body_back_data_uri = self._encode_image(self.body_ref_back_path)
+            image_urls.append(self._body_back_data_uri)
+        image_urls.append(source_uri)
+        
+        ref_count = len(image_urls)
+        
         payload = {
             "prompt": prompt,
-            "image_urls": [face_uri, body_uri, source_uri],
+            "image_urls": image_urls,
             "image_size": image_size,
             "num_images": 1,
             "max_images": 1,
@@ -287,7 +316,7 @@ class FalSeedreamService:
         
         try:
             async with httpx.AsyncClient(timeout=180.0) as client:
-                logger.info(f"Sending 3-ref transform request to fal.ai Seedream 4.5 edit...")
+                logger.info(f"Sending {ref_count}-ref transform request to fal.ai Seedream 4.5 edit...")
                 
                 response = await client.post(
                     FAL_EDIT_URL,
@@ -322,7 +351,7 @@ class FalSeedreamService:
                                     "seed": result.get("seed"),
                                     "provider": "fal.ai",
                                     "model": "seedream-4.5-edit",
-                                    "mode": "3-ref-transform"
+                                    "mode": f"{ref_count}-ref-transform"
                                 }
                     
                     return {"status": "error", "error": "No images in response"}

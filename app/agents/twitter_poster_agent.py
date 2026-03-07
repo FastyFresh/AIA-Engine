@@ -110,7 +110,7 @@ class TwitterPosterAgent:
                     "error": f"Image not found: {package.image_path}"
                 }
             
-            media = self.api.media_upload(str(image_path))
+            media = self.api.media_upload(str(image_path), media_category="tweet_image")
             
             response = self.client.create_tweet(
                 text=package.caption,

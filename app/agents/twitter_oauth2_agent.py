@@ -376,7 +376,7 @@ class TwitterOAuth2Agent:
                 )
             else:
                 # Simple upload for images
-                media = self.api_v1.media_upload(filename=str(media_file))
+                media = self.api_v1.media_upload(filename=str(media_file), media_category="tweet_image")
             
             media_id = media.media_id
             logger.info(f"Media uploaded successfully. Media ID: {media_id}")

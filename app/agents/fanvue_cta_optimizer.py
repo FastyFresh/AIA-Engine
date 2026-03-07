@@ -45,26 +45,44 @@ CTA_TEMPLATES = {
         "want to see what happens next?",
         "there's more where this came from 🤍",
         "you're not ready for what's on my page",
-        "I saved the best for somewhere else ↓"
+        "I saved the best for somewhere else ↓",
+        "this is just a taste of more 🤍",
+        "the real magic is behind that link ✨",
+        "I kept something special for you ↓",
+        "curious what else I’ve got waiting?",
+        "this is barely scratching the surface",
+        "the full story is somewhere else... 💚"
     ],
     "curiosity": [
         "come find out what I'm really like",
         "I don't show everything here...",
         "some things are just between us",
         "the real me is behind that link",
-        "I'm more fun when we're alone ✨"
+        "I'm more fun when we're alone ✨",
+        "what do you think happens next? 🤔",
+        "I wonder which you prefer...",
+        "there's a side of me you haven’t seen",
+        "I save my favorite parts for somewhere quieter ✨",
+        "not everything makes it here",
+        "I’ve got a secret − just between us ↓",
+        "guess what I’ve been working on..."
     ],
     "direct": [
         "link in bio 🤍",
         "you know where to find me",
         "come say hi ↓",
-        "let's chat somewhere more private"
+        "let's chat somewhere more private",
+        "I’m right here whenever you’re ready ↓",
+        "come find me where it’s quieter ✨"
     ],
     "exclusive": [
         "exclusive content waiting for you",
         "join me for the uncensored version",
         "my subscribers get the real content",
-        "VIP access in my bio ↓"
+        "VIP access in my bio ↓",
+        "behind-the-scenes just dropped ↓",
+        "only a few people get to see this side",
+        "this version you won’t find anywhere else"
     ]
 }
 

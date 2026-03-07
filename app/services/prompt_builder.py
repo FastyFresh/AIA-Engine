@@ -59,7 +59,7 @@ INFLUENCER_IDENTITIES = {
     "starbright_monroe": {
         "name": "Starbright Monroe",
         "identity": (
-            "extremely pale porcelain ivory white skin, almost translucent cool-toned pale complexion with no warmth or tan, "
+            "fair skin with natural warm peach-neutral undertones, soft natural rosiness in cheeks, healthy warm fair complexion with subtle tonal variation, "
             "straight sleek dark brown hair past shoulders (dark brown NOT black, not wavy, not curly), "
             "distinctive warm olive-brown hazel eyes (NOT green, NOT grey, NOT blue), "
             "prominent visible natural freckles scattered across nose and cheeks, "
@@ -68,9 +68,11 @@ INFLUENCER_IDENTITIES = {
             "slim athletic build like a young ballet dancer, delicate small frame, "
             "clothing hangs loosely on her thin frame"
         ),
-        "face_ref": "content/references/starbright_monroe/starbright_face_reference_v3.webp",
-        "body_ref": "content/references/starbright_monroe/body_reference_omnime09.png",
-        "body_ref_back": "content/references/starbright_monroe/body_reference_back_1.webp",
+        "face_ref": "content/references/starbright_monroe/advanced/01_face_front.jpg",
+        "freckle_ref": "content/references/starbright_monroe/advanced/03_eyes_freckles_enhanced.jpg",
+        "body_ref": "content/references/starbright_monroe/advanced/05b_body_front_casual.jpg",
+        "body_ref_alt": "content/references/starbright_monroe/advanced/05a_body_front_hips.jpg",
+        "body_ref_back": "content/references/starbright_monroe/advanced/06_body_back.webp",
         "output_dir": "content/generated/starbright_monroe",
     },
     "luna_vale": {
