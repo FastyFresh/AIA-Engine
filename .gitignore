@@ -143,3 +143,7 @@ x_ready_thread_*.json
 qc_review_v5.json
 feedback_learning.py
 gallery_server_v4.py
+
+# OpenClaw config (contains API keys)
+openclaw.json
+*.json.bak
